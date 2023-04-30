@@ -29,36 +29,36 @@ export default function RegisterPage() {
 
   return (
     <>
-    <Grid m={0} columns={24}>
-      <Grid.Col span={12}></Grid.Col>
-      <Grid.Col span={12}>
-        <Stack
-          justify="flex-end"
-          sx={(theme) => ({
-            backgroundColor:
-              theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-          })}
-        >
-          <TextInput
-            placeholder="Digite o seu nome de usuario"
-            label="Nome de usuário"
-            radius="md"
-            value={username ? username : ""}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <TextInput
-            placeholder="Digite a sua senha"
-            label="Senha"
-            radius="md"
-            value={password ? password : ""}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button variant="filled" onClick={register}>
-            Cadastrar
-          </Button>
-        </Stack>
-      </Grid.Col>
-    </Grid>
-  </>
+      <Grid m={0} columns={24}>
+        <Grid.Col span={12}></Grid.Col>
+        <Grid.Col span={12}>
+          <Stack
+            justify="flex-end"
+            sx={(theme) => ({
+              backgroundColor:
+                theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+            })}
+          >
+            <TextInput
+              placeholder="Digite o seu nome de usuario"
+              label="Nome de usuário"
+              radius="md"
+              value={username ? username : ''}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <TextInput
+              placeholder="Digite a sua senha"
+              label="Senha"
+              radius="md"
+              value={password ? password : ''}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button variant="filled" onClick={register}>
+              Cadastrar
+            </Button>
+          </Stack>
+        </Grid.Col>
+      </Grid>
+    </>
   );
 }

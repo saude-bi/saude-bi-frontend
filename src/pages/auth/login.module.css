@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    height: 100vh; /* altura total da tela */
+}
+
+.parteEsquerda,
+.parteDireita {
+    flex: 1; /* divide a tela igualmente */
+}
+
+.parteEsquerda {
+    background-color: #f0f0f0; /* cor de fundo da parte esquerda */
+}
+
+.parteDireita {
+    background-color: #e0e0e0; /* cor de fundo da parte direita */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para o formulário (opcional) */
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 600px; /* Define uma largura fixa para o formulário */
+    padding: 20px;
+    align-items: flex-end;
+}
+
+.input,
+.button {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.input {
+    width: 100%; /* largura do input */
+    box-sizing: border-box; /* garante que a largura total do elemento seja igual à largura definida */
+}
+  
+.button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}

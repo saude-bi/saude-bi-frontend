@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Grid } from '@mantine/core';
+import { Grid, SimpleGrid } from '@mantine/core';
 import { Stack, Button } from '@mantine/core';
 import { TextInput } from '@mantine/core';
+import { Container } from '@mantine/core';
+import styles from './login.module.css';
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   useEffect(() => {
     console.log(username, password);
   }, [username, password]);
@@ -24,7 +26,7 @@ export default function LoginPage() {
     } catch (err) {
       // Trate os erros
       console.error('Erro ao fazer a requisição:', err);
-      
+
       if (err instanceof Error) {
         setError(err.message);
       } else {
@@ -34,35 +36,32 @@ export default function LoginPage() {
   };
 
   return (
-    <Grid m={0} columns={24}>
-        <Grid.Col span={12}></Grid.Col>
-        <Grid.Col span={12}>
-          <Stack
-            justify="flex-end"
-            sx={(theme) => ({
-              backgroundColor:
-                theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-            })}
-          >
+    <div className={styles.container}>
+      <div className={styles.parteEsquerda}>{/* Conteúdo da parte esquerda */}</div>
+      <div className={styles.parteDireita}>
+        <form className={styles.form}>
             <TextInput
-              placeholder="Digite o nome do seu usuário"
+              placeholder="Digite o seu nome de usuario"
               label="Nome de usuário"
-              radius="md"
-              value={username ? username : ""}
+              radius="md" sx={{width: "100%"}}
+              value={username ? username : ''}
               onChange={(e) => setUsername(e.target.value)}
             />
             <TextInput
               placeholder="Digite a sua senha"
               label="Senha"
-              radius="md"
-              value={password ? password : ""}
-              onChange={(e) => setPassword(e.target.value)}
+              radius="md" 
+              value={password ? password : ''}
+              onChange={(e) => setPassword(e.target.value)} 
+              sx={{marginBottom: "20px", width: "100%"}}
             />
-            <Button variant="filled" onClick={login}>
+            <Button variant="filled" onClick={login} sx={{
+              width: "30%" 
+            }}>
               Entrar
             </Button>
-          </Stack>
-        </Grid.Col>
-      </Grid>
+        </form>
+      </div>
+    </div>
   );
 }
