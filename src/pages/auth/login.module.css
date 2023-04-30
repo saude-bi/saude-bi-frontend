@@ -28,23 +28,3 @@
     align-items: flex-end;
 }
 
-.input,
-.button {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-}
-
-.input {
-    width: 100%; /* largura do input */
-    box-sizing: border-box; /* garante que a largura total do elemento seja igual à largura definida */
-}
-  
-.button {
-    background-color: #007bff;
-    border: none;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
