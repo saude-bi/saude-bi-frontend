@@ -19,8 +19,9 @@ export default function LoginPage() {
         password,
       });
 
-      // Exiba os dados recebidos
-      console.log(response.data);
+      if(response.status === 200) {
+        localStorage.setItem('access_token', response.data.access_token);
+      }
     } catch (err) {
       // Trate os erros
       console.error('Erro ao fazer a requisição:', err);

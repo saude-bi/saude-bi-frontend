@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Grid } from '@mantine/core';
-import { Stack, Button } from '@mantine/core';
 import { TextInput } from '@mantine/core';
 import styles from './auth.module.css';
-import { redirect } from 'next/dist/server/api-utils';
 import { useRouter } from 'next/router';
 export default function RegisterPage() {
   const [username, setUsername] = useState('');
