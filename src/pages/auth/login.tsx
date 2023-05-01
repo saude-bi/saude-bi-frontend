@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Grid, SimpleGrid } from '@mantine/core';
-import { Stack, Button } from '@mantine/core';
+import { Button } from '@mantine/core';
 import { TextInput } from '@mantine/core';
-import { Container } from '@mantine/core';
-import styles from './login.module.css';
+import styles from './auth.module.css';
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

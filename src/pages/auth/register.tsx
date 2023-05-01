@@ -3,62 +3,80 @@ import axios from 'axios';
 import { Grid } from '@mantine/core';
 import { Stack, Button } from '@mantine/core';
 import { TextInput } from '@mantine/core';
+import styles from './auth.module.css';
+import { redirect } from 'next/dist/server/api-utils';
+import { useRouter } from 'next/router';
 export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const router = useRouter();
   useEffect(() => {
     console.log(username, password);
   }, [username, password]);
 
-  const register = async () => {
-    try {
-      // Faça a requisição para uma API
-      const response = await axios.post('http://localhost:8000/users', {
-        username,
-        password,
-      });
+  const confirmPasswordValidation = () => {
+    return password === confirmPassword
+  }
 
-      // Exiba os dados recebidos
-      console.log(response.data);
-    } catch (error) {
-      // Trate os erros
-      console.error('Erro ao fazer a requisição:', error);
+  const register = async () => {
+
+    if (confirmPasswordValidation()) {
+      try {
+        // Faça a requisição para uma API
+        const response = await axios.post('http://localhost:8000/users', {
+          username,
+          password,
+        });
+  
+        // Exiba os dados recebidos
+        console.log(response.data);
+        router.push('/auth/login');
+      } catch (error) {
+        // Trate os erros
+        console.error('Erro ao fazer a requisição:', error);
+      }
+    } else {
+      console.error("Erro: As senhas não são iguais")
     }
+    
   };
 
   return (
-    <>
-      <Grid m={0} columns={24}>
-        <Grid.Col span={12}></Grid.Col>
-        <Grid.Col span={12}>
-          <Stack
-            justify="flex-end"
-            sx={(theme) => ({
-              backgroundColor:
-                theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-            })}
-          >
+    <div className={styles.container}>
+      <div className={styles.parteEsquerda}>{/* Conteúdo da parte esquerda */}</div>
+      <div className={styles.parteDireita}>
+        <form className={styles.form}>
             <TextInput
               placeholder="Digite o seu nome de usuario"
               label="Nome de usuário"
-              radius="md"
+              radius="md" sx={{width: "100%"}}
               value={username ? username : ''}
               onChange={(e) => setUsername(e.target.value)}
             />
             <TextInput
               placeholder="Digite a sua senha"
               label="Senha"
-              radius="md"
+              radius="md" 
               value={password ? password : ''}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)} 
+              sx={{ width: "100%"}}
             />
-            <Button variant="filled" onClick={register}>
+            <TextInput
+              placeholder="Digite a sua senha Novamente"
+              label="Confirmação de senha"
+              radius="md" 
+              value={confirmPassword ? confirmPassword : ''}
+              onChange={(e) => setConfirmPassword(e.target.value)} 
+              sx={{marginBottom: "20px", width: "100%"}}
+            />
+            <Button variant="filled" onClick={register} sx={{
+              width: "30%" 
+            }}>
               Cadastrar
             </Button>
-          </Stack>
-        </Grid.Col>
-      </Grid>
-    </>
+        </form>
+      </div>
+    </div>
   );
 }
