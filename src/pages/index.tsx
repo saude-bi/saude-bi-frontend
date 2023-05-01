@@ -1,28 +1,42 @@
-import { Welcome } from '@/components/Welcome/Welcome';
-import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
-import { useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 export default function HomePage() {
   const router = useRouter();
+  const [token, setToken] = useState("");
+  const[verificaToken, setVerificaToken] = useState(false)
+
+  useEffect(() => {
+    setToken(localStorage.getItem('access_token') || '');
+    setVerificaToken(true)
+  });
 
   useEffect(()=> {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      console.log('Token encontrado:', token);
-    } else {
-      console.log('Token não encontrado.');
-      router.push('/auth/login');
+    if(verificaToken) {
+      if (token) {
+        console.log('Token encontrado:', token);
+      } else {
+        console.log('Token não encontrado.');
+        router.push('/auth/login');
+      }
     }
-  })
+  }, [verificaToken])
 
   const logout = () => {
-    localStorage.removeItem('access_token')
+    localStorage.removeItem('access_token');
     router.push('/auth/login');
-  }
+  };
+
   return (
-   <div>
-      <h1>Usuário autenticado</h1>
-      <button onClick={logout}>Logout</button>
-   </div>
+    <>
+      {verificaToken && token && <div>
+        
+        <h1>
+          Usuário autenticado
+        </h1>
+        <button onClick={logout}>Logout</button>
+      </div>}
+      {verificaToken && !token && <div>Usuário não autenticado</div>}
+    </>
   );
 }

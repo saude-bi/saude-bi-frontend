@@ -13,11 +13,10 @@ export default function RegisterPage() {
   }, [username, password]);
 
   const confirmPasswordValidation = () => {
-    return password === confirmPassword
-  }
+    return password === confirmPassword;
+  };
 
   const register = async () => {
-
     if (confirmPasswordValidation()) {
       try {
         // Faça a requisição para uma API
@@ -25,7 +24,7 @@ export default function RegisterPage() {
           username,
           password,
         });
-  
+
         // Exiba os dados recebidos
         console.log(response.data);
         router.push('/auth/login');
@@ -34,9 +33,8 @@ export default function RegisterPage() {
         console.error('Erro ao fazer a requisição:', error);
       }
     } else {
-      console.error("Erro: As senhas não são iguais")
+      console.error('Erro: As senhas não são iguais');
     }
-    
   };
 
   return (
@@ -44,34 +42,39 @@ export default function RegisterPage() {
       <div className={styles.parteEsquerda}>{/* Conteúdo da parte esquerda */}</div>
       <div className={styles.parteDireita}>
         <form className={styles.form}>
-            <TextInput
-              placeholder="Digite o seu nome de usuario"
-              label="Nome de usuário"
-              radius="md" sx={{width: "100%"}}
-              value={username ? username : ''}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <TextInput
-              placeholder="Digite a sua senha"
-              label="Senha"
-              radius="md" 
-              value={password ? password : ''}
-              onChange={(e) => setPassword(e.target.value)} 
-              sx={{ width: "100%"}}
-            />
-            <TextInput
-              placeholder="Digite a sua senha Novamente"
-              label="Confirmação de senha"
-              radius="md" 
-              value={confirmPassword ? confirmPassword : ''}
-              onChange={(e) => setConfirmPassword(e.target.value)} 
-              sx={{marginBottom: "20px", width: "100%"}}
-            />
-            <Button variant="filled" onClick={register} sx={{
-              width: "30%" 
-            }}>
-              Cadastrar
-            </Button>
+          <TextInput
+            placeholder="Digite o seu nome de usuario"
+            label="Nome de usuário"
+            radius="md"
+            sx={{ width: '100%' }}
+            value={username ? username : ''}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextInput
+            placeholder="Digite a sua senha"
+            label="Senha"
+            radius="md"
+            value={password ? password : ''}
+            onChange={(e) => setPassword(e.target.value)}
+            sx={{ width: '100%' }}
+          />
+          <TextInput
+            placeholder="Digite a sua senha Novamente"
+            label="Confirmação de senha"
+            radius="md"
+            value={confirmPassword ? confirmPassword : ''}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            sx={{ marginBottom: '20px', width: '100%' }}
+          />
+          <Button
+            variant="filled"
+            onClick={register}
+            sx={{
+              width: '30%',
+            }}
+          >
+            Cadastrar
+          </Button>
         </form>
       </div>
     </div>
