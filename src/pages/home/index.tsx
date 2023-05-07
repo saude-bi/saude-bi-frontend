@@ -1,9 +1,9 @@
-
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Drawer from '@/components/MenuLateral/Drawer';
 import DrawerStyle from "@/components/MenuLateral/Drawer.module.css"
-export default function HomePage() {
+import styles from "./home.module.css"
+export default function Home() {
   const router = useRouter();
   const [token, setToken] = useState("");
   const[verificaToken, setVerificaToken] = useState(false)
@@ -31,13 +31,11 @@ export default function HomePage() {
   };
 
   return (
-    <>
-      {verificaToken && token && 
-      <div>
-         
-      </div>
-      }
-      {verificaToken && !token && <div>Usuário não autenticado</div>}
-    </>
-  );
+    <div className={styles.pagina}>
+      <Drawer/>
+      <main className={DrawerStyle.pagina}>
+        {/* Seu conteúdo principal da página aqui */}
+      </main>
+    </div>
+  )
 }

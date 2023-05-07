@@ -1,0 +1,21 @@
+.drawerContainer {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  height: 650px;
+  width: 150px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 25px;
+}
+
+.iconContainer {
+  margin-top: 40px; /* Atualizado */
+}
+
+.bodyContainer {
+  margin-left: 170px;
+}
