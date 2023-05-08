@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Drawer from '@/components/MenuLateral/Drawer';
+import Drawer from '@/components/Drawer/Drawer';
 import DrawerStyle from "@/components/MenuLateral/Drawer.module.css"
 export default function HomePage() {
   const router = useRouter();

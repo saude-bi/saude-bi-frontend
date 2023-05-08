@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Drawer from '@/components/MenuLateral/Drawer';
-import DrawerStyle from "@/components/MenuLateral/Drawer.module.css"
+import Drawer from '@/components/Drawer/Drawer';
+import Breadcrumb from '@/components/Breadcrumb';
 import styles from "./home.module.css"
 export default function Home() {
   const router = useRouter();
@@ -32,10 +32,13 @@ export default function Home() {
 
   return (
     <div className={styles.pagina}>
-      <Drawer/>
-      <main className={DrawerStyle.pagina}>
-        {/* Seu conteúdo principal da página aqui */}
-      </main>
+      <Drawer />
+      <div className={styles.content}>
+        <div className={styles.breadcrumbContainer}>
+          <Breadcrumb />
+        </div>
+        {/* Restante do conteúdo da página */}
+      </div>
     </div>
-  )
+  );  
 }
