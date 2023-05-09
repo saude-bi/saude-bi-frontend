@@ -3,6 +3,8 @@ import axios from 'axios';
 import { TextInput } from '@mantine/core';
 import styles from './auth.module.css';
 import { useRouter } from 'next/router';
+
+import { Button } from '@mantine/core';
 export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

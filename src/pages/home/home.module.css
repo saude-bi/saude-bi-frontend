@@ -16,3 +16,10 @@
   top: 1vh;
   align-self: flex-start;
 }
+
+.conteudo_pagina {
+  margin-left: 300px;
+  margin-top: 1vh;
+  flex-direction: column;
+}
+

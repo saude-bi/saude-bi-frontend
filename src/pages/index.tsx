@@ -1,21 +1,20 @@
-
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Drawer from '@/components/Drawer/Drawer';
-import DrawerStyle from "@/components/MenuLateral/Drawer.module.css"
+import DrawerStyle from '@/components/MenuLateral/Drawer.module.css';
 export default function HomePage() {
   const router = useRouter();
-  const [token, setToken] = useState("");
-  const[verificaToken, setVerificaToken] = useState(false)
+  const [token, setToken] = useState('');
+  const [verificaToken, setVerificaToken] = useState(false);
 
   useEffect(() => {
     setToken(localStorage.getItem('access_token') || '');
-    setVerificaToken(true)
+    setVerificaToken(true);
   });
 
   // redirecionamento para a pagina de login, no caso do usuario não estar autenticado
-  useEffect(()=> {
-    if(verificaToken) {
+  useEffect(() => {
+    if (verificaToken) {
       if (token) {
         console.log('Token encontrado:', token);
       } else {
@@ -23,7 +22,7 @@ export default function HomePage() {
         router.push('/auth/login');
       }
     }
-  }, [verificaToken])
+  }, [verificaToken]);
 
   const logout = () => {
     localStorage.removeItem('access_token');
@@ -32,11 +31,7 @@ export default function HomePage() {
 
   return (
     <>
-      {verificaToken && token && 
-      <div>
-         
-      </div>
-      }
+      {verificaToken && token && <div></div>}
       {verificaToken && !token && <div>Usuário não autenticado</div>}
     </>
   );

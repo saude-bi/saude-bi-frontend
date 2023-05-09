@@ -23,7 +23,7 @@ export default function LoginPage() {
 
       if (response.status === 200) {
         localStorage.setItem('access_token', response.data.access_token);
-        router.push("/")
+        router.push('/home');
       }
     } catch (err) {
       // Trate os erros

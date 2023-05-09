@@ -19,3 +19,7 @@
 .bodyContainer {
   margin-left: 170px;
 }
+
+.iconCursor {
+  cursor: pointer;
+}
