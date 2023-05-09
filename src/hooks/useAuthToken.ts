@@ -1,9 +1,9 @@
 export function removeAuthToken() {
-    localStorage.removeItem('access_token');
-    return "usuario realizou o logout com sucesso"
+  localStorage.removeItem('access_token');
+  return 'usuario realizou o logout com sucesso';
 }
 
 export function storeAuthToken(access_token: string) {
-    localStorage.setItem('access_token', access_token);
-    return "usuário realizou o login com sucesso"
+  localStorage.setItem('access_token', access_token);
+  return 'usuário realizou o login com sucesso';
 }

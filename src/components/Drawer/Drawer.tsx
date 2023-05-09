@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './Drawer.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import useLogout  from '@/hooks/useLogout';
+import useLogout from '@/hooks/useLogout';
 
 export default function Drawer() {
   const router = useRouter();
-  
+
   const { logout } = useLogout(router);
 
   const redirecionamentoParaPaginaHome = () => {
