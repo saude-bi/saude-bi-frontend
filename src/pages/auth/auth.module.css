@@ -28,3 +28,8 @@
     align-items: flex-end;
 }
 
+.errorMessage {
+    color: red;
+    margin-top: 10px;
+  }
+  

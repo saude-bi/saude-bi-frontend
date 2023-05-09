@@ -1,41 +1,14 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Button } from '@mantine/core';
 import { TextInput } from '@mantine/core';
 import styles from './auth.module.css';
 import { useRouter } from 'next/router';
+import useLogin from '@/hooks/useLogin';
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const router = useRouter();
-  useEffect(() => {
-    console.log(username, password);
-  }, [username, password]);
-
-  const login = async () => {
-    try {
-      // Faça a requisição para uma API
-      const response = await axios.post('http://localhost:8000/auth', {
-        username,
-        password,
-      });
-
-      if (response.status === 200) {
-        localStorage.setItem('access_token', response.data.access_token);
-        router.push('/home');
-      }
-    } catch (err) {
-      // Trate os erros
-      console.error('Erro ao fazer a requisição:', err);
-
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('Ocorreu um erro desconhecido.');
-      }
-    }
-  };
+  const { login, error } = useLogin(password, username, router);
 
   return (
     <div className={styles.container}>
@@ -67,6 +40,7 @@ export default function LoginPage() {
           >
             Entrar
           </Button>
+          {error && <p className={styles.errorMessage}>{error}</p>}
         </form>
       </div>
     </div>
