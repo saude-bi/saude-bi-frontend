@@ -15,8 +15,7 @@ export default function useLogin(password: string, username: string, router: Nex
             });
       
             if (response.status === 200) {
-              if(response.data.access_token === String)
-                storeAuthToken(response.data.access_token)
+              storeAuthToken(response.data.access_token)
               router.push('/home');
             }
         } catch (err) {
