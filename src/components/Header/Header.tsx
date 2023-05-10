@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = () => {
         <Breadcrumb />
       </div>
       <div className={styles.container_area_input_pesquisa}>
-        <TextInput placeholder="Pesquisar" width={50} height={50} />
+        <TextInput placeholder="Pesquisar" width={50} height={80} radius="lg"/>
       </div>
       <div className={styles.container_area_icone_perfil}>
         <Image
