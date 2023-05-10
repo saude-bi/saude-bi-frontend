@@ -7,7 +7,7 @@
 
 .content {
   display: flex;
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
 .breadcrumbContainer {
@@ -18,8 +18,13 @@
 }
 
 .conteudo_pagina {
-  margin-left: 300px;
-  margin-top: 1vh;
+  flex-wrap: wrap;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  align-content: center;
   flex-direction: column;
 }
 

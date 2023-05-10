@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Drawer from '@/components/Drawer/Drawer';
-import Breadcrumb from '@/components/Breadcrumb';
 import styles from './home.module.css';
-
-import { Button } from '@mantine/core';
+import Header from '@/components/Header/Header';
 export default function Home() {
   const router = useRouter();
   const [token, setToken] = useState('');
@@ -31,10 +29,9 @@ export default function Home() {
         <div className={styles.pagina}>
           <Drawer />
           <div className={styles.content}>
-            <div className={styles.breadcrumbContainer}>
-              <Breadcrumb />
-            </div>
-            <main className={styles.conteudo_pagina}>{/* conteudo da pagina */}</main>
+            <main className={styles.conteudo_pagina}>
+              <Header />
+            </main>
           </div>
         </div>
       )}
