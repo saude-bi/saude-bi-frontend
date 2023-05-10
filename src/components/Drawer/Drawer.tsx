@@ -19,23 +19,29 @@ export default function Drawer() {
         <Image
           src="/botao-de-inicio.png"
           alt="Autor: Mayor Icons"
-          width={50}
-          height={50}
           onClick={redirecionamentoParaPaginaHome}
-          className={styles.iconCursor}
+          className={styles.icon_style}
+          width={40}
+          height={40}
         />
       </article>
       <article className={styles.iconContainer}>
-        <Image src="/engrenagem.png" alt="Autor: ambar" width={50} height={50} />
+        <Image
+          src="/engrenagem.png"
+          alt="Autor: ambar"
+          className={styles.icon_style}
+          width={40}
+          height={40}
+        />
       </article>
       <article className={styles.iconContainer}>
         <Image
           src="/botao-de-logout.png"
           alt="Autor: ambar"
-          width={50}
-          height={50}
           onClick={logout}
-          className={styles.iconCursor}
+          className={styles.icon_style}
+          width={40}
+          height={40}
         />
       </article>
     </div>

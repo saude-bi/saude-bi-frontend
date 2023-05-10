@@ -1,25 +1,19 @@
 .drawerContainer {
-  position: fixed;
-  top: 50%;
-  left: 20px;
-  transform: translateY(-50%);
-  height: 680px;
-  width: 150px;
+
+  min-height: 80%;
+  min-width: 100%;
   background-color: white;
+  border-radius: 25px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  border-radius: 25px;
 }
 
 .iconContainer {
-  margin-top: 40px; /* Atualizado */
+  padding-top: 40%;
 }
 
-.bodyContainer {
-  margin-left: 170px;
-}
-
-.iconCursor {
+.icon_style {
   cursor: pointer;
 }

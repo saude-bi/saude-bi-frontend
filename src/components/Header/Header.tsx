@@ -15,18 +15,19 @@ const Header: React.FC<HeaderProps> = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.espaco_do_breadcrumb}>
+      <div className={styles.container_area_breadcrumb}>
         <Breadcrumb />
       </div>
-
-      <TextInput placeholder="Pesquisar" className={styles.inputSearch} />
-      <div className={styles.espaco_da_imagem}>
+      <div className={styles.container_area_input_pesquisa}>
+        <TextInput placeholder="Pesquisar" width={50} height={50} />
+      </div>
+      <div className={styles.container_area_icone_perfil}>
         <Image
-          src="/icone-de-usuario.png"
-          alt="Autor: Mayor Icons"
+          src={'/icone-de-usuario.png'}
+          alt="Autor:"
           width={50}
           height={50}
-          className={styles.iconCursor}
+          className={styles.icone_style}
         />
       </div>
     </div>

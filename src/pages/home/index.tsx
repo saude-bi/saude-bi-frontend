@@ -26,12 +26,15 @@ export default function Home() {
   return (
     <>
       {verificaToken && token && (
-        <div className={styles.pagina}>
-          <Drawer />
-          <div className={styles.content}>
-            <main className={styles.conteudo_pagina}>
+        <div className={styles.area_pagina}>
+          <div className={styles.area_esquerda}>
+            <Drawer />
+          </div>
+          <div className={styles.area_direita}>
+            <div className={styles.area_de_pesquisa}>
               <Header />
-            </main>
+            </div>
+            <div className={styles.area_do_conteudo}></div>
           </div>
         </div>
       )}
