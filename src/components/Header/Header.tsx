@@ -28,14 +28,15 @@ const Header: React.FC<HeaderProps> = () => {
       </div>
       <div className={styles.container_area_input_pesquisa}>
         <form onSubmit={handleSearch}>
-        <TextInput
-          placeholder="Pesquisar"
-          width={50}
-          height={80}
-          radius="lg"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        /></form>
+          <TextInput
+            placeholder="Pesquisar"
+            width={50}
+            height={80}
+            radius="lg"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </form>
       </div>
       <div className={styles.container_area_icone_perfil}>
         <Image
