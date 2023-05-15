@@ -1,16 +1,24 @@
 // src/components/Header/index.tsx
 import React from 'react';
+import { useRouter } from 'next/router';
 import Breadcrumb from '@/components/Breadcrumb';
 import styles from './Header.module.css';
 import { TextInput } from '@mantine/core';
 import Image from 'next/image';
+
 interface HeaderProps {
   // você pode definir as props que precisa aqui
 }
 
 const Header: React.FC<HeaderProps> = () => {
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const router = useRouter();
+
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // implemente a lógica de pesquisa aqui
+    event.preventDefault();
+    if (searchTerm.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchTerm)}`);
+    }
   };
 
   return (
@@ -19,14 +27,22 @@ const Header: React.FC<HeaderProps> = () => {
         <Breadcrumb />
       </div>
       <div className={styles.container_area_input_pesquisa}>
-        <TextInput placeholder="Pesquisar" width={50} height={80} radius="lg"/>
+        <TextInput
+          placeholder="Pesquisar"
+          width={50}
+          height={80}
+          radius="lg"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onSubmit={handleSearch}
+        />
       </div>
       <div className={styles.container_area_icone_perfil}>
         <Image
           src={'/icone-de-usuario.png'}
           alt="Autor:"
-          width={50}
-          height={50}
+          width={35}
+          height={35}
           className={styles.icone_style}
         />
       </div>

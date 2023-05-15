@@ -21,8 +21,8 @@ export default function Drawer() {
           alt="Autor: Mayor Icons"
           onClick={redirecionamentoParaPaginaHome}
           className={styles.icon_style}
-          width={40}
-          height={40}
+          width={30}
+          height={30}
         />
       </article>
       <article className={styles.iconContainer}>
@@ -30,8 +30,8 @@ export default function Drawer() {
           src="/engrenagem.png"
           alt="Autor: ambar"
           className={styles.icon_style}
-          width={40}
-          height={40}
+          width={30}
+          height={30}
         />
       </article>
       <article className={styles.iconContainer}>
@@ -40,8 +40,8 @@ export default function Drawer() {
           alt="Autor: ambar"
           onClick={logout}
           className={styles.icon_style}
-          width={40}
-          height={40}
+          width={30}
+          height={30}
         />
       </article>
     </div>
