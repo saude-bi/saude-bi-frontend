@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = () => {
   const [searchTerm, setSearchTerm] = React.useState('');
   const router = useRouter();
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (searchTerm.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchTerm)}`);
@@ -27,6 +27,7 @@ const Header: React.FC<HeaderProps> = () => {
         <Breadcrumb />
       </div>
       <div className={styles.container_area_input_pesquisa}>
+        <form onSubmit={handleSearch}>
         <TextInput
           placeholder="Pesquisar"
           width={50}
@@ -34,8 +35,7 @@ const Header: React.FC<HeaderProps> = () => {
           radius="lg"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onSubmit={handleSearch}
-        />
+        /></form>
       </div>
       <div className={styles.container_area_icone_perfil}>
         <Image
