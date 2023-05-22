@@ -17,7 +17,7 @@ const Header: React.FC<HeaderProps> = () => {
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (searchTerm.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchTerm)}`);
+      router.push(`/home/search?q=${encodeURIComponent(searchTerm)}`);
     }
   };
 
