@@ -1,0 +1,19 @@
+.drawerContainer {
+
+  min-height: 80%;
+  min-width: 100%;
+  background-color: white;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.iconContainer {
+  padding-top: 40%;
+}
+
+.icon_style {
+  cursor: pointer;
+}

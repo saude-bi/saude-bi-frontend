@@ -1,0 +1,20 @@
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+  }
+  
+  .separator {
+    margin: 0 0.5rem;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
