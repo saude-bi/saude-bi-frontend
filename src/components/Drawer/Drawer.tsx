@@ -2,16 +2,10 @@ import React from 'react';
 import styles from './Drawer.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import useLogout from '@/hooks/useLogout';
+import { logout } from '@/store/auth';
 
 export default function Drawer() {
   const router = useRouter();
-
-  const { logout } = useLogout(router);
-
-  const redirecionamentoParaPaginaHome = () => {
-    router.push('/home');
-  };
 
   return (
     <div className={styles.drawerContainer}>
@@ -19,7 +13,7 @@ export default function Drawer() {
         <Image
           src="/botao-de-inicio.png"
           alt="Autor: Mayor Icons"
-          onClick={redirecionamentoParaPaginaHome}
+          onClick={() => router.push('/home')}
           className={styles.icon_style}
           width={30}
           height={30}
@@ -38,7 +32,10 @@ export default function Drawer() {
         <Image
           src="/botao-de-logout.png"
           alt="Autor: ambar"
-          onClick={logout}
+          onClick={() => {
+            logout();
+            router.push('/auth/login');
+          }}
           className={styles.icon_style}
           width={30}
           height={30}

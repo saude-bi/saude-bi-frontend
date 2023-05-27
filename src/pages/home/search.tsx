@@ -1,5 +1,5 @@
 import React from 'react';
-import InternalPageLayout from '@/layout/internaPageLayout';
+import InternalPageLayout from '@/layout/internalPageLayout';
 import { useRouter } from 'next/router';
 
 export default function Search() {

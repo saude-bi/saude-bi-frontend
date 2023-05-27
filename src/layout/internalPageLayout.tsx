@@ -1,38 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Drawer from '@/components/Drawer/Drawer';
 import styles from './internalPageLayout.module.css';
 import Header from '@/components/Header/Header';
 import { ReactNode } from 'react';
+import { useGetCurrentUserQuery } from '@/store/auth';
+import { Flex, LoadingOverlay } from '@mantine/core';
 
 interface InternalPageLayoutProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export default function InternalPageLayout({ children }: InternalPageLayoutProps) {
   const router = useRouter();
-  const [token, setToken] = useState('');
-  const [verificaToken, setVerificaToken] = useState(false);
+  const { isLoading, isError } = useGetCurrentUserQuery();
 
   useEffect(() => {
-    setToken(localStorage.getItem('access_token') || '');
-    setVerificaToken(true);
-  });
-
-  // redirecionamento para a pagina de login, no caso do usuario não estar autenticado
-  useEffect(() => {
-    if (verificaToken) {
-      if (!token) {
-        console.log('Token não encontrado.');
-        router.push('/auth/login');
-      }
+    if (isError) {
+      router.push('/auth/login');
     }
-  }, [verificaToken]);
+  }, [isError]);
 
   return (
-    <>
-      {verificaToken && token && (
-        <div className={styles.area_pagina}>
+    <div className={styles.area_pagina}>
+      {isLoading || isError ? (
+        <LoadingOverlay visible />
+      ) : (
+        <Flex w="100%">
           <div className={styles.area_esquerda}>
             <Drawer />
           </div>
@@ -42,9 +36,8 @@ export default function InternalPageLayout({ children }: InternalPageLayoutProps
             </div>
             <div className={styles.area_do_conteudo}>{children}</div>
           </div>
-        </div>
+        </Flex>
       )}
-      {verificaToken && !token && <div>Usuário não autenticado</div>}
-    </>
+    </div>
   );
 }
