@@ -16,7 +16,7 @@ export default function LoginPage() {
   const [login, { isSuccess, isError }] = useLoginMutation();
   const router = useRouter();
 
-  const { onSubmit, errors, getInputProps } = useForm<FormValues>({
+  const { onSubmit, getInputProps } = useForm<FormValues>({
     initialValues: { username: '', password: '' },
     validate: {
       username: (username) => {
