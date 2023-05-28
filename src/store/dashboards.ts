@@ -3,28 +3,17 @@ import { injectCreate, injectDelete, injectFindAll, injectFindById, injectUpdate
 
 const endpoint = 'dashboard';
 
-interface Dashboard extends Entity {
- 
-}
+interface Dashboard extends Entity {}
 
-export const { useFindDashboardQuery } = injectFindById<Dashboard>(
-   'findDashboard',
-   endpoint
-);
+export const { useFindDashboardQuery } = injectFindById<Dashboard>('findDashboard', endpoint);
 
 export const { useFindAllDashboardsQuery } = injectFindAll<Dashboard>(
-   'findAllDashboards',
-   endpoint
+  'findAllDashboards',
+  endpoint
 );
 
-export const { useCreateDashboardMutation } = injectCreate<Dashboard>(
-   'createDashboard',
-   endpoint
-);
+export const { useCreateDashboardMutation } = injectCreate<Dashboard>('createDashboard', endpoint);
 
-export const { useUpdateDashboardMutation } = injectUpdate<Dashboard>(
-   'updateDashboard',
-   endpoint
-);
+export const { useUpdateDashboardMutation } = injectUpdate<Dashboard>('updateDashboard', endpoint);
 
 export const { useDeleteDashboardMutation } = injectDelete('deleteDashboard', endpoint);
