@@ -1,7 +1,7 @@
 import { Entity } from '@/types/common';
 import { injectCreate, injectDelete, injectFindAll, injectFindById, injectUpdate } from './common';
 
-const endpoint = 'dashboards';
+const endpoint = 'dashboard';
 
 interface Dashboard extends Entity {
  
