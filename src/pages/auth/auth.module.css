@@ -12,7 +12,7 @@
 }
 
 .parteEsquerda {
-    background-color: #f0f0f0; /* cor de fundo da parte esquerda */
+    background-color: #E9ECEF; /* cor de fundo da parte esquerda */
     flex-direction: column;
 }
 .parteEsquerda p {
@@ -23,7 +23,7 @@
     color: #5C5F66;
 }
 .parteDireita {
-    background-color: #e0e0e0;
+    background-color: #E9ECEF;
 }
 
 /* Estilos para o formulário (opcional) */
