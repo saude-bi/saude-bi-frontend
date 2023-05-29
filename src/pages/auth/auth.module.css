@@ -6,30 +6,44 @@
 .parteEsquerda,
 .parteDireita {
     flex: 1; /* divide a tela igualmente */
+    display: flex; /* permite o uso de Flexbox */
+    align-items: center; /* alinha verticalmente no centro */
+    justify-content: center; /* alinha horizontalmente no centro */
 }
 
 .parteEsquerda {
     background-color: #f0f0f0; /* cor de fundo da parte esquerda */
+    flex-direction: column;
 }
-
+.parteEsquerda p {
+    padding: 30px;
+    color: #5C5F66;
+}
+.parteEsquerda h2 {
+    color: #5C5F66;
+}
 .parteDireita {
-    background-color: #e0e0e0; /* cor de fundo da parte direita */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: #e0e0e0;
 }
 
 /* Estilos para o formulário (opcional) */
 .form {
     display: flex;
     flex-direction: column;
-    width: 600px; /* Define uma largura fixa para o formulário */
-    padding: 20px;
-    align-items: flex-end;
+    justify-content: center;
+    width: 600px; 
+    height: 650px;
+    padding: 40px;
+    align-items: center;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
+.form h3 {
+    color: black;
+}
 .errorMessage {
     color: red;
     margin-top: 10px;
-  }
-  
+}
