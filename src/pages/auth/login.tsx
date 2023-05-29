@@ -73,7 +73,7 @@ export default function LoginPage() {
             placeholder="Digite o seu nome de usuario"
             label="Nome de usuário"
             radius="md"
-            sx={{ width: '85%', marginBottom: '20px' }}
+            sx={{ width: '100%', marginBottom: '20px' }}
             {...getInputProps('username')}
           />
 
@@ -81,7 +81,7 @@ export default function LoginPage() {
             placeholder="Digite a sua senha"
             label="Senha"
             radius="md"
-            sx={{ marginBottom: '40px', width: '85%' }}
+            sx={{ marginBottom: '40px', width: '100%' }}
             type="password"
             {...getInputProps('password')}
           />

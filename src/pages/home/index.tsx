@@ -1,13 +1,12 @@
 import InternalPageLayout from '@/layout/internalPageLayout';
-import { useFindAllEstablishmentsQuery } from '@/store/establishments';
 import { useEffect } from 'react';
-
+import { useFindAllDashboardsQuery } from '@/store/dashboards';
 export default function Home() {
-  const { isLoading, data: establishments } = useFindAllEstablishmentsQuery();
+  const { isLoading, data: dashboards } = useFindAllDashboardsQuery();
 
   useEffect(() => {
-    console.log(establishments);
-  }, [establishments]);
+    console.log(dashboards);
+  }, [dashboards]);
 
   return (
     <InternalPageLayout>
