@@ -17,7 +17,7 @@ export default function HomePage() {
     if (verificaToken) {
       if (token) {
         console.log('Token encontrado:', token);
-        router.push("/home")
+        router.push('/home');
       } else {
         console.log('Token não encontrado.');
         router.push('/auth/login');

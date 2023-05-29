@@ -51,7 +51,7 @@ export default function LoginPage() {
   return (
     <div className={styles.container}>
       <div className={styles.parteEsquerda}>
-      <Image
+        <Image
           src="/login-image.png"
           alt="Autor: Mayor Icons"
           onClick={() => router.push('/home')}
@@ -60,9 +60,10 @@ export default function LoginPage() {
         />
         <h2>Titulo</h2>
         <p>
-          Lorem ipsum iaculis dictumst habitasse sed vivamus fusce dapibus curae neque libero sodales, 
-          etiam mollis etiam netus ut purus lorem augue aliquet ante cubilia. curae praesent potenti eget nulla nec cras aenean 
-          itora pharetra, quam non mi porta odio duis mi libero ornare, curabitur tellus hac tortor porta risus ultrices egestas.
+          Lorem ipsum iaculis dictumst habitasse sed vivamus fusce dapibus curae neque libero
+          sodales, etiam mollis etiam netus ut purus lorem augue aliquet ante cubilia. curae
+          praesent potenti eget nulla nec cras aenean itora pharetra, quam non mi porta odio duis mi
+          libero ornare, curabitur tellus hac tortor porta risus ultrices egestas.
         </p>
       </div>
       <div className={styles.parteDireita}>
@@ -72,7 +73,7 @@ export default function LoginPage() {
             placeholder="Digite o seu nome de usuario"
             label="Nome de usuário"
             radius="md"
-            sx={{ width: '85%', marginBottom: '20px'}}
+            sx={{ width: '85%', marginBottom: '20px' }}
             {...getInputProps('username')}
           />
 
@@ -90,10 +91,10 @@ export default function LoginPage() {
             type="submit"
             sx={{
               width: '100%',
-              height: "6vh",
-              borderRadius: "7px",
-              backgroundColor: "#748FFC",
-              fontSize: "2.3vh"
+              height: '6vh',
+              borderRadius: '7px',
+              backgroundColor: '#748FFC',
+              fontSize: '2.3vh',
             }}
           >
             Login
