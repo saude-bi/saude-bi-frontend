@@ -5,7 +5,7 @@ export interface User extends Entity {
   isAdmin: boolean;
 }
 
-export type LoginForm = {
+export type LoginFormDto = {
   username: string;
   password: string;
 };
