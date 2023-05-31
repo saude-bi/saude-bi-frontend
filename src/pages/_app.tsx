@@ -6,6 +6,7 @@ import { MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core
 import { Notifications } from '@mantine/notifications';
 import { baseApi } from '@/store/api';
 import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
+import { theme } from '@/utils/theme';
 
 export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   const { Component, pageProps } = props;
@@ -26,7 +27,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
       </Head>
 
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-        <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+        <MantineProvider theme={{ ...theme, colorScheme }} withGlobalStyles withNormalizeCSS>
           <ApiProvider api={baseApi}>
             <Component {...pageProps} />
             <Notifications />
