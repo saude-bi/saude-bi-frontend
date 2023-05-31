@@ -13,7 +13,7 @@ export const Drawer: React.FC = () => {
       <Stack h="100%">
         <Title color="white">SBI</Title>
         <Stack sx={{ flexGrow: 1 }} align="center" justify="center" spacing="xl">
-          <ActionIcon onClick={() => router.push('/home')} size="lg">
+          <ActionIcon onClick={() => router.push('/')} size="lg">
             <IconHome size="lg" />
           </ActionIcon>
 

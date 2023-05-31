@@ -44,20 +44,14 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push('/home');
+      router.push('/');
     }
   }, [isSuccess]);
 
   return (
     <div className={styles.container}>
       <div className={styles.parteEsquerda}>
-        <Image
-          src="/login-image.png"
-          alt="Autor: Mayor Icons"
-          onClick={() => router.push('/home')}
-          width={400}
-          height={400}
-        />
+        <Image src="/login-image.png" alt="Autor: Mayor Icons" width={400} height={400} />
         <h2>Titulo</h2>
         <p>
           Lorem ipsum iaculis dictumst habitasse sed vivamus fusce dapibus curae neque libero
