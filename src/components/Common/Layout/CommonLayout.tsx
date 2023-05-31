@@ -1,17 +1,19 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Flex, LoadingOverlay } from '@mantine/core';
+import { Box, Center, Flex, Group, LoadingOverlay, Stack } from '@mantine/core';
 import { useGetCurrentUserQuery } from '@/store/auth';
-import Header from '@/components/Header/Header';
+import { PageTitle } from '@/components/PageTitle/PageTitle';
 import { Drawer } from '@/components/Drawer/Drawer';
+import { UserProfile } from '@/components/UserProfile/UserProfile';
 
-interface Props {
+type Props = {
   children: React.ReactNode;
-}
+  title: string;
+};
 
-export const CommonLayout: React.FC<Props> = ({ children }) => {
+export const CommonLayout: React.FC<Props> = ({ children, title }) => {
   const router = useRouter();
-  const { isLoading, isError } = useGetCurrentUserQuery();
+  const { isLoading, isError, data: currentUser } = useGetCurrentUserQuery();
 
   useEffect(() => {
     if (isError) {
@@ -20,18 +22,23 @@ export const CommonLayout: React.FC<Props> = ({ children }) => {
   }, [isError]);
 
   return (
-    <Flex sx={{ minHeight: '100vh', minWidth: '100vw' }} bg="gray.2">
+    <Box bg="gray.2">
       {isLoading || isError ? (
         <LoadingOverlay visible />
       ) : (
-        <Flex h="100%" w="100%">
-          <Drawer />
-          <Flex h="100%" w="84%">
-            <Header />
+        <Flex sx={{ minHeight: '100vh', minWidth: '100vw' }}>
+          <Center p="xl">
+            <Drawer />
+          </Center>
+          <Stack sx={{ flexGrow: 1 }} px="xl" py="md">
+            <Flex align="center" justify="space-between">
+              <PageTitle title={title} />
+              <UserProfile user={currentUser!} />
+            </Flex>
             {children}
-          </Flex>
+          </Stack>
         </Flex>
       )}
-    </Flex>
+    </Box>
   );
 };

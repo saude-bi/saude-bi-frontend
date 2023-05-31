@@ -9,7 +9,7 @@ export const Drawer: React.FC = () => {
   const router = useRouter();
 
   return (
-    <ContentCard bg="indigo.4">
+    <ContentCard bg="indigo.4" h="100%">
       <Stack h="100%">
         <Title color="white">SBI</Title>
         <Stack sx={{ flexGrow: 1 }} align="center" justify="center" spacing="xl">

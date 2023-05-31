@@ -10,7 +10,7 @@ export default function Home() {
   }, [dashboards]);
 
   return (
-    <CommonLayout>
+    <CommonLayout title="Dashboards">
       <p>Bem Vindo!</p>
     </CommonLayout>
   );
