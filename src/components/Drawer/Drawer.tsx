@@ -14,11 +14,11 @@ export const Drawer: React.FC = () => {
         <Title color="white">SBI</Title>
         <Stack sx={{ flexGrow: 1 }} align="center" justify="center" spacing="xl">
           <ActionIcon onClick={() => router.push('/')} size="lg">
-            <IconHome size="lg" />
+            <IconHome color="white" size="32px" />
           </ActionIcon>
 
           <ActionIcon size="lg">
-            <IconUser size="lg" />
+            <IconUser color="white" size="32px" />
           </ActionIcon>
 
           <ActionIcon
@@ -28,7 +28,7 @@ export const Drawer: React.FC = () => {
             }}
             size="lg"
           >
-            <IconDatabase size="lg" />
+            <IconDatabase color="white" size="32px" />
           </ActionIcon>
         </Stack>
       </Stack>

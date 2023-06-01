@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Center, Flex, Group, LoadingOverlay, Stack } from '@mantine/core';
+import { Box, Center, Flex, LoadingOverlay, Stack } from '@mantine/core';
 import { useGetCurrentUserQuery } from '@/store/auth';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
 import { Drawer } from '@/components/Drawer/Drawer';

@@ -11,7 +11,7 @@ export const UserProfile: React.FC<Props> = ({ user }) => {
   return (
     <Group spacing="lg">
       <ActionIcon color="orange.3" variant="filled" size="xl" radius="md">
-        <IconUser size="32px" />
+        <IconUser color="white" size="32px" />
       </ActionIcon>
 
       <Stack spacing={0}>
