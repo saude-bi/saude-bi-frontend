@@ -1,4 +1,5 @@
 export type Entity = { id: number; created: Date; updated: Date };
+
 export type PaginatedResponse<T> = {
   data: T[];
   page: {
@@ -7,4 +8,9 @@ export type PaginatedResponse<T> = {
     totalPages: number;
     current: number;
   };
+};
+
+export type PaginationQuery = {
+  page?: number;
+  perPage?: number;
 };

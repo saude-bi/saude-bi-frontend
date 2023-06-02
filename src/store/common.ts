@@ -1,4 +1,4 @@
-import { PaginatedResponse } from '@/types/common';
+import { PaginatedResponse, PaginationQuery } from '@/types/common';
 import { baseApi } from './api';
 
 export const injectFindById = <T>(name: string, endpoint: string) => {
@@ -17,8 +17,8 @@ export const injectFindById = <T>(name: string, endpoint: string) => {
 export const injectFindAll = <T>(name: string, endpoint: string) => {
   const entityApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
-      [name]: build.query<PaginatedResponse<T>, void>({
-        query: () => ({ url: endpoint }),
+      [name]: build.query<PaginatedResponse<T>, PaginationQuery | void>({
+        query: (params) => ({ url: endpoint, params: params || undefined }),
       }),
     }),
   });
