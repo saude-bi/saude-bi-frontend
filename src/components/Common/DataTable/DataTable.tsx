@@ -1,12 +1,25 @@
-import { Entity, PaginatedResponse } from '@/types/common';
-import { BaseQueryFn } from '@reduxjs/toolkit/dist/query';
-import { TypedUseQueryHookResult } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { Entity, PaginatedResponse, PaginationQuery } from '@/types/common';
+import {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  FetchBaseQueryMeta,
+  QueryDefinition,
+} from '@reduxjs/toolkit/dist/query';
+import { TypedUseQueryHookResult, UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { MantineReactTable, MantineReactTableProps } from 'mantine-react-table';
 import { MRT_Localization_PT_BR } from 'mantine-react-table/locales/pt-BR';
 import { RowActions } from './RowActions';
 
-type CrudMethods<T extends Entity> = {
-  findAll: TypedUseQueryHookResult<PaginatedResponse<T>, unknown, BaseQueryFn>;
+export type CrudMethods<T extends Entity> = {
+  findAll: UseQuery<
+    QueryDefinition<
+      void | PaginationQuery,
+      BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>,
+      never,
+      PaginatedResponse<T>
+    >
+  >;
   create?: number;
   update?: number;
   remove?: number;
