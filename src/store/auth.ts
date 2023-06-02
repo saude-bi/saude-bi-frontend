@@ -1,5 +1,5 @@
-import Cookie from 'universal-cookie';
-import { LoginForm, User } from '@/types/user';
+import { setCookie, deleteCookie } from 'cookies-next';
+import { LoginFormDto, User } from '@/types/user';
 import { TokenResponse } from '@/types/auth';
 import { baseApi } from './api';
 
@@ -12,7 +12,7 @@ export const authApi = baseApi.injectEndpoints({
       keepUnusedDataFor: 0.0001,
     }),
 
-    login: build.mutation<TokenResponse, LoginForm>({
+    login: build.mutation<TokenResponse, LoginFormDto>({
       query: (body) => ({
         url: `auth`,
         method: 'POST',
@@ -21,9 +21,7 @@ export const authApi = baseApi.injectEndpoints({
       onQueryStarted: async (_, { queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled;
-
-          const cookies = new Cookie();
-          cookies.set('token', data.access_token);
+          setCookie('token', data.access_token);
         } catch (err) {
           console.error(err);
           logout();
@@ -36,7 +34,6 @@ export const authApi = baseApi.injectEndpoints({
 
 export const { useGetCurrentUserQuery, useLoginMutation } = authApi;
 export const logout = () => {
-  const cookies = new Cookie();
-  cookies.remove('token');
+  deleteCookie('token');
   authApi.util.resetApiState();
 };

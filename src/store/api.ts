@@ -1,6 +1,5 @@
-import { fetchBaseQuery } from '@reduxjs/toolkit/dist/query';
-import { createApi } from '@reduxjs/toolkit/dist/query/react';
-import Cookie from 'universal-cookie';
+import { getCookie } from 'cookies-next';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -8,11 +7,9 @@ export const baseApi = createApi({
     credentials: 'same-origin',
     mode: 'cors',
     prepareHeaders: (headers) => {
-      const cookies = new Cookie();
-      const token = cookies.get('token');
+      const token = getCookie('token');
 
       if (token) {
-        console.log(token);
         headers.set('Authorization', `Bearer ${token}`);
       }
 
