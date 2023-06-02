@@ -1,5 +1,5 @@
 import { Entity } from '@/types/common';
-import { injectCreate, injectDelete, injectFindAll, injectFindById, injectUpdate } from './common';
+import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from './common';
 
 const endpoint = 'establishments';
 
@@ -28,4 +28,4 @@ export const { useUpdateEstablishmentMutation } = injectUpdate<Establishment>(
   endpoint
 );
 
-export const { useDeleteEstablishmentMutation } = injectDelete('deleteEstablishment', endpoint);
+export const { useRemoveEstablishmentMutation } = injectRemove('removeEstablishment', endpoint);

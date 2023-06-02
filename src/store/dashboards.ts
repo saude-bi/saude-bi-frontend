@@ -1,5 +1,5 @@
 import { Entity } from '@/types/common';
-import { injectCreate, injectDelete, injectFindAll, injectFindById, injectUpdate } from './common';
+import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from './common';
 
 const endpoint = 'dashboard';
 
@@ -16,4 +16,4 @@ export const { useCreateDashboardMutation } = injectCreate<Dashboard>('createDas
 
 export const { useUpdateDashboardMutation } = injectUpdate<Dashboard>('updateDashboard', endpoint);
 
-export const { useDeleteDashboardMutation } = injectDelete('deleteDashboard', endpoint);
+export const { useRemoveDashboardMutation } = injectRemove('removeDashboard', endpoint);

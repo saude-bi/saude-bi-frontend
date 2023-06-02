@@ -1,6 +1,6 @@
 import { Entity } from '@/types/common';
 import { Occupation } from '@/types/occupation';
-import { injectCreate, injectDelete, injectFindAll, injectFindById, injectUpdate } from './common';
+import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from './common';
 
 const endpoint = 'occupation-categories';
 
@@ -29,7 +29,7 @@ export const { useUpdateOccupationCategoryMutation } = injectUpdate<OccupationCa
   endpoint
 );
 
-export const { useDeleteOccupationCategoryMutation } = injectDelete(
-  'deleteOccupationCategory',
+export const { useRemoveOccupationCategoryMutation } = injectRemove(
+  'removeOccupationCategory',
   endpoint
 );

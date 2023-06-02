@@ -1,5 +1,5 @@
 import { Entity } from '@/types/common';
-import { injectCreate, injectDelete, injectFindAll, injectFindById, injectUpdate } from './common';
+import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from './common';
 
 const endpoint = 'category';
 
@@ -16,4 +16,4 @@ export const { useCreateDashboardCategoryMutation } = injectCreate<DashboardCate
 
 export const { useUpdateDashboardCategoryMutation } = injectUpdate<DashboardCategory>('updateDashboardCategory', endpoint);
 
-export const { useDeleteDashboardCategoryMutation } = injectDelete('deleteDashboardCategory', endpoint);
+export const { useRemoveDashboardCategoryMutation } = injectRemove('removeDashboardCategory', endpoint);

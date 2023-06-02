@@ -13,7 +13,7 @@ export default function LoginPage() {
           a galley of type and scrambled it to make a type specimen book.
         </Text>
       </Stack>
-      <Center h="100%" p="xl" sx={{ flexGrow: 1 }}>
+      <Center h="100%" p="5rem 10rem" sx={{ flexGrow: 1 }}>
         <LoginForm />
       </Center>
     </Group>

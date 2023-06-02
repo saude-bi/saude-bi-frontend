@@ -1,9 +1,12 @@
 import { Entity } from '@/types/common';
-import { MantineReactTable } from 'mantine-react-table';
+import { MantineReactTable, MantineReactTableProps } from 'mantine-react-table';
 import { MRT_Localization_PT_BR } from 'mantine-react-table/locales/pt-BR';
 import { RowActions } from './RowActions';
 
-type Props<T extends Entity> = Parameters<typeof MantineReactTable<T>>[0];
+interface Props<T extends Entity> extends MantineReactTableProps<T> {
+  removeMutation?: (id: number) => void;
+  refetch: () => void;
+}
 
 export const DataTable = <T extends Entity>(props: Props<T>) => {
   return (
@@ -20,7 +23,17 @@ export const DataTable = <T extends Entity>(props: Props<T>) => {
       }}
       enableRowActions
       getRowId={(row: Entity) => row.id.toString()}
-      renderRowActions={({ row }) => <RowActions id={+row.id} />}
+      renderRowActions={({ row }) => (
+        <RowActions
+          id={+row.id}
+          onRemove={(id) => {
+            if (props.removeMutation) {
+              props.removeMutation(id);
+              props.refetch();
+            }
+          }}
+        />
+      )}
       {...props}
     />
   );

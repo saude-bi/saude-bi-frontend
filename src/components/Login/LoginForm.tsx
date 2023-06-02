@@ -15,20 +15,12 @@ export const LoginForm: React.FC<{}> = () => {
     initialValues: { username: '', password: '' },
     validate: {
       username: (username) => {
-        if (username === '') {
-          return 'o login é obrigatorio';
-        }
-
         if (username.length < 5) {
           return 'O login deve ter pelo menos 5 caracteres';
         }
       },
 
       password: (password) => {
-        if (password === '') {
-          return 'a senha de usuário é obrigatoria';
-        }
-
         if (password.length < 5) {
           return 'A senha deve ter pelo menos 5 caracteres';
         }
@@ -57,7 +49,6 @@ export const LoginForm: React.FC<{}> = () => {
             label="Login"
             radius="xs"
             w="100%"
-            labelProps={{ color: 'red' }}
             required
             {...getInputProps('username')}
           />
@@ -69,7 +60,6 @@ export const LoginForm: React.FC<{}> = () => {
             w="100%"
             type="password"
             required
-            c="red"
             {...getInputProps('password')}
           />
 

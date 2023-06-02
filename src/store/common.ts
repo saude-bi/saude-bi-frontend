@@ -50,7 +50,7 @@ export const injectCreate = <T>(name: string, endpoint: string) => {
   return entityApi;
 };
 
-export const injectDelete = (name: string, endpoint: string) => {
+export const injectRemove = (name: string, endpoint: string) => {
   const entityApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
       [name]: build.mutation<null, number>({

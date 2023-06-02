@@ -3,11 +3,12 @@ import { IconEraser, IconEye, IconPencil } from '@tabler/icons-react';
 
 type Props = {
   id: number;
+  onRemove?: (id: number) => void;
 };
 
-export const RowActions: React.FC<Props> = ({ id }) => {
+export const RowActions: React.FC<Props> = ({ id, onRemove }) => {
   return (
-    <Group spacing="sm">
+    <Group spacing="sm" noWrap>
       <ActionIcon color="green.6" variant="filled">
         <IconEye />
       </ActionIcon>
@@ -16,9 +17,11 @@ export const RowActions: React.FC<Props> = ({ id }) => {
         <IconPencil />
       </ActionIcon>
 
-      <ActionIcon color="red.6" variant="filled">
-        <IconEraser />
-      </ActionIcon>
+      {onRemove && (
+        <ActionIcon color="red.6" variant="filled" onClick={() => onRemove(id)}>
+          <IconEraser />
+        </ActionIcon>
+      )}
     </Group>
   );
 };
