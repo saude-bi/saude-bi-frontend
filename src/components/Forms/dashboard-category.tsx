@@ -1,10 +1,10 @@
-import { DashboardCategoryDto } from "@/types/dashboard-category";
+import { DashboardCategory } from "@/types/dashboard-category";
 import { createFormContext } from "@mantine/form";
 import { TextInput } from '@mantine/core';
 
 
 export const [DashboardCategoryFormProvider, dashboardCategoryFormContext, useDashboardCategoryForm] =
-  createFormContext<DashboardCategoryDto>();
+  createFormContext<DashboardCategory>();
 
 export const DashboardCategoryInputs = () => {
   const form = dashboardCategoryFormContext();

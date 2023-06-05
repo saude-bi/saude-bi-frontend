@@ -19,6 +19,7 @@ export const EditLayout: React.FC<Props> = ({ children, handleSubmit, title }) =
                 <ContentCard>
                     <Stack>
                         <Text color="dark.3">
+                            Ações
                         </Text>
                         <ButtonSave handleSubmit={handleSubmit} />
                         <ButtonBack />

@@ -8,14 +8,15 @@ import {
 } from '@/store/occupation-categories';
 import { Button, Grid, Stack, Text, TextInput } from '@mantine/core';
 import React, { useEffect, useMemo, useRef } from 'react';
-import { DashboardCategoryDto } from '@/types/dashboard-category'
+import { DashboardCategory, DashboardCategoryDto } from '@/types/dashboard-category'
 import { useForm } from '@mantine/form';
 import { DashboardCategoryFormProvider, DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
 import { notifications } from '@mantine/notifications';
+import { useCreateDashboardCategoryMutation } from '@/store/dashboard-categories';
 
 export default function OccupationCategoriesPage() {
   const refForm = React.createRef<HTMLFormElement>();
-  const form = useForm<DashboardCategoryDto>({
+  const form = useForm<DashboardCategory>({
     validate: {
       name: (values) => (
         values === undefined
@@ -30,7 +31,7 @@ export default function OccupationCategoriesPage() {
 
   const trigerSubmit = () => {
     if (!form.validate().hasErrors) {
-      notifications.show({ message: 'Salvo com sucesso!', color: 'green' });
+      createDashboardCategory(form.values)
     }
   };
 
