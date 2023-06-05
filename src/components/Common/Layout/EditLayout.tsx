@@ -2,14 +2,15 @@ import { ButtonBack, ButtonSave } from '@/components/Common/Buttons/Buttons';
 import { Grid, Stack, Text } from '@mantine/core';
 import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
 import { ContentCard } from '../ContentCard/ContentCard';
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
 type Props = {
   children: React.ReactNode,
+  handleSubmit: MouseEventHandler<HTMLButtonElement>,
   title: string
 }
 
-export const EditLayout: React.FC<Props> = ({ children, title }) => {
+export const EditLayout: React.FC<Props> = ({ children, handleSubmit, title }) => {
   
   return (
     <CommonLayout title={title}>
@@ -19,7 +20,7 @@ export const EditLayout: React.FC<Props> = ({ children, title }) => {
                     <Stack>
                         <Text color="dark.3">
                         </Text>
-                        <ButtonSave />
+                        <ButtonSave handleSubmit={handleSubmit} />
                         <ButtonBack />
                     </Stack>
                 </ContentCard>
