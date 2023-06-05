@@ -13,9 +13,12 @@ import { useForm } from '@mantine/form';
 import { DashboardCategoryFormProvider, DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
 import { notifications } from '@mantine/notifications';
 import { useCreateDashboardCategoryMutation } from '@/store/dashboard-categories';
+import { useRouter } from 'next/router';
 
 export default function OccupationCategoriesPage() {
-  const refForm = React.createRef<HTMLFormElement>();
+  const [submit, { isSuccess, isError }] = useCreateDashboardCategoryMutation();
+  const router = useRouter();
+
   const form = useForm<DashboardCategory>({
     validate: {
       name: (values) => (
@@ -31,14 +34,23 @@ export default function OccupationCategoriesPage() {
 
   const trigerSubmit = () => {
     if (!form.validate().hasErrors) {
-      createDashboardCategory(form.values)
+      submit(form.values)
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.push('/dashboard-category');
+    }
+    if (isError) {
+      notifications.show({ message: 'Erro ao cadastrar uma Categoria', color: 'red' })
+    }
+  }, [isSuccess]);
 
   return (
     <EditLayout title="Categorias de Ocupacoes" handleSubmit={trigerSubmit}>
       <DashboardCategoryFormProvider form={form}>
-        <form ref={refForm} onSubmit={form.onSubmit(() => {})}>
+        <form onSubmit={form.onSubmit(() => {})}>
           <DashboardCategoryInputs />
         </form>
       </DashboardCategoryFormProvider>
