@@ -1,94 +1,39 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
+import { MRT_ColumnDef } from 'mantine-react-table';
 import {
-  MantineReactTable,
-  MRT_ColumnDef,
-  MRT_ColumnFiltersState,
-  MRT_PaginationState,
-  MRT_SortingState,
-} from 'mantine-react-table';
-import { useFindAllDashboardCategoriesQuery } from '@/store/dashboard-categories';
+  useFindAllDashboardCategoriesQuery,
+  useRemoveDashboardCategoryMutation
+} from '@/store/dashboard-categories';
 import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
 import { DashboardCategory } from '@/types/dashboard-category';
+import { DataTable } from '@/components/Common/DataTable/DataTable';
 
 export default function DashboardCategories() {
-  const { isLoading, isError, data: dashboardCategories } = useFindAllDashboardCategoriesQuery();
-
-  //data and fetching state
-  const [isRefetching, setIsRefetching] = useState(false);
-  const [rowCount, setRowCount] = useState(0);
-
-  //table state
-  const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
-    [],
-  );
-  const [globalFilter, setGlobalFilter] = useState('');
-  const [sorting, setSorting] = useState<MRT_SortingState>([]);
-  const [pagination, setPagination] = useState<MRT_PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  });
+  const { data, refetch } = useFindAllDashboardCategoriesQuery();
+  const [remove, removeResult] = useRemoveDashboardCategoryMutation();
 
   useEffect(() => {
-  }, [
-    isLoading,
-    isError,
-    DashboardCategories,
-    columnFilters,
-    globalFilter,
-    pagination.pageIndex,
-    pagination.pageSize,
-    sorting,
-  ]);
+    console.log(data);
+  });
 
-  const columns = useMemo<MRT_ColumnDef<any>[]>(
+  const columns = useMemo<MRT_ColumnDef<DashboardCategory>[]>(
     () => [
-      {
-        accessorKey: 'id' as const,
-        header: 'ID',
-      },
-      {
-        accessorKey: 'name' as const,
-        header: 'Nome',
-      }
-      //end
+      { accessorKey: 'name', header: 'Nome' },
+      { accessorKey: 'created', header: 'Data de Criacao' },
+      { accessorKey: 'updated', header: 'Data de Atualizacao' },
     ],
-    [],
+    []
   );
 
   return (
-    <CommonLayout title="Dashboards">
-      <MantineReactTable
-        columns={columns}
-        data={dashboardCategories?.data || []}
-        enableRowSelection
-        getRowId={(row) => row.id.toString() }
-        initialState={{ showColumnFilters: true }}
-        manualFiltering
-        manualPagination
-        manualSorting
-        mantineToolbarAlertBannerProps={
-        isError
-          ? {
-              color: 'red',
-              children: 'Error loading data',
-            }
-          : undefined
-        }
-        onColumnFiltersChange={setColumnFilters}
-        onGlobalFilterChange={setGlobalFilter}
-        onPaginationChange={setPagination}
-        onSortingChange={setSorting}
-        rowCount={rowCount}
-        state={{
-          columnFilters,
-          globalFilter,
-          isLoading,
-          pagination,
-          showAlertBanner: isError,
-          showProgressBars: isRefetching,
-          sorting,
-        }}
-      />
-    </CommonLayout>
+      <CommonLayout title="Categorias de Ocupacoes">
+        <DataTable
+          columns={columns}
+          data={data?.data || []}
+          rowCount={data?.page.totalItems}
+          removeMutation={remove}
+          refetch={refetch}
+        />
+      </CommonLayout>
   );
 }
