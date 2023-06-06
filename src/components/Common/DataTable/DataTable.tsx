@@ -10,7 +10,7 @@ import {
 import { UseQuery, UseMutation } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { MantineReactTable, MRT_ColumnDef } from 'mantine-react-table';
 import { MRT_Localization_PT_BR } from 'mantine-react-table/locales/pt-BR';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ButtonCreate } from '../Buttons/Buttons';
 import { RowActions } from './RowActions';
 

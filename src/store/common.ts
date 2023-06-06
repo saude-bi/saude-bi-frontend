@@ -31,10 +31,10 @@ export const injectFindAll = <T extends Entity>(name: string, endpoint: string) 
   });
 };
 
-export const injectUpdate = <T extends Entity>(name: string, endpoint: string) => {
+export const injectUpdate = <T extends Entity, U = Partial<T>>(name: string, endpoint: string) => {
   return baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
     endpoints: (build) => ({
-      [name]: build.mutation<T, { id: number; body: Partial<T> }>({
+      [name]: build.mutation<T, { id: number; body: U }>({
         query: ({ id, body }) => ({ url: endpoint + '/' + id, method: 'PATCH', body }),
         invalidatesTags: (_, __, { id }) => [{ type: endpoint, id }],
       }),
@@ -42,10 +42,10 @@ export const injectUpdate = <T extends Entity>(name: string, endpoint: string) =
   });
 };
 
-export const injectCreate = <T extends Entity>(name: string, endpoint: string) => {
+export const injectCreate = <T extends Entity, U = Partial<T>>(name: string, endpoint: string) => {
   return baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
     endpoints: (build) => ({
-      [name]: build.mutation<T, Partial<T>>({
+      [name]: build.mutation<T, U>({
         query: (body) => ({ url: endpoint, body, method: 'POST' }),
         invalidatesTags: () => [{ type: endpoint, id: 'PAGE' }],
       }),
