@@ -80,7 +80,12 @@ export const DataTable = <T extends Entity>({
       rowCount={data?.page.totalItems}
       getRowId={(row: Entity) => row.id?.toString()}
       renderRowActions={({ row }) => (
-        <RowActions id={+row.id} previewUrl={previewUrl} updateUrl={updateUrl} onRemove={remove} />
+        <RowActions
+          id={+row.id}
+          previewUrl={previewUrl ? `${previewUrl}/${+row.id}` : undefined}
+          updateUrl={updateUrl ? `${updateUrl}/${+row.id}` : undefined}
+          onRemove={remove}
+        />
       )}
     />
   );

@@ -1,5 +1,6 @@
 import { ActionIcon, Group } from '@mantine/core';
 import { IconEraser, IconEye, IconPencil } from '@tabler/icons-react';
+import Link from 'next/link';
 
 type Props = {
   id: number;
@@ -12,15 +13,19 @@ export const RowActions: React.FC<Props> = ({ id, previewUrl, updateUrl, onRemov
   return (
     <Group spacing="sm" noWrap>
       {previewUrl && (
-        <ActionIcon color="green.6" variant="filled" component="a" href={previewUrl}>
-          <IconEye />
-        </ActionIcon>
+        <Link href={previewUrl}>
+          <ActionIcon color="green.6" variant="filled">
+            <IconEye />
+          </ActionIcon>
+        </Link>
       )}
 
       {updateUrl && (
-        <ActionIcon color="blue.6" variant="filled" component="a" href={updateUrl}>
-          <IconPencil />
-        </ActionIcon>
+        <Link href={updateUrl}>
+          <ActionIcon color="blue.6" variant="filled">
+            <IconPencil />
+          </ActionIcon>
+        </Link>
       )}
 
       {onRemove && (
