@@ -19,7 +19,7 @@ export default function OccupationCategoriesPage() {
   const [submit, { isSuccess, isError }] = useCreateDashboardCategoryMutation();
   const router = useRouter();
 
-  const form = useForm<DashboardCategory>({
+  const form = useForm<DashboardCategoryDto>({
     validate: {
       name: (values) => (
         values === undefined
