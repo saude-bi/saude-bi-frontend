@@ -24,6 +24,9 @@ export default function DashboardCategories() {
         useFindAllQuery={useFindAllDashboardCategoriesQuery}
         useRemoveMutation={useRemoveDashboardCategoryMutation}
         columns={columns}
+        createUrl="/dashboard-category/create"
+        updateUrl="/dashboard-category/edit"
+        previewUrl="/dashboard-category/view"
       />
     </CommonLayout>
   );

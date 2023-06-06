@@ -1,5 +1,5 @@
 import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from './common';
-import { DashboardCategory } from '@/types/dashboard-category';
+import { DashboardCategory, DashboardCategoryDto } from '@/types/dashboard-category';
 
 const endpoint = 'category';
 
@@ -18,7 +18,7 @@ export const { useCreateDashboardCategoryMutation } = injectCreate<DashboardCate
   endpoint
 );
 
-export const { useUpdateDashboardCategoryMutation } = injectUpdate<DashboardCategory>(
+export const { useUpdateDashboardCategoryMutation } = injectUpdate<DashboardCategory, DashboardCategoryDto>(
   'updateDashboardCategory',
   endpoint
 );
