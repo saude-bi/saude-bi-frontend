@@ -13,7 +13,7 @@ type Props = {
 
 export const CommonLayout: React.FC<Props> = ({ children, title }) => {
   const router = useRouter();
-  const { isLoading, isError, data: currentUser } = useGetCurrentUserQuery();
+  const { isLoading, isError, currentData: currentUser } = useGetCurrentUserQuery();
 
   useEffect(() => {
     if (isError) {

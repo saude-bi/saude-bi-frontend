@@ -58,7 +58,10 @@ export const injectRemove = (name: string, endpoint: string) => {
     endpoints: (build) => ({
       [name]: build.mutation<null, number>({
         query: (id) => ({ url: endpoint + '/' + id, method: 'DELETE' }),
-        invalidatesTags: (_, __, id) => [{ type: endpoint, id }],
+        invalidatesTags: (_, __, id) => [
+          { type: endpoint, id },
+          { type: endpoint, id: 'PAGE' },
+        ],
       }),
     }),
   });

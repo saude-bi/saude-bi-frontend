@@ -10,6 +10,7 @@ import {
 import { UseQuery, UseMutation } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { MantineReactTable, MRT_ColumnDef } from 'mantine-react-table';
 import { MRT_Localization_PT_BR } from 'mantine-react-table/locales/pt-BR';
+import { useEffect, useState } from 'react';
 import { ButtonCreate } from '../Buttons/Buttons';
 import { RowActions } from './RowActions';
 
@@ -44,13 +45,21 @@ export const DataTable = <T extends Entity>({
   previewUrl,
   updateUrl,
 }: Props<T>) => {
-  const { isLoading, data } = useFindAllQuery({ page: 0, perPage: 10 }, { pollingInterval: 1000 });
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  const { isLoading, data } = useFindAllQuery(
+    { page: pagination.pageIndex, perPage: pagination.pageSize },
+    { pollingInterval: 1000 }
+  );
   const [remove] = useRemoveMutation();
 
   return (
     <MantineReactTable
-      state={{ isLoading }}
       manualPagination
+      onPaginationChange={setPagination}
       localization={MRT_Localization_PT_BR}
       enableFilters={false}
       enableHiding={false}
@@ -61,6 +70,7 @@ export const DataTable = <T extends Entity>({
       initialState={{
         showGlobalFilter: true,
       }}
+      state={{ isLoading, pagination }}
       renderToolbarInternalActions={() =>
         createUrl && <ButtonCreate href={createUrl}>NOVO</ButtonCreate>
       }
