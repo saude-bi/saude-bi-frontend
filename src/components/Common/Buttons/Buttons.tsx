@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, ButtonProps } from '@mantine/core';
 import { PolymorphicComponentProps } from '@mantine/utils';
-import { IconArrowLeft, IconDeviceFloppy, IconPlus } from '@tabler/icons-react';
+import { IconArrowLeft, IconDeviceFloppy, IconPencil, IconPlus, IconTrash } from '@tabler/icons-react';
 import Link from 'next/link';
 
 type BaseButtonProps<C = 'button'> = PolymorphicComponentProps<C, ButtonProps>;
@@ -21,6 +21,30 @@ export const ButtonSave: React.FC<BaseButtonProps> = ({ children, ...props }) =>
     {...props}
   >
     {children || 'Salvar'}
+  </Button>
+);
+
+export const ButtonEdit: React.FC<BaseButtonProps> = ({ children, ...props }) => (
+  <Button
+    variant="filled"
+    type="submit"
+    color="blue.6"
+    leftIcon={<IconPencil size="1rem" />}
+    {...props}
+  >
+    {children || 'Editar'}
+  </Button>
+);
+
+export const ButtonDelete: React.FC<BaseButtonProps> = ({ children, ...props }) => (
+  <Button
+    variant="filled"
+    type="submit"
+    color="red.6"
+    leftIcon={<IconTrash size="1rem" />}
+    {...props}
+  >
+    {children || 'Deletar'}
   </Button>
 );
 
