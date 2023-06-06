@@ -13,12 +13,12 @@ export const Drawer: React.FC = () => {
       <Stack h="100%">
         <Title color="white">SBI</Title>
         <Stack sx={{ flexGrow: 1 }} align="center" justify="center" spacing="xl">
-          <ActionIcon onClick={() => router.push('/')} size="lg">
-            <IconHome color="white" size="32px" />
+          <ActionIcon onClick={() => router.push('/')} color="indigo.4" variant="filled" size="lg">
+            <IconHome size="32px" />
           </ActionIcon>
 
-          <ActionIcon size="lg">
-            <IconUser color="white" size="32px" />
+          <ActionIcon color="indigo.4" variant="filled" size="lg">
+            <IconUser size="32px" />
           </ActionIcon>
 
           <ActionIcon
@@ -26,9 +26,11 @@ export const Drawer: React.FC = () => {
               logout();
               router.push('/auth/login');
             }}
+            color="indigo.4"
+            variant="filled"
             size="lg"
           >
-            <IconDatabase color="white" size="32px" />
+            <IconDatabase size="32px" />
           </ActionIcon>
         </Stack>
       </Stack>
