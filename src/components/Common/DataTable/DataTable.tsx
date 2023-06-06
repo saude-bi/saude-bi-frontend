@@ -19,7 +19,7 @@ interface Props<T extends Entity> {
     QueryDefinition<
       void | PaginationQuery,
       BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>,
-      never,
+      string,
       PaginatedResponse<T>
     >
   >;
@@ -27,7 +27,7 @@ interface Props<T extends Entity> {
     MutationDefinition<
       number,
       BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>,
-      never,
+      string,
       null
     >
   >;
