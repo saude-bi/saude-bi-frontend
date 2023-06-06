@@ -1,25 +1,36 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import { Button, ButtonProps } from '@mantine/core';
-import { IconArrowLeft, IconDeviceFloppy } from '@tabler/icons-react';
+import { PolymorphicComponentProps } from '@mantine/utils';
+import { IconArrowLeft, IconDeviceFloppy, IconPlus } from '@tabler/icons-react';
+import Link from 'next/link';
 
-type Props = {
-  children?: React.ReactNode,
-  handleSubmit: MouseEventHandler<HTMLButtonElement>,
-  props?: ButtonProps
-}
+type BaseButtonProps<C = 'button'> = PolymorphicComponentProps<C, ButtonProps>;
 
-export const ButtonBack: React.FC<ButtonProps> = ({ children, ...props }) => {
-  return (
-    <Button variant="outline" color="primary" leftIcon={<IconArrowLeft size="1rem" />} {...props}>
-        {children || 'Voltar'}
+export const ButtonBack: React.FC<BaseButtonProps> = ({ children, ...props }) => (
+  <Button variant="outline" color="primary" leftIcon={<IconArrowLeft size="1rem" />} {...props}>
+    {children || 'Voltar'}
+  </Button>
+);
+
+export const ButtonSave: React.FC<BaseButtonProps> = ({ children, ...props }) => (
+  <Button
+    variant="filled"
+    type="submit"
+    color="green.6"
+    leftIcon={<IconDeviceFloppy size="1rem" />}
+    {...props}
+  >
+    {children || 'Salvar'}
+  </Button>
+);
+
+export const ButtonCreate: React.FC<BaseButtonProps & { href: string }> = ({
+  children,
+  ...props
+}) => (
+  <Link href={props.href}>
+    <Button color="indigo.4" leftIcon={<IconPlus size="20px" />} {...props}>
+      {children}
     </Button>
-  );
-};
-
-export const ButtonSave: React.FC<Props> = ({ children, handleSubmit, ...props }) => {
-    return (
-      <Button onClick={handleSubmit} variant="filled" type='submit' color="green.6" leftIcon={<IconDeviceFloppy size="1rem" />} {...props}>
-          {children || 'Salvar'}
-      </Button>
-    );
-};
+  </Link>
+);

@@ -1,21 +1,14 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { MRT_ColumnDef } from 'mantine-react-table';
 import {
   useFindAllDashboardCategoriesQuery,
-  useRemoveDashboardCategoryMutation
+  useRemoveDashboardCategoryMutation,
 } from '@/store/dashboard-categories';
 import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
 import { DashboardCategory } from '@/types/dashboard-category';
 import { DataTable } from '@/components/Common/DataTable/DataTable';
 
 export default function DashboardCategories() {
-  const { data, refetch } = useFindAllDashboardCategoriesQuery();
-  const [remove, removeResult] = useRemoveDashboardCategoryMutation();
-
-  useEffect(() => {
-    console.log(data);
-  });
-
   const columns = useMemo<MRT_ColumnDef<DashboardCategory>[]>(
     () => [
       { accessorKey: 'name', header: 'Nome' },
@@ -26,14 +19,12 @@ export default function DashboardCategories() {
   );
 
   return (
-      <CommonLayout title="Categorias de Ocupacoes">
-        <DataTable
-          columns={columns}
-          data={data?.data || []}
-          rowCount={data?.page.totalItems}
-          removeMutation={remove}
-          refetch={refetch}
-        />
-      </CommonLayout>
+    <CommonLayout title="Categorias de Ocupacoes">
+      <DataTable
+        useFindAllQuery={useFindAllDashboardCategoriesQuery}
+        useRemoveMutation={useRemoveDashboardCategoryMutation}
+        columns={columns}
+      />
+    </CommonLayout>
   );
 }
