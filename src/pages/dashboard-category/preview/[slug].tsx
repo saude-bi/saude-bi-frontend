@@ -6,18 +6,24 @@ import {
   useFindAllOccupationCategoriesQuery,
   useUpdateOccupationCategoryMutation,
 } from '@/store/occupation-categories';
-import { Button, Grid, Stack, Text, TextInput } from '@mantine/core';
+import { Button, Grid, LoadingOverlay, Stack, Text, TextInput } from '@mantine/core';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { DashboardCategory, DashboardCategoryDto } from '@/types/dashboard-category'
 import { useForm } from '@mantine/form';
 import { DashboardCategoryFormProvider, DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
 import { notifications } from '@mantine/notifications';
-import { useCreateDashboardCategoryMutation } from '@/store/dashboard-categories';
+import { useUpdateDashboardCategoryMutation, useFindDashboardCategoryQuery, useRemoveDashboardCategoryMutation } from '@/store/dashboard-categories';
 import { useRouter } from 'next/router';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 export default function OccupationCategoriesPage() {
-  const [submit, { isSuccess, isError }] = useCreateDashboardCategoryMutation();
+  const [submit, { isSuccess: isSaveSuccess, isError: isSaveError }] = useUpdateDashboardCategoryMutation();
   const router = useRouter();
+  const { slug } = router.query;
+  const id = parseInt(slug as string, 10);
+
+  const { data, isSuccess, isError, isLoading } =
+    useFindDashboardCategoryQuery(!!slug ? id : skipToken);
 
   const form = useForm<DashboardCategoryDto>({
     validate: {
@@ -34,29 +40,40 @@ export default function OccupationCategoriesPage() {
 
   const trigerSubmit = () => {
     if (!form.validate().hasErrors) {
-      submit(form.values)
+      submit({ id, body: form.values})
     }
   };
 
   useEffect(() => {
     if (isSuccess) {
+      console.log(data)
+      form.setValues(data);
+    }
+
+    if (isSaveSuccess) {
       router.push('/dashboard-category');
     }
-    if (isError) {
+    if (isSaveError) {
       notifications.show({ message: 'Erro ao cadastrar uma Categoria', color: 'red' })
     }
-  }, [isSuccess]);
+  }, [isSaveSuccess, isSuccess]);
 
   return (
     <EditLayout 
       title="Categorias de Ocupacoes"
       handleSubmit={trigerSubmit}
-      useRemoveMutation={useRemoveOccupationCategoryMutation}
-      type="create"
+      useRemoveMutation={useRemoveDashboardCategoryMutation}
+      type="preview"
+      updateUrl="/dashboard-category/edit"
+      id={id}
     >
       <DashboardCategoryFormProvider form={form}>
         <form onSubmit={form.onSubmit(() => {})}>
-          <DashboardCategoryInputs />
+          {isLoading || isError ? (
+              <LoadingOverlay visible />
+            ) : (
+              <DashboardCategoryInputs disabled={false} />
+            )}
         </form>
       </DashboardCategoryFormProvider>
     </EditLayout>

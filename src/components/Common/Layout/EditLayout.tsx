@@ -14,7 +14,7 @@ import {
   MutationDefinition,
 } from '@reduxjs/toolkit/dist/query';
 
-interface Props<T extends Entity> {
+interface Props {
   children: React.ReactNode,
   useRemoveMutation: UseMutation<
     MutationDefinition<
@@ -26,8 +26,9 @@ interface Props<T extends Entity> {
   >;
   handleSubmit: MouseEventHandler<HTMLButtonElement>,
   id?: number,
-  type: 'create' | 'edit' | 'view',
-  title: string
+  type: 'create' | 'edit' | 'preview',
+  title: string,
+  updateUrl?: string,
 }
 
 export const EditLayout = <T extends Entity>({ 
@@ -35,16 +36,23 @@ export const EditLayout = <T extends Entity>({
   useRemoveMutation,
   handleSubmit,
   id,
-  type = 'view',
-  title 
-}: Props<T>) => {
+  type,
+  title,
+  updateUrl,
+}: Props) => {
   const router = useRouter();
   const [remove] = useRemoveMutation();
 
   const handleDelete = () => {
     if (id) {
-      remove(id);
+      remove(id).then(() => {
+        router.back();
+      });
     }
+  }
+
+  const handleEditPage = () => {
+
   }
 
   const handleBack = () => {
@@ -60,15 +68,17 @@ export const EditLayout = <T extends Entity>({
                         <Text color="dark.3">
                             Ações
                         </Text>
-                        {(type === 'create' || type === 'edit') ? (
+                        {(type === 'create' || type === 'edit') &&
                           <ButtonSave onClick={handleSubmit} />
-                        ) :
-                        type === 'view' ? (
+                        }
+                        {type === 'preview' &&
                           <>
-                            <ButtonEdit onClick={handleSubmit} />
+                            {updateUrl && id &&
+                              <ButtonEdit href={`${updateUrl}/${id}`} />
+                            }
                             <ButtonDelete onClick={handleDelete} />
                           </>
-                        ) : null}
+                        }
                         <ButtonBack onClick={handleBack} />
                     </Stack>
                 </ContentCard>

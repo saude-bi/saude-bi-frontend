@@ -4,7 +4,6 @@ export interface DashboardCategory extends Entity {
     name: string
 }
 
-export type DashboardCategoryDto = {
-    id?: number,
-    name: string
+export class DashboardCategoryDto {
+    name: string = ''
 }

@@ -26,7 +26,7 @@ export default function DashboardCategories() {
         columns={columns}
         createUrl="/dashboard-category/create"
         updateUrl="/dashboard-category/edit"
-        previewUrl="/dashboard-category/view"
+        previewUrl="/dashboard-category/preview"
       />
     </CommonLayout>
   );

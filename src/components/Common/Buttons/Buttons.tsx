@@ -24,16 +24,19 @@ export const ButtonSave: React.FC<BaseButtonProps> = ({ children, ...props }) =>
   </Button>
 );
 
-export const ButtonEdit: React.FC<BaseButtonProps> = ({ children, ...props }) => (
-  <Button
-    variant="filled"
-    type="submit"
-    color="blue.6"
-    leftIcon={<IconPencil size="1rem" />}
-    {...props}
-  >
-    {children || 'Editar'}
-  </Button>
+export const ButtonEdit: React.FC<BaseButtonProps & { href: string }> = ({ children, ...props }) => (
+  <Link href={props.href} style={{ textDecoration: 'none' }}>
+    <Button
+      variant="filled"
+      type="submit"
+      color="blue.6"
+      leftIcon={<IconPencil size="1rem" />}
+      {...props}
+      fullWidth
+    >
+      {children || 'Editar'}
+    </Button>
+  </Link>
 );
 
 export const ButtonDelete: React.FC<BaseButtonProps> = ({ children, ...props }) => (

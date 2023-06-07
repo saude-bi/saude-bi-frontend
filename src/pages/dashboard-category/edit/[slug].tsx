@@ -12,7 +12,7 @@ import { DashboardCategory, DashboardCategoryDto } from '@/types/dashboard-categ
 import { useForm } from '@mantine/form';
 import { DashboardCategoryFormProvider, DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
 import { notifications } from '@mantine/notifications';
-import { useUpdateDashboardCategoryMutation, useFindDashboardCategoryQuery } from '@/store/dashboard-categories';
+import { useUpdateDashboardCategoryMutation, useFindDashboardCategoryQuery, useRemoveDashboardCategoryMutation } from '@/store/dashboard-categories';
 import { useRouter } from 'next/router';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 
@@ -26,6 +26,9 @@ export default function OccupationCategoriesPage() {
     useFindDashboardCategoryQuery(!!slug ? id : skipToken);
 
   const form = useForm<DashboardCategoryDto>({
+    initialValues: {
+      name: ''
+    },
     validate: {
       name: (values) => (
         values === undefined
@@ -46,8 +49,9 @@ export default function OccupationCategoriesPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data)
-      form.setValues(data);
+      form.setValues({
+        name: data.name
+      });
     }
 
     if (isSaveSuccess) {
@@ -59,7 +63,13 @@ export default function OccupationCategoriesPage() {
   }, [isSaveSuccess, isSuccess]);
 
   return (
-    <EditLayout title="Categorias de Ocupacoes" handleSubmit={trigerSubmit}>
+    <EditLayout 
+      title="Categorias de Ocupacoes"
+      handleSubmit={trigerSubmit}
+      useRemoveMutation={useRemoveDashboardCategoryMutation}
+      type="edit"
+      id={id}
+    >
       <DashboardCategoryFormProvider form={form}>
         <form onSubmit={form.onSubmit(() => {})}>
           {isLoading || isError ? (
