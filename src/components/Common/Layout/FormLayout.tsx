@@ -15,7 +15,7 @@ import {
   GenericRemoveMutation,
   GenericUpdateMutation,
 } from '@/store/common';
-import { getUpdatePath } from '@/utils/routes';
+import { getUpdatePath, routePushToPreviousPage } from '@/utils/routes';
 
 export type GenericForm<T> = ReturnType<UseForm<T>>;
 
@@ -33,7 +33,7 @@ export const FormLayout = <T,>({ title, form, FormInputs, ...props }: Props<T>) 
   const router = useRouter();
 
   const handleBack = () => {
-    router.back();
+    routePushToPreviousPage(router);
   };
 
   return (
@@ -86,7 +86,7 @@ const PreviewAction = ({ pageModuleUrl, id, useRemoveMutation }: PropsPreviewAct
 
   useEffect(() => {
     if (isSuccess) {
-      router.back();
+      routePushToPreviousPage(router);
     }
   }, [isSuccess]);
 
@@ -115,7 +115,7 @@ const CreateAction = <T,>({ form, useCreateMutation }: PropsCreateAction<T>) => 
 
   useEffect(() => {
     if (isSuccess) {
-      router.back();
+      routePushToPreviousPage(router);
     }
   }, [isSuccess]);
 
@@ -140,7 +140,7 @@ const UpdateAction = <T,>({ id, form, useUpdateMutation }: PropsUpdateAction<T>)
 
   useEffect(() => {
     if (isSuccess) {
-      router.back();
+      routePushToPreviousPage(router);
     }
   }, [isSuccess]);
 

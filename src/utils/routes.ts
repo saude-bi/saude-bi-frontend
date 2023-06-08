@@ -1,4 +1,11 @@
+import { NextRouter } from "next/router";
 
+
+export const routePushToPreviousPage = (router: NextRouter): void => {
+    const finalSlashIndex = router.asPath.lastIndexOf('/');
+    const previousPath = router.asPath.slice(0, finalSlashIndex);
+    router.push(previousPath);
+}
 
 const getEncodedPath = (path: string, uriParams: string): string => {
     return `${path}${uriParams !== '' ? '?' + encodeURIComponent(uriParams): ''}`;
