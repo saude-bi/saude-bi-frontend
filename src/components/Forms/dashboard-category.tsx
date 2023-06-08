@@ -1,7 +1,7 @@
-import { DashboardCategoryDto } from "@/types/dashboard-category";
+import { UpdateDashboardCategoryDto } from "@/types/dashboard-category";
 import { Box, TextInput } from '@mantine/core';
-import { UseForm } from "@mantine/form/lib/types";
 import { z } from 'zod';
+import { GenericForm } from "../Common/Layout/FormLayout";
 
 export const DashboardCategorySchema = z.object({
   name: z.string({
@@ -11,7 +11,7 @@ export const DashboardCategorySchema = z.object({
 
 type Props = {
   disabled: boolean,
-  form: ReturnType<UseForm<DashboardCategoryDto>>
+  form: GenericForm<UpdateDashboardCategoryDto>
 }
 
 export const DashboardCategoryInputs = ({ 

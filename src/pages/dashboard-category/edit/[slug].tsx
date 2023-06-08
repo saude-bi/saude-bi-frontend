@@ -1,6 +1,6 @@
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React, { useEffect } from 'react';
-import { DashboardCategoryDto } from '@/types/dashboard-category';
+import { UpdateDashboardCategoryDto } from '@/types/dashboard-category';
 import { useForm } from '@mantine/form';
 import { DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
 import {
@@ -19,7 +19,7 @@ export default function OccupationCategoriesPage() {
     !!slug ? id : skipToken
   );
 
-  const form = useForm<DashboardCategoryDto>({
+  const form = useForm<UpdateDashboardCategoryDto>({
     initialValues: {
       name: '',
     },

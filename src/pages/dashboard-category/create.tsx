@@ -1,6 +1,6 @@
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React from 'react';
-import { DashboardCategoryDto } from '@/types/dashboard-category'
+import { CreateDashboardCategoryDto } from '@/types/dashboard-category'
 import { useForm, zodResolver } from '@mantine/form';
 import { DashboardCategoryInputs, DashboardCategorySchema } from '@/components/Forms/dashboard-category';
 import { useCreateDashboardCategoryMutation } from '@/store/dashboard-categories';
@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 export default function OccupationCategoriesPage() {
   const router = useRouter();
 
-  const form = useForm<DashboardCategoryDto>({
+  const form = useForm<CreateDashboardCategoryDto>({
     validate: zodResolver(DashboardCategorySchema),
     validateInputOnChange: true
   });
@@ -17,11 +17,10 @@ export default function OccupationCategoriesPage() {
   return (
     <FormLayout 
       title="Categorias de Ocupacoes"
-      useSaveMutation={useCreateDashboardCategoryMutation}
+      useCreateMutation={useCreateDashboardCategoryMutation}
       FormInputs={DashboardCategoryInputs}
       form={form}
       type="create"
-    >
-    </FormLayout>
+    />
   );
 }

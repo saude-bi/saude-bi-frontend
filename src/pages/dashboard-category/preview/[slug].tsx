@@ -1,6 +1,6 @@
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React, { useEffect } from 'react';
-import { DashboardCategoryDto } from '@/types/dashboard-category'
+import { UpdateDashboardCategoryDto } from '@/types/dashboard-category'
 import { useForm } from '@mantine/form';
 import { DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
 import { 
@@ -18,17 +18,8 @@ export default function OccupationCategoriesPage() {
   const { data, isSuccess, isError, isLoading } =
     useFindDashboardCategoryQuery(!!slug ? id : skipToken);
 
-  const form = useForm<DashboardCategoryDto>({
-    validate: {
-      name: (values) => (
-        values === undefined
-          ? 'Campo nome da categoria é obrigatório'
-          : values.length < 4
-          ? 'O nome da categoria informado é muito curto'
-          : null
-      )
-    },
-    validateInputOnChange: true
+  const form = useForm<UpdateDashboardCategoryDto>({
+
   });
 
   useEffect(() => {
@@ -47,7 +38,6 @@ export default function OccupationCategoriesPage() {
       form={form}
       updateUrl="/dashboard-category/edit"
       id={id}
-    >
-    </FormLayout>
+    />
   );
 }
