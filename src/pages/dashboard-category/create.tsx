@@ -1,9 +1,8 @@
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { DashboardCategoryDto } from '@/types/dashboard-category'
-import { useForm } from '@mantine/form';
-import { DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
-import { notifications } from '@mantine/notifications';
+import { useForm, zodResolver } from '@mantine/form';
+import { DashboardCategoryInputs, DashboardCategorySchema } from '@/components/Forms/dashboard-category';
 import { useCreateDashboardCategoryMutation } from '@/store/dashboard-categories';
 import { useRouter } from 'next/router';
 
@@ -11,15 +10,7 @@ export default function OccupationCategoriesPage() {
   const router = useRouter();
 
   const form = useForm<DashboardCategoryDto>({
-    validate: {
-      name: (values) => (
-        values === undefined
-          ? 'Campo nome da categoria é obrigatório'
-          : values.length < 4
-          ? 'O nome da categoria informado é muito curto'
-          : null
-      )
-    },
+    validate: zodResolver(DashboardCategorySchema),
     validateInputOnChange: true
   });
 
