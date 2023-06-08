@@ -107,7 +107,7 @@ const CreateAction = <T,>({ form, useCreateMutation }: PropsCreateAction<T>) => 
   const [save, { isSuccess }] = useCreateMutation();
 
   const onSave = () => {
-    if (form.validate().hasErrors) {
+    if (!form.validate().hasErrors) {
       save(form.values);
     }
   };
