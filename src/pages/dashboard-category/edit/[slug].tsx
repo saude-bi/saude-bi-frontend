@@ -1,23 +1,16 @@
-import { EditLayout } from '@/components/Common/Layout/EditLayout';
-import {
-  OccupationCategory,
-  useCreateOccupationCategoryMutation,
-  useRemoveOccupationCategoryMutation,
-  useFindAllOccupationCategoriesQuery,
-  useUpdateOccupationCategoryMutation,
-} from '@/store/occupation-categories';
-import { Button, Grid, LoadingOverlay, Stack, Text, TextInput } from '@mantine/core';
-import React, { useEffect, useMemo, useRef } from 'react';
-import { DashboardCategory, DashboardCategoryDto } from '@/types/dashboard-category'
+import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import React, { useEffect } from 'react';
+import { DashboardCategoryDto } from '@/types/dashboard-category'
 import { useForm } from '@mantine/form';
-import { DashboardCategoryFormProvider, DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
-import { notifications } from '@mantine/notifications';
-import { useUpdateDashboardCategoryMutation, useFindDashboardCategoryQuery, useRemoveDashboardCategoryMutation } from '@/store/dashboard-categories';
+import { DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
+import { 
+  useUpdateDashboardCategoryMutation,
+  useFindDashboardCategoryQuery
+} from '@/store/dashboard-categories';
 import { useRouter } from 'next/router';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 export default function OccupationCategoriesPage() {
-  const [submit, { isSuccess: isSaveSuccess, isError: isSaveError }] = useUpdateDashboardCategoryMutation();
   const router = useRouter();
   const { slug } = router.query;
   const id = parseInt(slug as string, 10);
@@ -41,44 +34,23 @@ export default function OccupationCategoriesPage() {
     validateInputOnChange: true
   });
 
-  const trigerSubmit = () => {
-    if (!form.validate().hasErrors) {
-      submit({ id, body: form.values})
-    }
-  };
-
   useEffect(() => {
     if (isSuccess) {
       form.setValues({
         name: data.name
       });
     }
-
-    if (isSaveSuccess) {
-      router.push('/dashboard-category');
-    }
-    if (isSaveError) {
-      notifications.show({ message: 'Erro ao cadastrar uma Categoria', color: 'red' })
-    }
-  }, [isSaveSuccess, isSuccess]);
+  }, [isSuccess]);
 
   return (
-    <EditLayout 
+    <FormLayout
       title="Categorias de Ocupacoes"
-      handleSubmit={trigerSubmit}
-      useRemoveMutation={useRemoveDashboardCategoryMutation}
-      type="edit"
+      useSaveMutation={useUpdateDashboardCategoryMutation}
+      type="update"
+      FormInputs={DashboardCategoryInputs}
+      form={form}
       id={id}
     >
-      <DashboardCategoryFormProvider form={form}>
-        <form onSubmit={form.onSubmit(() => {})}>
-          {isLoading || isError ? (
-              <LoadingOverlay visible />
-            ) : (
-              <DashboardCategoryInputs disabled={false} />
-            )}
-        </form>
-      </DashboardCategoryFormProvider>
-    </EditLayout>
+    </FormLayout>
   );
 }

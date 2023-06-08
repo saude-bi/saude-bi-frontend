@@ -1,16 +1,8 @@
-import { EditLayout } from '@/components/Common/Layout/EditLayout';
-import {
-  OccupationCategory,
-  useCreateOccupationCategoryMutation,
-  useRemoveOccupationCategoryMutation,
-  useFindAllOccupationCategoriesQuery,
-  useUpdateOccupationCategoryMutation,
-} from '@/store/occupation-categories';
-import { Button, Grid, Stack, Text, TextInput } from '@mantine/core';
-import React, { useEffect, useMemo, useRef } from 'react';
-import { DashboardCategory, DashboardCategoryDto } from '@/types/dashboard-category'
+import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import React, { useEffect } from 'react';
+import { DashboardCategoryDto } from '@/types/dashboard-category'
 import { useForm } from '@mantine/form';
-import { DashboardCategoryFormProvider, DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
+import { DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
 import { notifications } from '@mantine/notifications';
 import { useCreateDashboardCategoryMutation } from '@/store/dashboard-categories';
 import { useRouter } from 'next/router';
@@ -48,17 +40,13 @@ export default function OccupationCategoriesPage() {
   }, [isSuccess]);
 
   return (
-    <EditLayout 
+    <FormLayout 
       title="Categorias de Ocupacoes"
       handleSubmit={trigerSubmit}
-      useRemoveMutation={useRemoveOccupationCategoryMutation}
+      FormInputs={DashboardCategoryInputs}
+      form={form}
       type="create"
     >
-      <DashboardCategoryFormProvider form={form}>
-        <form onSubmit={form.onSubmit(() => {})}>
-          <DashboardCategoryInputs />
-        </form>
-      </DashboardCategoryFormProvider>
-    </EditLayout>
+    </FormLayout>
   );
 }

@@ -1,4 +1,4 @@
-import { EditLayout } from '@/components/Common/Layout/EditLayout';
+import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import {
   OccupationCategory,
   useCreateOccupationCategoryMutation,
@@ -59,23 +59,15 @@ export default function OccupationCategoriesPage() {
   }, [isSaveSuccess, isSuccess]);
 
   return (
-    <EditLayout 
+    <FormLayout 
       title="Categorias de Ocupacoes"
-      handleSubmit={trigerSubmit}
       useRemoveMutation={useRemoveDashboardCategoryMutation}
       type="preview"
+      FormInputs={DashboardCategoryInputs}
+      form={form}
       updateUrl="/dashboard-category/edit"
       id={id}
     >
-      <DashboardCategoryFormProvider form={form}>
-        <form onSubmit={form.onSubmit(() => {})}>
-          {isLoading || isError ? (
-              <LoadingOverlay visible />
-            ) : (
-              <DashboardCategoryInputs disabled={false} />
-            )}
-        </form>
-      </DashboardCategoryFormProvider>
-    </EditLayout>
+    </FormLayout>
   );
 }
