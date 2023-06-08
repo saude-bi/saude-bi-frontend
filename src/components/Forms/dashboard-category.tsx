@@ -1,13 +1,21 @@
 import { DashboardCategory, DashboardCategoryDto } from "@/types/dashboard-category";
 import { createFormContext } from "@mantine/form";
 import { Box, TextInput } from '@mantine/core';
+import { UseForm } from "@mantine/form/lib/types";
 
 
 export const [DashboardCategoryFormProvider, dashboardCategoryFormContext, useDashboardCategoryForm] =
   createFormContext<DashboardCategoryDto>();
 
-export const DashboardCategoryInputs = ({ disabled = false }) => {
-  const form = dashboardCategoryFormContext();
+type Props = {
+  disabled: boolean,
+  form: ReturnType<UseForm<DashboardCategoryDto>>
+}
+
+export const DashboardCategoryInputs = ({ 
+  disabled = false,
+  form
+ }: Props) => {
   return (
     <Box>
       <input
