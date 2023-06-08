@@ -1,4 +1,5 @@
-import { Entity, PaginatedResponse, PaginationQuery } from '@/types/common';
+import { GenericFindAllQuery, GenericRemoveMutation } from '@/store/common';
+import { Entity } from '@/types/common';
 import {
   BaseQueryFn,
   FetchArgs,
@@ -7,7 +8,6 @@ import {
   MutationDefinition,
   QueryDefinition,
 } from '@reduxjs/toolkit/dist/query';
-import { UseQuery, UseMutation } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { MantineReactTable, MRT_ColumnDef } from 'mantine-react-table';
 import { MRT_Localization_PT_BR } from 'mantine-react-table/locales/pt-BR';
 import { useState } from 'react';
@@ -15,22 +15,8 @@ import { ButtonCreate } from '../Buttons/Buttons';
 import { RowActions } from './RowActions';
 
 interface Props<T extends Entity> {
-  useFindAllQuery: UseQuery<
-    QueryDefinition<
-      void | PaginationQuery,
-      BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>,
-      string,
-      PaginatedResponse<T>
-    >
-  >;
-  useRemoveMutation: UseMutation<
-    MutationDefinition<
-      number,
-      BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>,
-      string,
-      null
-    >
-  >;
+  useFindAllQuery: GenericFindAllQuery<T>;
+  useRemoveMutation: GenericRemoveMutation;
   createUrl?: string;
   previewUrl?: string;
   updateUrl?: string;
