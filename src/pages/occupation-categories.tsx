@@ -24,7 +24,6 @@ export default function OccupationCategoriesPage() {
         useFindAllQuery={useFindAllOccupationCategoriesQuery}
         useRemoveMutation={useRemoveOccupationCategoryMutation}
         columns={columns}
-        pageModuleUrl="dashboard-category"
       />
     </CommonLayout>
   );
