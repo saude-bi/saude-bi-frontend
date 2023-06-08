@@ -16,7 +16,7 @@ import {
   GenericUpdateMutation,
 } from '@/store/common';
 
-type GenericForm<T> = ReturnType<UseForm<T>>;
+export type GenericForm<T> = ReturnType<UseForm<T>>;
 
 type Props<T> = {
   title: string;
@@ -132,7 +132,7 @@ const UpdateAction = <T,>({ id, form, useUpdateMutation }: PropsUpdateAction<T>)
   const [update, { isSuccess }] = useUpdateMutation();
 
   const onSave = () => {
-    if (form.validate().hasErrors) {
+    if (!form.validate().hasErrors) {
       update({ id, body: form.values });
     }
   };
