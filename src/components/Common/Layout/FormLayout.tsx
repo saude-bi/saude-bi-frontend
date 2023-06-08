@@ -93,7 +93,7 @@ const PreviewAction = ({ pageModuleUrl, id, useRemoveMutation }: PropsPreviewAct
   return (
     <>
       <ButtonEdit href={getUpdatePath(pageModuleUrl, id)} />
-      <ButtonDelete onClick={onDelete} />
+      <ButtonDelete onDelete={onDelete} />
     </>
   );
 };

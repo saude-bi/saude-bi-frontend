@@ -1,5 +1,6 @@
 import NextApp, { AppProps, AppContext } from 'next/app';
 import Head from 'next/head';
+import { ModalsProvider } from '@mantine/modals';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { baseApi } from '@/store/api';
@@ -23,10 +24,12 @@ export default function App(props: AppProps) {
           withGlobalStyles
           withNormalizeCSS
         >
-          <ApiProvider api={baseApi}>
-            <Component {...pageProps} />
-            <Notifications />
-          </ApiProvider>
+          <ModalsProvider>
+            <ApiProvider api={baseApi}>
+              <Component {...pageProps} />
+              <Notifications />
+            </ApiProvider>
+          </ModalsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </>

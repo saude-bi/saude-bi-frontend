@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, ButtonProps } from '@mantine/core';
+import { modals } from '@mantine/modals';
+import { Button, ButtonProps, Text } from '@mantine/core';
 import { PolymorphicComponentProps } from '@mantine/utils';
 import { IconArrowLeft, IconDeviceFloppy, IconPencil, IconPlus, IconTrash } from '@tabler/icons-react';
 import Link from 'next/link';
@@ -39,17 +40,34 @@ export const ButtonEdit: React.FC<BaseButtonProps & { href: string }> = ({ child
   </Link>
 );
 
-export const ButtonDelete: React.FC<BaseButtonProps> = ({ children, ...props }) => (
-  <Button
-    variant="filled"
-    type="submit"
-    color="red.6"
-    leftIcon={<IconTrash size="1rem" />}
-    {...props}
-  >
-    {children || 'Deletar'}
-  </Button>
-);
+export const ButtonDelete: React.FC<BaseButtonProps & { onDelete: () => void }> = ({ children, onDelete, ...props }) => {
+  const openDeleteModal = () => modals.openConfirmModal({
+      title: 'Confirmação de exclusao',
+      centered: true,
+      children: (
+        <Text size="sm">
+          Você tem certeza que deseja deletar este item? Esta ação não poderá ser desfeita.
+        </Text>
+      ),
+      labels: { confirm: 'Sim deletar', cancel: "Não deletar" },
+      confirmProps: { color: 'red' },
+      onCancel: () => console.log('Cancel'),
+      onConfirm: () => onDelete(),
+  });
+
+  return (
+    <Button
+      onClick={openDeleteModal}
+      variant="filled"
+      type="submit"
+      color="red.6"
+      leftIcon={<IconTrash size="1rem" />}
+      {...props}
+    >
+      {children || 'Deletar'}
+    </Button>
+  );
+};
 
 export const ButtonCreate: React.FC<BaseButtonProps & { href: string }> = ({
   children,
