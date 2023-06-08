@@ -6,11 +6,11 @@ import { useState } from 'react';
 import { ButtonCreate } from '../Buttons/Buttons';
 import { RowActions } from './RowActions';
 import { getCreatePath, getPreviewPath, getUpdatePath } from '@/utils/routes';
+import { useRouter } from 'next/router';
 
 interface Props<T extends Entity> {
   useFindAllQuery: GenericFindAllQuery<T>;
-  useRemoveMutation: GenericRemoveMutation;
-  pageModuleUrl: string;
+  useRemoveMutation?: GenericRemoveMutation;
   canCreate?: boolean;
   canPreview?: boolean;
   canUpdate?: boolean;
@@ -21,7 +21,6 @@ export const DataTable = <T extends Entity>({
   useFindAllQuery,
   useRemoveMutation,
   columns,
-  pageModuleUrl,
   canCreate,
   canPreview,
   canUpdate,
@@ -35,7 +34,9 @@ export const DataTable = <T extends Entity>({
     { page: pagination.pageIndex, perPage: pagination.pageSize },
     { pollingInterval: 1000 }
   );
-  const [remove] = useRemoveMutation();
+
+  const remove = !!useRemoveMutation ? useRemoveMutation()[0] : undefined;
+  const { asPath: pageModuleUrl } = useRouter();
 
   return (
     <MantineReactTable

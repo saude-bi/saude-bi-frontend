@@ -31,10 +31,7 @@ type Props<T> = {
 
 export const FormLayout = <T,>({ title, form, FormInputs, ...props }: Props<T>) => {
   const router = useRouter();
-
-  const handleBack = () => {
-    routePushToPreviousPage(router);
-  };
+  const handleBack = () => routePushToPreviousPage(router);
 
   return (
     <CommonLayout title={title}>
@@ -61,7 +58,7 @@ export const FormLayout = <T,>({ title, form, FormInputs, ...props }: Props<T>) 
         <Grid.Col span={9}>
           <ContentCard>
             <form onSubmit={form.onSubmit(() => {})}>
-              <FormInputs disabled={props.type === 'preview'} form={form}></FormInputs>
+              <FormInputs disabled={props.type === 'preview'} form={form} />
             </form>
           </ContentCard>
         </Grid.Col>
@@ -71,18 +68,14 @@ export const FormLayout = <T,>({ title, form, FormInputs, ...props }: Props<T>) 
 };
 
 type PropsPreviewActions = {
-  pageModuleUrl: string;
   id: number;
   useRemoveMutation: GenericRemoveMutation;
 };
 
-const PreviewAction = ({ pageModuleUrl, id, useRemoveMutation }: PropsPreviewActions) => {
+const PreviewAction = ({ id, useRemoveMutation }: PropsPreviewActions) => {
   const router = useRouter();
   const [remove, { isSuccess }] = useRemoveMutation();
-
-  const onDelete = () => {
-    remove(id);
-  };
+  const onDelete = () => remove(id);
 
   useEffect(() => {
     if (isSuccess) {
@@ -96,7 +89,7 @@ const PreviewAction = ({ pageModuleUrl, id, useRemoveMutation }: PropsPreviewAct
 
   return (
     <>
-      <ButtonEdit href={getUpdatePath(pageModuleUrl, id)} />
+      <ButtonEdit href={getUpdatePath(router.asPath)} />
       <ButtonDelete onDelete={onDelete} />
     </>
   );
