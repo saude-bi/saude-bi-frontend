@@ -11,6 +11,7 @@ export const createDeleteModal = ({ onCancel, onConfirm }: Props) => {
     modals.openConfirmModal({
       title: 'Confirmação de exclusão',
       centered: true,
+      withCloseButton: false,
       children: (
         <Text size="sm">
           Você tem certeza que deseja deletar este item? Esta ação não poderá ser desfeita.
