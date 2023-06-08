@@ -5,7 +5,11 @@ import { useGetCurrentUserQuery } from '@/store/auth';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
 import { Drawer } from '@/components/Drawer/Drawer';
 import { UserProfile } from '@/components/UserProfile/UserProfile';
-import { ScrollUp } from '../Buttons/ScrollUp';
+import { ScrollUp } from '@/components/Common/Buttons/ScrollUp';
+import { 
+  BaseNotificationProps,
+  ShowStateNotification
+} from '@/components/Common/Feedback/Notifications';
 
 type Props = {
   children: React.ReactNode;
@@ -15,6 +19,12 @@ type Props = {
 export const CommonLayout: React.FC<Props> = ({ children, title }) => {
   const router = useRouter();
   const { isLoading, isError, currentData: currentUser } = useGetCurrentUserQuery();
+ 
+  useEffect(() => {
+    if (router.query.type !== undefined) {
+      ShowStateNotification({ ...router.query } as BaseNotificationProps);
+    }
+  }, [router.query]);
 
   useEffect(() => {
     if (isError) {

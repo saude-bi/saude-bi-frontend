@@ -27,7 +27,7 @@ export default function App(props: AppProps) {
           <ModalsProvider>
             <ApiProvider api={baseApi}>
               <Component {...pageProps} />
-              <Notifications />
+              <Notifications position="top-center" autoClose={5000} />
             </ApiProvider>
           </ModalsProvider>
         </MantineProvider>

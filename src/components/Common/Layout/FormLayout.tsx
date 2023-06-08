@@ -79,7 +79,11 @@ const PreviewAction = ({ id, useRemoveMutation }: PropsPreviewActions) => {
 
   useEffect(() => {
     if (isSuccess) {
-      routePushToPreviousPage(router);
+      routePushToPreviousPage(router, {
+        title: 'Item deletado com sucesso',
+        message: 'O item foi removido da base de dados.',
+        type: 'success',
+      });
     }
   }, [isSuccess]);
 
@@ -108,7 +112,11 @@ const CreateAction = <T,>({ form, useCreateMutation }: PropsCreateAction<T>) => 
 
   useEffect(() => {
     if (isSuccess) {
-      routePushToPreviousPage(router);
+      routePushToPreviousPage(router, {
+        title: 'Item cadastrado com sucesso',
+        message: 'O item foi cadastrado na base de dados.',
+        type: 'success',
+      });
     }
   }, [isSuccess]);
 
@@ -133,7 +141,11 @@ const UpdateAction = <T,>({ id, form, useUpdateMutation }: PropsUpdateAction<T>)
 
   useEffect(() => {
     if (isSuccess) {
-      routePushToPreviousPage(router);
+      routePushToPreviousPage(router, {
+        title: 'Item atualizado com sucesso',
+        message: 'O item foi atualizado.',
+        type: 'success',
+      });
     }
   }, [isSuccess]);
 
