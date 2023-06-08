@@ -1,6 +1,7 @@
 import { ActionIcon, Group } from '@mantine/core';
 import { IconEraser, IconEye, IconPencil } from '@tabler/icons-react';
 import Link from 'next/link';
+import { createDeleteModal } from '../Modal/DeleteModal';
 
 type Props = {
   id: number;
@@ -10,6 +11,10 @@ type Props = {
 };
 
 export const RowActions: React.FC<Props> = ({ id, previewUrl, updateUrl, onRemove }) => {
+  const openDeleteModal = createDeleteModal({
+    onConfirm: onRemove ? () => onRemove(id) : undefined,
+  });
+
   return (
     <Group spacing="sm" noWrap>
       {previewUrl && (
@@ -29,7 +34,7 @@ export const RowActions: React.FC<Props> = ({ id, previewUrl, updateUrl, onRemov
       )}
 
       {onRemove && (
-        <ActionIcon color="red.6" variant="filled" onClick={() => onRemove(id)}>
+        <ActionIcon color="red.6" variant="filled" onClick={openDeleteModal}>
           <IconEraser />
         </ActionIcon>
       )}
