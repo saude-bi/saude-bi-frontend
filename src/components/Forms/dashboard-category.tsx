@@ -1,23 +1,22 @@
-import { UpdateDashboardCategoryDto } from "@/types/dashboard-category";
+import { UpdateDashboardCategoryDto } from '@/types/dashboard-category';
 import { Box, TextInput } from '@mantine/core';
 import { z } from 'zod';
-import { GenericForm } from "../Common/Layout/FormLayout";
+import { GenericForm } from '../Common/Layout/FormLayout';
 
 export const DashboardCategorySchema = z.object({
-  name: z.string({
-    required_error: 'Campo nome da categoria é obrigatório'
-  }).min(2, { message: 'O nome da categoria informado é muito curto' })
+  name: z
+    .string({
+      required_error: 'Campo nome da categoria é obrigatório',
+    })
+    .min(2, { message: 'O nome da categoria informado é muito curto' }),
 });
 
-type Props = {
-  disabled: boolean,
-  form: GenericForm<UpdateDashboardCategoryDto>
-}
+type Props<T> = {
+  disabled: boolean;
+  form: GenericForm<T>;
+};
 
-export const DashboardCategoryInputs = ({ 
-  disabled = false,
-  form
- }: Props) => {
+export const DashboardCategoryInputs = <T,>({ disabled = false, form }: Props<T>) => {
   return (
     <Box>
       <TextInput
@@ -29,4 +28,4 @@ export const DashboardCategoryInputs = ({
       />
     </Box>
   );
-}
+};
