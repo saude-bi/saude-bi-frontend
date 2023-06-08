@@ -13,6 +13,9 @@ export default function OccupationCategoriesPage() {
   const router = useRouter();
 
   const form = useForm<CreateDashboardCategoryDto>({
+    initialValues: {
+      name: '',
+    },
     validate: zodResolver(DashboardCategorySchema),
     validateInputOnChange: true,
   });

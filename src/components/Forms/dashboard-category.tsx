@@ -8,7 +8,7 @@ export const DashboardCategorySchema = z.object({
     .string({
       required_error: 'Campo nome da categoria é obrigatório',
     })
-    .min(2, { message: 'O nome da categoria informado é muito curto' }),
+    .min(4, { message: 'O nome da categoria informado é muito curto' }),
 });
 
 type Props<T> = {
