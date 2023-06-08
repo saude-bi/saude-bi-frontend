@@ -36,7 +36,7 @@ export default function OccupationCategoriesPage() {
       type="preview"
       FormInputs={DashboardCategoryInputs<UpdateDashboardCategoryDto>}
       form={form}
-      updateUrl="/dashboard-category/edit"
+      pageModuleUrl="dashboard-category"
       id={id}
     />
   );

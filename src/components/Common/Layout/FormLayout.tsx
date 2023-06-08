@@ -15,6 +15,7 @@ import {
   GenericRemoveMutation,
   GenericUpdateMutation,
 } from '@/store/common';
+import { getUpdatePath } from '@/utils/routes';
 
 export type GenericForm<T> = ReturnType<UseForm<T>>;
 
@@ -70,12 +71,12 @@ export const FormLayout = <T,>({ title, form, FormInputs, ...props }: Props<T>) 
 };
 
 type PropsPreviewActions = {
-  updateUrl: string;
+  pageModuleUrl: string;
   id: number;
   useRemoveMutation: GenericRemoveMutation;
 };
 
-const PreviewAction = ({ updateUrl, id, useRemoveMutation }: PropsPreviewActions) => {
+const PreviewAction = ({ pageModuleUrl, id, useRemoveMutation }: PropsPreviewActions) => {
   const router = useRouter();
   const [remove, { isSuccess }] = useRemoveMutation();
 
@@ -91,7 +92,7 @@ const PreviewAction = ({ updateUrl, id, useRemoveMutation }: PropsPreviewActions
 
   return (
     <>
-      <ButtonEdit href={`${updateUrl}/${id}`} />
+      <ButtonEdit href={getUpdatePath(pageModuleUrl, id)} />
       <ButtonDelete onClick={onDelete} />
     </>
   );

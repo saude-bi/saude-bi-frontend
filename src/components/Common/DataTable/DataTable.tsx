@@ -1,25 +1,19 @@
 import { GenericFindAllQuery, GenericRemoveMutation } from '@/store/common';
 import { Entity } from '@/types/common';
-import {
-  BaseQueryFn,
-  FetchArgs,
-  FetchBaseQueryError,
-  FetchBaseQueryMeta,
-  MutationDefinition,
-  QueryDefinition,
-} from '@reduxjs/toolkit/dist/query';
 import { MantineReactTable, MRT_ColumnDef } from 'mantine-react-table';
 import { MRT_Localization_PT_BR } from 'mantine-react-table/locales/pt-BR';
 import { useState } from 'react';
 import { ButtonCreate } from '../Buttons/Buttons';
 import { RowActions } from './RowActions';
+import { getCreatePath, getPreviewPath, getUpdatePath } from '@/utils/routes';
 
 interface Props<T extends Entity> {
   useFindAllQuery: GenericFindAllQuery<T>;
   useRemoveMutation: GenericRemoveMutation;
-  createUrl?: string;
-  previewUrl?: string;
-  updateUrl?: string;
+  pageModuleUrl: string;
+  canCreate?: boolean;
+  canPreview?: boolean;
+  canUpdate?: boolean;
   columns: MRT_ColumnDef<T>[];
 }
 
@@ -27,9 +21,10 @@ export const DataTable = <T extends Entity>({
   useFindAllQuery,
   useRemoveMutation,
   columns,
-  createUrl,
-  previewUrl,
-  updateUrl,
+  pageModuleUrl,
+  canCreate,
+  canPreview,
+  canUpdate,
 }: Props<T>) => {
   const [pagination, setPagination] = useState({
     pageIndex: 0,
@@ -58,7 +53,7 @@ export const DataTable = <T extends Entity>({
       }}
       state={{ isLoading, pagination }}
       renderToolbarInternalActions={() =>
-        createUrl && <ButtonCreate href={createUrl}>NOVO</ButtonCreate>
+        canCreate && <ButtonCreate href={getCreatePath(pageModuleUrl)}>NOVO</ButtonCreate>
       }
       enableRowActions
       columns={columns}
@@ -68,8 +63,8 @@ export const DataTable = <T extends Entity>({
       renderRowActions={({ row }) => (
         <RowActions
           id={+row.id}
-          previewUrl={previewUrl ? `${previewUrl}/${+row.id}` : undefined}
-          updateUrl={updateUrl ? `${updateUrl}/${+row.id}` : undefined}
+          previewUrl={canPreview ? getPreviewPath(pageModuleUrl, parseInt(row.id)) : undefined}
+          updateUrl={canUpdate ? getUpdatePath(pageModuleUrl, parseInt(row.id)) : undefined}
           onRemove={remove}
         />
       )}
