@@ -47,7 +47,7 @@ export default function OccupationCategoriesPage() {
       title="Categorias de Ocupacoes"
       useUpdateMutation={useUpdateDashboardCategoryMutation}
       type="update"
-      FormInputs={DashboardCategoryInputs}
+      FormInputs={DashboardCategoryInputs<UpdateDashboardCategoryDto>}
       form={form}
       id={id}
     />

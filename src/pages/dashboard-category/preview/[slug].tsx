@@ -34,7 +34,7 @@ export default function OccupationCategoriesPage() {
       title="Categorias de Ocupacoes"
       useRemoveMutation={useRemoveDashboardCategoryMutation}
       type="preview"
-      FormInputs={DashboardCategoryInputs}
+      FormInputs={DashboardCategoryInputs<UpdateDashboardCategoryDto>}
       form={form}
       updateUrl="/dashboard-category/edit"
       id={id}
