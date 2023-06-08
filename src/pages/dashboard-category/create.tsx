@@ -8,7 +8,6 @@ import { useCreateDashboardCategoryMutation } from '@/store/dashboard-categories
 import { useRouter } from 'next/router';
 
 export default function OccupationCategoriesPage() {
-  const [submit, { isSuccess, isError }] = useCreateDashboardCategoryMutation();
   const router = useRouter();
 
   const form = useForm<DashboardCategoryDto>({
@@ -24,25 +23,10 @@ export default function OccupationCategoriesPage() {
     validateInputOnChange: true
   });
 
-  const trigerSubmit = () => {
-    if (!form.validate().hasErrors) {
-      submit(form.values)
-    }
-  };
-
-  useEffect(() => {
-    if (isSuccess) {
-      router.push('/dashboard-category');
-    }
-    if (isError) {
-      notifications.show({ message: 'Erro ao cadastrar uma Categoria', color: 'red' })
-    }
-  }, [isSuccess]);
-
   return (
     <FormLayout 
       title="Categorias de Ocupacoes"
-      handleSubmit={trigerSubmit}
+      useSaveMutation={useCreateDashboardCategoryMutation}
       FormInputs={DashboardCategoryInputs}
       form={form}
       type="create"
