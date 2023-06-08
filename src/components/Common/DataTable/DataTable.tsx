@@ -2,7 +2,7 @@ import { GenericFindAllQuery, GenericRemoveMutation } from '@/store/common';
 import { Entity } from '@/types/common';
 import { MantineReactTable, MRT_ColumnDef } from 'mantine-react-table';
 import { MRT_Localization_PT_BR } from 'mantine-react-table/locales/pt-BR';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ButtonCreate } from '../Buttons/Buttons';
 import { RowActions } from './RowActions';
 import { getCreatePath, getPreviewPath, getUpdatePath } from '@/utils/routes';
@@ -25,10 +25,19 @@ export const DataTable = <T extends Entity>({
   canPreview,
   canUpdate,
 }: Props<T>) => {
+  const router = useRouter();
+  const pageModuleUrl = router.asPath.split('?')[0];
+
   const [pagination, setPagination] = useState({
-    pageIndex: 0,
-    pageSize: 10,
+    pageIndex: router.query.page ? parseInt(router.query.page as string, 10) : 0,
+    pageSize: router.query.perPage ? parseInt(router.query.perPage as string, 10) : 10,
   });
+
+  useEffect(() => {
+    router.replace({
+      query: { ...router.query, page: pagination.pageIndex, perPage: pagination.pageSize },
+    });
+  }, [pagination]);
 
   const { isLoading, data } = useFindAllQuery(
     { page: pagination.pageIndex, perPage: pagination.pageSize },
@@ -36,7 +45,6 @@ export const DataTable = <T extends Entity>({
   );
 
   const remove = !!useRemoveMutation ? useRemoveMutation()[0] : undefined;
-  const { asPath: pageModuleUrl } = useRouter();
 
   return (
     <MantineReactTable
