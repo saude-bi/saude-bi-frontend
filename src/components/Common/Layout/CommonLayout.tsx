@@ -5,6 +5,7 @@ import { useGetCurrentUserQuery } from '@/store/auth';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
 import { Drawer } from '@/components/Drawer/Drawer';
 import { UserProfile } from '@/components/UserProfile/UserProfile';
+import { ScrollUp } from '../Buttons/ScrollUp';
 
 type Props = {
   children: React.ReactNode;
@@ -39,6 +40,7 @@ export const CommonLayout: React.FC<Props> = ({ children, title }) => {
           </Stack>
         </Flex>
       )}
+      <ScrollUp />
     </Box>
   );
 };
