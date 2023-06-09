@@ -14,9 +14,8 @@ export default function Occupations() {
         initialValues: {
             name: '',
             cbo: '',
-            category: 0
+            category: -1
         },
-        validate: zodResolver(OccupationSchema),
         validateInputOnChange: true
     });
 

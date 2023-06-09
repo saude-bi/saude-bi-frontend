@@ -1,9 +1,11 @@
 import { Box, TextInput } from '@mantine/core';
 import { z } from 'zod';
 import { GenericForm } from '../Common/Layout/FormLayout';
-import { Autocomplete } from '@mantine/core';
+import { Select } from '@mantine/core';
 import {useFindAllOccupationCategoriesQuery} from "@/store/occupation-categories"
 import { OccupationCategory } from '@/types/occupation-category';
+import { Autocomplete } from '@mantine/core';
+import { useState } from 'react';
 export const OccupationSchema = z.object({
     name: z
     .string({
@@ -16,6 +18,8 @@ export const OccupationSchema = z.object({
     }),
     category: z.number({
         required_error: "A Categoria da ocupação é obrigatoria"
+    }).nonnegative({
+        message: "A Categoria da ocupação é obrigatoria"
     })
 })
 
@@ -25,22 +29,17 @@ type Props<T> = {
 };
 
 export const OccupationInputs =  <T,>({ disabled = false, form }: Props<T>) => {
-    
+    const [search, setSearch] = useState("")
     const {data} = useFindAllOccupationCategoriesQuery(
         { page: 0, perPage: 1000 },
-        { pollingInterval: 1000 }
+        { pollingInterval: 30000 }
     )
 
     const occupationCategoriesList = data?.data.map(item => ({
-        value: item.name,
-        id: item.id,
-        name: item.name,
-        created: item.created,
-        updated: item.updated
+        value: item.id.toString(),
+        label: item.name
     })) || []
 
-
-    
 
     return (
         <Box>
@@ -58,13 +57,16 @@ export const OccupationInputs =  <T,>({ disabled = false, form }: Props<T>) => {
                 {...form.getInputProps('cbo')}
                 disabled={disabled}
             />
-            <Autocomplete
+             <Select
                 withAsterisk
                 label="Categoria da Ocupação"
                 placeholder="Categoria da Ocupação"
                 {...form.getInputProps('category')}
                 data={occupationCategoriesList}
                 disabled={disabled}
+                searchable
+                searchValue={search}
+                onSearchChange={setSearch}
             />
         </Box>
     )
