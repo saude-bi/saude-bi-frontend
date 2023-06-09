@@ -9,8 +9,8 @@ export const { useFindOccupationQuery } = injectFindById<Occupation>(
     endpoint
 );
 
-export const { useFindAllOccupationQuery } = injectFindAll<Occupation>(
-    'findAllOccupation',
+export const { useFindAllOccupationsQuery } = injectFindAll<Occupation>(
+    'findAllOccupations',
     endpoint
 );
 
@@ -18,6 +18,11 @@ export const { useCreateOccupationMutation } = injectCreate<
     Occupation,
     CreateOccupationDto>
 ('createOccupation', endpoint);
+
+export const { useUpdateOccupationMutation} = injectUpdate<
+Occupation,
+UpdateOccupationDto>
+('updateOccupation', endpoint);
 
 export const { useRemoveOccupationMutation } = injectRemove(
     "removeOccupation",
