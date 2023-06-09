@@ -9,7 +9,7 @@ import {
 import { useCreateDashboardCategoryMutation } from '@/store/dashboard-categories';
 import { useRouter } from 'next/router';
 
-export default function OccupationCategoriesPage() {
+export default function DashboardCategoriesPage() {
   const router = useRouter();
 
   const form = useForm<CreateDashboardCategoryDto>({
@@ -22,7 +22,7 @@ export default function OccupationCategoriesPage() {
 
   return (
     <FormLayout
-      title="Categorias de Ocupacoes"
+      title="Categorias de Dashboard"
       useCreateMutation={useCreateDashboardCategoryMutation}
       FormInputs={DashboardCategoryInputs<CreateDashboardCategoryDto>}
       form={form}
