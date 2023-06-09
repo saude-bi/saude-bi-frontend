@@ -16,10 +16,8 @@ export const OccupationSchema = z.object({
     .string({
         required_error: "O campo cbo é obrigatorio"
     }),
-    category: z.number({
+    category: z.string({
         required_error: "A Categoria da ocupação é obrigatoria"
-    }).nonnegative({
-        message: "A Categoria da ocupação é obrigatoria"
     })
 })
 

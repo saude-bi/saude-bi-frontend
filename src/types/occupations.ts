@@ -10,7 +10,7 @@ export interface Occupation extends Entity {
 export type CreateOccupationDto = {
     name: string,
     cbo: string,
-    category: number,
+    category: string,
 }
 
 export type UpdateOccupationDto = Partial<CreateOccupationDto>
