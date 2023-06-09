@@ -23,7 +23,6 @@ export default function OccupationCategoriesPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data);
       form.setValues(data);
     }
   }, [isSuccess]);
