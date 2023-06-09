@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { useFindAllDashboardsQuery } from '@/store/dashboards';
 import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
 import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
-import { Button, Group, Stack, Text, Title } from '@mantine/core';
+import { Group, Stack, Text, Title } from '@mantine/core';
 import Link from 'next/link';
-import { IconCheck } from '@tabler/icons-react';
 import { FilterSelector } from '@/components/FilterSelector/FilterSelector';
 
 type Props = {
