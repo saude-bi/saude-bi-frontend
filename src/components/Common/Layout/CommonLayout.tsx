@@ -4,7 +4,7 @@ import { Box, Center, Flex, LoadingOverlay, Stack } from '@mantine/core';
 import { useGetCurrentUserQuery } from '@/store/auth';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
 import { Drawer } from '@/components/Drawer/Drawer';
-import { UserProfile } from '@/components/UserProfile/UserProfile';
+import { UserProfile } from '@/components/Common/Buttons/UserProfile';
 import { ScrollUp } from '@/components/Common/Buttons/ScrollUp';
 import {
   BaseNotificationProps,
