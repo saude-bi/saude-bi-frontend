@@ -19,7 +19,7 @@ export default function OccupationCaregories() {
   );
 
   return (
-    <CommonLayout title="Categorias de Ocupacoes">
+    <CommonLayout title="Categorias de Ocupações">
       <DataTable
         useFindAllQuery={useFindAllOccupationCategoriesQuery}
         useRemoveMutation={useRemoveOccupationCategoryMutation}
