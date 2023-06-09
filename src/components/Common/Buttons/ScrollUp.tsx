@@ -22,4 +22,4 @@ export const ScrollUp: React.FC = () => {
       </Affix>
     </>
   );
-}
+};

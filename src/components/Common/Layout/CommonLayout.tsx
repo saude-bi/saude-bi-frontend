@@ -6,9 +6,9 @@ import { PageTitle } from '@/components/PageTitle/PageTitle';
 import { Drawer } from '@/components/Drawer/Drawer';
 import { UserProfile } from '@/components/UserProfile/UserProfile';
 import { ScrollUp } from '@/components/Common/Buttons/ScrollUp';
-import { 
+import {
   BaseNotificationProps,
-  ShowStateNotification
+  ShowStateNotification,
 } from '@/components/Common/Feedback/Notifications';
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 export const CommonLayout: React.FC<Props> = ({ children, title }) => {
   const router = useRouter();
   const { isLoading, isError, currentData: currentUser } = useGetCurrentUserQuery();
- 
+
   useEffect(() => {
     if (router.query.type !== undefined) {
       ShowStateNotification({ ...router.query } as BaseNotificationProps);

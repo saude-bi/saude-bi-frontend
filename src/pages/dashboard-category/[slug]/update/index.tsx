@@ -2,7 +2,10 @@ import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React, { useEffect } from 'react';
 import { UpdateDashboardCategoryDto } from '@/types/dashboard-category';
 import { useForm, zodResolver } from '@mantine/form';
-import { DashboardCategoryInputs, DashboardCategorySchema } from '@/components/Forms/dashboard-category';
+import {
+  DashboardCategoryInputs,
+  DashboardCategorySchema,
+} from '@/components/Forms/dashboard-category';
 import {
   useUpdateDashboardCategoryMutation,
   useFindDashboardCategoryQuery,

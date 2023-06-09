@@ -1,10 +1,10 @@
-import { UpdateOccupationCategoryDto } from "@/types/occupation-category";
+import { UpdateOccupationCategoryDto } from '@/types/occupation-category';
 import { Box, TextInput } from '@mantine/core';
 import { z } from 'zod';
 import { GenericForm } from '../Common/Layout/FormLayout';
 
 export const OccupationCategorySchema = z.object({
-    name: z
+  name: z
     .string({
       required_error: 'Campo nome da categoria é obrigatório',
     })
@@ -12,20 +12,20 @@ export const OccupationCategorySchema = z.object({
 });
 
 type Props<T> = {
-    disabled: boolean;
-    form: GenericForm<T>;
+  disabled: boolean;
+  form: GenericForm<T>;
 };
 
-export const OccupationCategoryInputs =  <T,>({ disabled = false, form }: Props<T>) => {
-    return (
-      <Box>
-        <TextInput
-          withAsterisk
-          label="Categoria"
-          placeholder="Categoria"
-          {...form.getInputProps('name')}
-          disabled={disabled}
-        />
-      </Box>
-    );
-  };
+export const OccupationCategoryInputs = <T,>({ disabled = false, form }: Props<T>) => {
+  return (
+    <Box>
+      <TextInput
+        withAsterisk
+        label="Categoria"
+        placeholder="Categoria"
+        {...form.getInputProps('name')}
+        disabled={disabled}
+      />
+    </Box>
+  );
+};

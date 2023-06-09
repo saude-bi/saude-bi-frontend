@@ -1,11 +1,11 @@
-import { Entity } from "@/types/common";
+import { Entity } from '@/types/common';
 
 export interface OccupationCategory extends Entity {
-    name: string
+  name: string;
 }
 
 export type CreateOccupationCategoryDto = {
-    name: string
-}
+  name: string;
+};
 
-export type UpdateOccupationCategoryDto = Partial<CreateOccupationCategoryDto>
+export type UpdateOccupationCategoryDto = Partial<CreateOccupationCategoryDto>;

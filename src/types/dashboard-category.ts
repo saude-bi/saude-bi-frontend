@@ -1,11 +1,11 @@
-import { Entity } from "@/types/common";
+import { Entity } from '@/types/common';
 
 export interface DashboardCategory extends Entity {
-    name: string
+  name: string;
 }
 
 export type CreateDashboardCategoryDto = {
-    name: string
-}
+  name: string;
+};
 
-export type UpdateDashboardCategoryDto = Partial<CreateDashboardCategoryDto>
+export type UpdateDashboardCategoryDto = Partial<CreateDashboardCategoryDto>;
