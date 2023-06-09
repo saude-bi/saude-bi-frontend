@@ -17,7 +17,9 @@ const AccessCard: React.FC<Props> = ({ title, text, href }) => {
     <Link href={href} style={{ textDecoration: 'none' }}>
       <ContentCard>
         <Stack spacing={'sm'}>
-          <Title order={3}>{title}</Title>
+          <Text fz="sm" fw={500}>
+            {title}
+          </Text>
           <Text component="p" sx={{ margin: 0 }}>
             {text}
           </Text>
@@ -49,11 +51,11 @@ export default function Home() {
         <Stack>
           <Title order={4}>Selecione o acesso que deseja utilizar:</Title>
           <Group>
-            <AccessCard title="Núcleo de Saúde AKLP" text="CBO - Enfermeiro" href="/" />
+            <AccessCard title="Núcleo de Saúde AKLP" text="CBO - Enfermeiro" href="dashboards" />
             <AccessCard
               title="Núcleo de Saúde AKLP"
               text="CBO - Gerente de Serviços em Saúde"
-              href="/"
+              href="dashboards"
             />
           </Group>
         </Stack>
