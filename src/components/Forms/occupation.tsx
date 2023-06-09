@@ -1,9 +1,9 @@
-import { UpdateOccupationDto } from "@/types/occupations";
 import { Box, TextInput } from '@mantine/core';
 import { z } from 'zod';
 import { GenericForm } from '../Common/Layout/FormLayout';
 import { Autocomplete } from '@mantine/core';
 import {useFindAllOccupationCategoriesQuery} from "@/store/occupation-categories"
+import { OccupationCategory } from '@/types/occupation-category';
 export const OccupationSchema = z.object({
     name: z
     .string({
@@ -25,7 +25,23 @@ type Props<T> = {
 };
 
 export const OccupationInputs =  <T,>({ disabled = false, form }: Props<T>) => {
-    const {data} = useFindAllOccupationCategoriesQuery()
+    
+    const {data} = useFindAllOccupationCategoriesQuery(
+        { page: 0, perPage: 1000 },
+        { pollingInterval: 1000 }
+    )
+
+    const occupationCategoriesList = data?.data.map(item => ({
+        value: item.name,
+        id: item.id,
+        name: item.name,
+        created: item.created,
+        updated: item.updated
+    })) || []
+
+
+    
+
     return (
         <Box>
             <TextInput
@@ -42,12 +58,12 @@ export const OccupationInputs =  <T,>({ disabled = false, form }: Props<T>) => {
                 {...form.getInputProps('cbo')}
                 disabled={disabled}
             />
-             <Autocomplete
+            <Autocomplete
                 withAsterisk
                 label="Categoria da Ocupação"
                 placeholder="Categoria da Ocupação"
-                {...form.getInputProps('cbo')}
-                data={['React', 'Angular', 'Svelte', 'Vue']}
+                {...form.getInputProps('category')}
+                data={occupationCategoriesList}
                 disabled={disabled}
             />
         </Box>

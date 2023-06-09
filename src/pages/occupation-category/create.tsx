@@ -8,9 +8,8 @@ import {
 } from '@/components/Forms/occupation-category';
 import { useRouter } from 'next/router';
 import { useCreateOccupationCategoryMutation } from '@/store/occupation-categories';
-import { DashboardCategoryInputs } from '@/components/Forms/dashboard-category';
 
-export default function OccupationCategoriesPagev2() {
+export default function OccupationCategories() {
   const router = useRouter();
 
   const form = useForm<CreateOccupationCategoryDto>({
@@ -25,7 +24,7 @@ export default function OccupationCategoriesPagev2() {
     <FormLayout
       title="Categoria de Ocupações"
       useCreateMutation={useCreateOccupationCategoryMutation}
-      FormInputs={DashboardCategoryInputs<CreateOccupationCategoryDto>}
+      FormInputs={OccupationCategoryInputs<CreateOccupationCategoryDto>}
       form={form}
       type="create"
     />
