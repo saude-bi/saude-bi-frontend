@@ -15,17 +15,19 @@ type Props = {
 
 const DashboardCard: React.FC<Props> = ({ title, type, href }) => {
   return (
-    <ContentCard h={90}>
-      <Flex h="100%">
-        <Group spacing={'sm'} noWrap align="center">
-          {type === 'dashboard' && <IconDashboard size={24} />}
-          {type === 'map' && <IconMap size={24} />}
-          <Text fz="sm" fw={500}>
-            {title}
-          </Text>
-        </Group>
-      </Flex>
-    </ContentCard>
+    <Link href={href} style={{ textDecoration: 'none' }}>
+      <ContentCard h={90}>
+        <Flex h="100%">
+          <Group spacing={'sm'} noWrap align="center">
+            {type === 'dashboard' && <IconDashboard size={24} />}
+            {type === 'map' && <IconMap size={24} />}
+            <Text fz="sm" fw={500}>
+              {title}
+            </Text>
+          </Group>
+        </Flex>
+      </ContentCard>
+    </Link>
   );
 };
 
@@ -64,16 +66,20 @@ export default function Home() {
               { maxWidth: 'xs', cols: 1, spacing: 'sm' },
             ]}
           >
-            <DashboardCard type="map" title="Gestantes sem cartão SUS informado" href="/" />
+            <DashboardCard
+              type="map"
+              title="Gestantes sem cartão SUS informado"
+              href="dashboards/1"
+            />
             <DashboardCard
               type="dashboard"
               title="Agendamentos Sem Pedido de Eletrocardiograma - Hospital Madre de Dio"
-              href="/"
+              href="dashboard/1"
             />
             <DashboardCard
               type="map"
               title="Agendamentos Sem Pedido de Eletrocardiograma - Hospital Madre de Dio"
-              href="/"
+              href="dashboard/2"
             />
           </SimpleGrid>
         </Stack>
