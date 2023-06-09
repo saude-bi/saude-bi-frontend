@@ -10,7 +10,7 @@ import {
 import { useRouter } from 'next/router';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 
-export default function OccupationCategoriesPage() {
+export default function DashboardCategoriesPage() {
   const router = useRouter();
   const { slug } = router.query;
   const id = parseInt(slug as string, 10);
@@ -37,7 +37,7 @@ export default function OccupationCategoriesPage() {
 
   return (
     <FormLayout
-      title="Categorias de Ocupacoes"
+      title="Categorias de Dashboard"
       useUpdateMutation={useUpdateDashboardCategoryMutation}
       type="update"
       FormInputs={DashboardCategoryInputs<UpdateDashboardCategoryDto>}
