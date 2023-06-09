@@ -1,13 +1,7 @@
-import { Entity } from '@/types/common';
-import { Occupation } from '@/types/occupation';
 import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from './common';
-
+import { OccupationCategory, CreateOccupationCategoryDto, UpdateOccupationCategoryDto } from "@/types/occupation-category";
 const endpoint = 'occupation-categories';
 
-export interface OccupationCategory extends Entity {
-  name: string;
-  occupations: Occupation[];
-}
 
 export const { useFindOccupationCategoryQuery } = injectFindById<OccupationCategory>(
   'findOccupationCategory',
@@ -19,12 +13,12 @@ export const { useFindAllOccupationCategoriesQuery } = injectFindAll<OccupationC
   endpoint
 );
 
-export const { useCreateOccupationCategoryMutation } = injectCreate<OccupationCategory>(
+export const { useCreateOccupationCategoryMutation } = injectCreate<OccupationCategory, CreateOccupationCategoryDto>(
   'createOccupationCategory',
   endpoint
 );
 
-export const { useUpdateOccupationCategoryMutation } = injectUpdate<OccupationCategory>(
+export const { useUpdateOccupationCategoryMutation } = injectUpdate<OccupationCategory, UpdateOccupationCategoryDto>(
   'updateOccupationCategory',
   endpoint
 );
