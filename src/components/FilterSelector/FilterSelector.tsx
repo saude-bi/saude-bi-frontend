@@ -1,30 +1,33 @@
-import React from 'react';
-import { PaperProps, Box, Chip, Group } from '@mantine/core';
-import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
+import React, { useEffect, useState } from 'react';
+import { Chip, Group } from '@mantine/core';
 
-export const FilterSelector: React.FC<PaperProps> = (props) => {
+type Props = {
+  options: string[];
+  setSelectedOption: (option: number) => void;
+};
+
+export const FilterSelector: React.FC<Props> = ({ options, setSelectedOption }) => {
+  const [currentOption, setCurrentOption] = useState(-1);
+
+  useEffect(() => {
+    setSelectedOption(currentOption);
+  }, [currentOption]);
+
   return (
-    <ContentCard>
-      <Box
-        sx={(theme) => ({
-          textAlign: 'center',
-        })}
-      >
-        <p>Filtrar por </p>
-        <Chip.Group>
-          <Group position="center">
-            <Chip defaultChecked color="teal" radius="md">
-              teste 1
-            </Chip>
-            <Chip defaultChecked color="teal" radius="md">
-              teste 2
-            </Chip>
-            <Chip defaultChecked color="teal" radius="md">
-              teste 3
-            </Chip>
-          </Group>
-        </Chip.Group>
-      </Box>
-    </ContentCard>
+    <Chip.Group>
+      <Group position="center">
+        {options.map((option, idx) => (
+          <Chip
+            color="teal"
+            radius="md"
+            checked={currentOption === idx}
+            onClick={() => (currentOption === idx ? setCurrentOption(-1) : setCurrentOption(idx))}
+            wrapperProps={{ border: 'none' }}
+          >
+            {option}
+          </Chip>
+        ))}
+      </Group>
+    </Chip.Group>
   );
 };
