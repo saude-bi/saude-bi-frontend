@@ -11,10 +11,10 @@ export const { useFindOccupationCategoryQuery } = injectFindById<OccupationCateg
   endpoint
 );
 
-export const { useFindAllOccupationCategoriesQuery } = injectFindAll<OccupationCategory>(
-  'findAllOccupationCategories',
-  endpoint
-);
+export const { useFindAllOccupationCategoriesQuery } = injectFindAll<
+  OccupationCategory,
+  { name?: string }
+>('findAllOccupationCategories', endpoint);
 
 export const { useCreateOccupationCategoryMutation } = injectCreate<
   OccupationCategory,
