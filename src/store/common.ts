@@ -41,10 +41,10 @@ export type GenericFindAllQuery<T extends Entity> = UseQuery<
   >
 >;
 
-export const injectFindAll = <T extends Entity>(name: string, endpoint: string) => {
+export const injectFindAll = <T extends Entity, U = {}>(name: string, endpoint: string) => {
   return baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
     endpoints: (build) => ({
-      [name]: build.query<PaginatedResponse<T>, PaginationQuery | void>({
+      [name]: build.query<PaginatedResponse<T>, (PaginationQuery & U) | void>({
         query: (params) => ({ url: endpoint, params: params || undefined }),
         providesTags: (result) =>
           result
