@@ -1,16 +1,16 @@
-import { Entity } from "@/types/common";
-import { OccupationCategory } from "./occupation-category";
+import { Entity } from '@/types/common';
+import { OccupationCategory } from './occupation-category';
 
 export interface Occupation extends Entity {
-    name: string,
-    cbo: string,
-    category: OccupationCategory
+  name: string;
+  cbo: string;
+  category: OccupationCategory;
 }
 
 export type CreateOccupationDto = {
-    name: string,
-    cbo: string,
-    category: string,
-}
+  name: string;
+  cbo: string;
+  category: string;
+};
 
-export type UpdateOccupationDto = Partial<CreateOccupationDto>
+export type UpdateOccupationDto = Partial<CreateOccupationDto>;

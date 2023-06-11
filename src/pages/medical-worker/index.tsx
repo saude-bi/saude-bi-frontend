@@ -2,7 +2,10 @@ import { useMemo } from 'react';
 import { MRT_ColumnDef } from 'mantine-react-table';
 import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
 import { DataTable } from '@/components/Common/DataTable/DataTable';
-import { useFindAllMedicalWorkersQuery, useRemoveMedicalWorkerMutation } from '@/store/medical-worker';
+import {
+  useFindAllMedicalWorkersQuery,
+  useRemoveMedicalWorkerMutation,
+} from '@/store/medical-worker';
 import { MedicalWorker } from '@/types/medical-worker';
 
 export default function MedicalWorkerPage() {

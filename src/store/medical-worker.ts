@@ -1,4 +1,10 @@
-import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from '@/store/common';
+import {
+  injectCreate,
+  injectRemove,
+  injectFindAll,
+  injectFindById,
+  injectUpdate,
+} from '@/store/common';
 import {
   CreateMedicalWorkerDto,
   MedicalWorker,
@@ -27,7 +33,4 @@ export const { useUpdateMedicalWorkerMutation } = injectUpdate<
   UpdateMedicalWorkerDto
 >('updateMedicalWorker', endpoint);
 
-export const { useRemoveMedicalWorkerMutation } = injectRemove(
-  'removeMedicalWorker',
-  endpoint
-);
+export const { useRemoveMedicalWorkerMutation } = injectRemove('removeMedicalWorker', endpoint);
