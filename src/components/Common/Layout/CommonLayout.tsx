@@ -29,6 +29,11 @@ const menu: Menu[] = [
     icon: IconUser,
     submenu: [
       {
+        name: 'Profissionais',
+        uri: '/medical-worker',
+        icon: IconUser,
+      },
+      {
         name: 'Ocupacação',
         uri: '/occupation',
         icon: IconUser,
