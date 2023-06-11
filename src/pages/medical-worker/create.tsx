@@ -1,13 +1,10 @@
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React from 'react';
 import { useForm, zodResolver } from '@mantine/form';
-import {
-  DashboardCategoryInputs,
-  DashboardCategorySchema,
-} from '@/components/Forms/dashboard-category';
 import { useRouter } from 'next/router';
 import { CreateMedicalWorkerDto } from '@/types/medical-worker';
 import { useCreateMedicalWorkerMutation } from '@/store/medical-worker';
+import { MedicalWorkerInputs, MedicalWorkerSchema } from '@/components/Forms/medical-worker';
 
 export default function CreateMedicalWorkerPage() {
   const router = useRouter();
@@ -20,7 +17,7 @@ export default function CreateMedicalWorkerPage() {
       cns: '',
       cpf: '',
     },
-    validate: zodResolver(DashboardCategorySchema),
+    validate: zodResolver(MedicalWorkerSchema),
     validateInputOnChange: true,
   });
 
@@ -28,7 +25,7 @@ export default function CreateMedicalWorkerPage() {
     <FormLayout
       title="Categorias de Dashboard"
       useCreateMutation={useCreateMedicalWorkerMutation}
-      FormInputs={DashboardCategoryInputs<CreateMedicalWorkerDto>}
+      FormInputs={MedicalWorkerInputs<CreateMedicalWorkerDto>}
       form={form}
       type="create"
     />
