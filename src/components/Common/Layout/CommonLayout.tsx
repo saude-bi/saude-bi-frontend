@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Box, Center, Flex, LoadingOverlay, Stack } from '@mantine/core';
 import { useGetCurrentUserQuery } from '@/store/auth';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
-import { Drawer, Menu } from '@/components/Drawer/Drawer';
+import { Drawer } from '@/components/Drawer/Drawer';
 import { UserProfile } from '@/components/Common/Buttons/UserProfile';
 import { ScrollUp } from '@/components/Common/Buttons/ScrollUp';
 import {
@@ -11,6 +11,7 @@ import {
   ShowStateNotification,
 } from '@/components/Common/Feedback/Notifications';
 import { IconDatabase, IconHome, IconUser } from '@tabler/icons-react';
+import { Menu } from '@/components/Drawer/DrawerMenu';
 
 type Props = {
   children: React.ReactNode;
