@@ -10,7 +10,6 @@ import {
   BaseNotificationProps,
   ShowStateNotification,
 } from '@/components/Common/Feedback/Notifications';
-import { IconDatabase, IconHome, IconUser } from '@tabler/icons-react';
 import { Menu } from '@/components/Drawer/DrawerMenu';
 import { menuAdmin, menuMedicalWorker } from '@/utils/menu-role';
 
@@ -26,9 +25,11 @@ export const CommonLayout: React.FC<Props> = ({ children, title }) => {
 
   useEffect(() => {
     if (!!currentUser && currentUser.isAdmin) {
+      console.log(currentUser);
       setMenu(menuAdmin);
+    } else {
+      setMenu(menuMedicalWorker);
     }
-    setMenu(menuMedicalWorker);
   }, [currentUser]);
 
   useEffect(() => {
