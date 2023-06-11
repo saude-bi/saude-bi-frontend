@@ -25,7 +25,6 @@ export const CommonLayout: React.FC<Props> = ({ children, title }) => {
 
   useEffect(() => {
     if (!!currentUser && currentUser.isAdmin) {
-      console.log(currentUser);
       setMenu(menuAdmin);
     } else {
       setMenu(menuMedicalWorker);

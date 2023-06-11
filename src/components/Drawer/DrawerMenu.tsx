@@ -59,7 +59,7 @@ export const DrawerMenu: React.FC<Props> = ({ menu }) => {
 
   const submenus = (menu: MenuItem[]) =>
     menu.map((item) => (
-      <Link href={item.uri}>
+      <Link href={item.uri} key={item.name}>
         <UnstyledButton className={classes.subLink} key={item.name}>
           <Group noWrap align="center">
             <ThemeIcon size={34} variant="default" radius="md">

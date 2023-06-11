@@ -17,7 +17,7 @@ export const Drawer: React.FC<Props> = ({ menu }) => {
         <Title color="white">SBI</Title>
         <Stack sx={{ flexGrow: 1 }} align="center" justify="center" spacing="xl">
           {menu.map((item) => (
-            <DrawerMenu menu={item} />
+            <DrawerMenu menu={item} key={item.name} />
           ))}
         </Stack>
       </Stack>

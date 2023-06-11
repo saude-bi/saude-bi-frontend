@@ -18,6 +18,7 @@ export const FilterSelector: React.FC<Props> = ({ options, setSelectedOption }) 
       <Group position="center">
         {options.map((option, idx) => (
           <Chip
+            key={idx}
             color="teal"
             radius="md"
             checked={currentOption === idx}
