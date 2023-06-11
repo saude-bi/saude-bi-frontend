@@ -1,5 +1,5 @@
-import { Entity } from "@/types/common";
-import { User } from "@/types/user";
+import { Entity } from '@/types/common';
+import { User } from '@/types/user';
 
 export interface MedicalWorker extends Entity {
   user: User;
@@ -10,7 +10,7 @@ export interface MedicalWorker extends Entity {
 }
 
 export type CreateMedicalWorkerDto = {
-  user: User;
+  user: string;
   name: string;
   gender: string;
   cns: string;
