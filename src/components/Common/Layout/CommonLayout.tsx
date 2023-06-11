@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { use, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Center, Flex, LoadingOverlay, Stack } from '@mantine/core';
 import { useGetCurrentUserQuery } from '@/store/auth';
@@ -12,57 +12,24 @@ import {
 } from '@/components/Common/Feedback/Notifications';
 import { IconDatabase, IconHome, IconUser } from '@tabler/icons-react';
 import { Menu } from '@/components/Drawer/DrawerMenu';
+import { menuAdmin, menuMedicalWorker } from '@/utils/menu-role';
 
 type Props = {
   children: React.ReactNode;
   title: string;
 };
 
-const menu: Menu[] = [
-  {
-    name: 'Home',
-    uri: '/',
-    icon: IconHome,
-  },
-  {
-    name: 'Usuários',
-    uri: '/',
-    icon: IconUser,
-    submenu: [
-      {
-        name: 'Profissionais',
-        uri: '/medical-worker',
-        icon: IconUser,
-      },
-      {
-        name: 'Ocupacação',
-        uri: '/occupation',
-        icon: IconUser,
-      },
-      {
-        name: 'Categorias de Ocupacação',
-        uri: '/occupation-category',
-        icon: IconUser,
-      },
-    ],
-  },
-  {
-    name: 'Business Intelligence',
-    uri: '/',
-    icon: IconDatabase,
-    submenu: [
-      {
-        name: 'Categories de Dashboards',
-        uri: '/dashboard-category',
-        icon: IconUser,
-      },
-    ],
-  },
-];
-
 export const CommonLayout: React.FC<Props> = ({ children, title }) => {
   const router = useRouter();
+  const [menu, setMenu] = useState<Menu[]>([]);
   const { isLoading, isError, currentData: currentUser } = useGetCurrentUserQuery();
+
+  useEffect(() => {
+    if (!!currentUser && currentUser.isAdmin) {
+      setMenu(menuAdmin);
+    }
+    setMenu(menuMedicalWorker);
+  }, [currentUser]);
 
   useEffect(() => {
     if (router.query.type !== undefined) {
