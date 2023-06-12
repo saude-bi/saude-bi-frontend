@@ -1,15 +1,17 @@
-import { TextInput, InputBase, Stack, Radio, Group } from '@mantine/core';
+import { TextInput, InputBase, Stack, Radio, Group, Select } from '@mantine/core';
 import { z } from 'zod';
 import { GenericForm } from '@/components/Common/Layout/FormLayout';
 import { IMaskInput } from 'react-imask';
 import { validateCNS, validateCPF } from '@/utils/validation';
+import { useEffect, useState } from 'react';
+import { useFindAllUsersQuery } from '@/store/user';
+import { useDebouncedState } from '@mantine/hooks';
 
 export const MedicalWorkerSchema = z.object({
   name: z
     .string({
       required_error: 'Campo nome da categoria é obrigatório',
-    })
-    .min(4, { message: 'O nome da categoria informado é muito curto' }),
+    }),
   user: z
     .string({
       required_error: 'Campo nome da usuário é obrigatório',
@@ -49,15 +51,36 @@ type Props<T> = {
 };
 
 export const MedicalWorkerInputs = <T,>({ disabled = false, form }: Props<T>) => {
+  const [search, setSearch] = useState('');
+  const [currentSearch, setCurrentSearch] = useDebouncedState(search, 250);
+
+  useEffect(() => {
+    setCurrentSearch(search);
+  }, [search]);
+
+  const { data } = useFindAllUsersQuery(
+    { page: 0, perPage: 1000, username: currentSearch },
+    { pollingInterval: 30000 }
+  );
+
+  const occupationCategoriesList =
+    data?.data.map((item) => ({
+      value: item.username,
+      label: item.username,
+    })) || [];
+
   return (
-    <Stack>
-      <TextInput
-        required
+    <Stack>    
+      <Select
         withAsterisk
         label="Usuário"
         placeholder="Selecione um usuário"
         {...form.getInputProps('user')}
+        data={occupationCategoriesList}
         disabled={disabled}
+        searchable
+        searchValue={search}
+        onSearchChange={setSearch}
       />
 
       <TextInput
