@@ -1,5 +1,9 @@
 import { Entity } from '@/types/common';
 import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from './common';
+import {
+  CreateEstablishmentDto,
+  UpdateEstablishmentDto
+} from "@/types/establishment";
 
 const endpoint = 'establishments';
 
@@ -18,12 +22,16 @@ export const { useFindAllEstablishmentsQuery } = injectFindAll<Establishment>(
   endpoint
 );
 
-export const { useCreateEstablishmentMutation } = injectCreate<Establishment>(
+export const { useCreateEstablishmentMutation } = injectCreate<
+  Establishment,
+  CreateEstablishmentDto>(
   'createEstablishment',
   endpoint
 );
 
-export const { useUpdateEstablishmentMutation } = injectUpdate<Establishment>(
+export const { useUpdateEstablishmentMutation } = injectUpdate<
+  Establishment,
+  UpdateEstablishmentDto>(
   'updateEstablishment',
   endpoint
 );
