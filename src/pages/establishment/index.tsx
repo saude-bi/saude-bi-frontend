@@ -8,7 +8,7 @@ import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
 import { DataTable } from '@/components/Common/DataTable/DataTable';
 import { Establishment } from '@/types/establishment';
 
-export default function Establishment() {
+export default function EstablishmentPage() {
   const columns = useMemo<MRT_ColumnDef<Establishment>[]>(
     () => [
       { accessorKey: 'name', header: 'Nome' },
