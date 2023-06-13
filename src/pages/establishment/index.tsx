@@ -6,6 +6,7 @@ import {
 } from '@/store/establishments';
 import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
 import { DataTable } from '@/components/Common/DataTable/DataTable';
+import { Establishment } from '@/types/establishment';
 
 export default function Establishment() {
   const columns = useMemo<MRT_ColumnDef<Establishment>[]>(
