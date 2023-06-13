@@ -29,9 +29,7 @@ export async function middleware(req: NextRequest) {
     const decodedJwt: DecodedJwt = jwt.decode(cookie.value) as DecodedJwt;
 
     if (isAdminRoute(pathname) && !decodedJwt.isAdmin) {
-      //return NextResponse.next();
-      //return NextResponse.redirect(new URL('/api/auth/unauthorized', req.url));
-      return NextResponse.json({ message: 'Acesso não Autorizado' }, { status: 401 })
+      return NextResponse.redirect(new URL('/auth/unauthorized', req.url));
     }
   }
   return NextResponse.next();
