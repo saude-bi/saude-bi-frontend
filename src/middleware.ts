@@ -22,7 +22,7 @@ export async function middleware(req: NextRequest) {
 
   if (!isPublicPage(pathname)) {
     if (cookie === undefined) {
-      req.nextUrl.pathname = "/login";
+      req.nextUrl.pathname = "/auth/login";
       return NextResponse.redirect(req.nextUrl);
     }
 
@@ -38,5 +38,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/:path*'],
+  matcher: "/((?!api|static|.*\\..*|_next).*)",
 };
