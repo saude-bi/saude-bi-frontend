@@ -18,22 +18,22 @@ export const menuAdmin: Menu[] = [
   },
   {
     name: 'Usuários',
-    uri: '/',
+    uri: 'javascript:void(0)',
     icon: IconUser,
     submenu: [
       {
         name: 'Profissionais',
-        uri: '/medical-worker',
+        uri: '/admin/medical-worker',
         icon: IconUser,
       },
       {
         name: 'Ocupacação',
-        uri: '/occupation',
+        uri: '/admin/occupation',
         icon: IconSchool,
       },
       {
         name: 'Categorias de Ocupacação',
-        uri: '/occupation-category',
+        uri: '/admin/occupation-category',
         icon: IconCategory2,
       },
     ],
@@ -45,19 +45,19 @@ export const menuAdmin: Menu[] = [
     submenu: [
       {
         name: 'Estabelecimentos',
-        uri: '/establishment',
+        uri: '/admin/establishment',
         icon: IconBuildingHospital,
       },
     ],
   },
   {
     name: 'Business Intelligence',
-    uri: '/',
+    uri: 'javascript:void(0)',
     icon: IconDatabase,
     submenu: [
       {
         name: 'Categories de Dashboards',
-        uri: '/dashboard-category',
+        uri: '/admin/dashboard-category',
         icon: IconCategory,
       },
     ],
