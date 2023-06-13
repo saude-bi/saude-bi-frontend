@@ -1,5 +1,14 @@
 import { Menu } from '@/components/Drawer/DrawerMenu';
-import { IconDatabase, IconHome, IconUser } from '@tabler/icons-react';
+import {
+  IconBuildingHospital,
+  IconCategory,
+  IconCategory2,
+  IconDatabase,
+  IconHome,
+  IconSchool,
+  IconServerCog,
+  IconUser,
+} from '@tabler/icons-react';
 
 export const menuAdmin: Menu[] = [
   {
@@ -20,12 +29,24 @@ export const menuAdmin: Menu[] = [
       {
         name: 'Ocupacação',
         uri: '/occupation',
-        icon: IconUser,
+        icon: IconSchool,
       },
       {
         name: 'Categorias de Ocupacação',
         uri: '/occupation-category',
-        icon: IconUser,
+        icon: IconCategory2,
+      },
+    ],
+  },
+  {
+    name: 'Gestão de Locais',
+    uri: '/',
+    icon: IconServerCog,
+    submenu: [
+      {
+        name: 'Estabelecimentos',
+        uri: '/establishment',
+        icon: IconBuildingHospital,
       },
     ],
   },
@@ -37,7 +58,7 @@ export const menuAdmin: Menu[] = [
       {
         name: 'Categories de Dashboards',
         uri: '/dashboard-category',
-        icon: IconUser,
+        icon: IconCategory,
       },
     ],
   },

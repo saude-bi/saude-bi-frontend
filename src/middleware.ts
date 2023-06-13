@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const isUserRoute = (pathname: string) => {
-    return pathname.startsWith('/occupation');
-}
+  return pathname.startsWith('/occupation');
+};
 
 export async function middleware(req: NextRequest) {
-  const role = req.headers.get("authorization");
+  const role = req.headers.get('authorization');
   const { pathname } = req.nextUrl;
   console.log('teste middleware');
   console.log(req.headers);
@@ -19,5 +19,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/occupation/:path*', '/medical-worker/:path*']
+  matcher: ['/occupation/:path*', '/medical-worker/:path*'],
 };

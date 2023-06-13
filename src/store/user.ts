@@ -11,7 +11,10 @@ const endpoint = 'users';
 
 export const { useFindUserQuery } = injectFindById<User>('findUser', endpoint);
 
-export const { useFindAllUsersQuery } = injectFindAll<User, { username?: string }>('findAllUsers', endpoint);
+export const { useFindAllUsersQuery } = injectFindAll<User, { username?: string }>(
+  'findAllUsers',
+  endpoint
+);
 
 export const { useCreateUserMutation } = injectCreate<User, CreateUserDto>('createUser', endpoint);
 

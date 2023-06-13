@@ -8,30 +8,28 @@ import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import { EstablishmentInputs } from '@/components/Forms/establishment';
 
 export default function EstablishmentPage() {
-    const router = useRouter();
-    const { slug } = router.query;
-    const id = parseInt(slug as string, 10);
+  const router = useRouter();
+  const { slug } = router.query;
+  const id = parseInt(slug as string, 10);
 
-    const { data, isSuccess, isError, isLoading } = useFindEstablishmentQuery(
-        slug ? id : skipToken
-    );
+  const { data, isSuccess, isError, isLoading } = useFindEstablishmentQuery(slug ? id : skipToken);
 
-    const form = useForm<UpdateEstablishmentDto>({});
+  const form = useForm<UpdateEstablishmentDto>({});
 
-    useEffect(() => {
-        if (isSuccess) {
-            form.setValues(data);
-        }
-    }, [isSuccess]);
+  useEffect(() => {
+    if (isSuccess) {
+      form.setValues(data);
+    }
+  }, [isSuccess]);
 
-    return (
-        <FormLayout
-          title="Dashboard de Estabelecimentos"
-          useRemoveMutation={useRemoveEstablishmentMutation}
-          type="preview"
-          FormInputs={EstablishmentInputs<UpdateEstablishmentDto>}
-          form={form}
-          id={id}
-        />
-    );
+  return (
+    <FormLayout
+      title="Dashboard de Estabelecimentos"
+      useRemoveMutation={useRemoveEstablishmentMutation}
+      type="preview"
+      FormInputs={EstablishmentInputs<UpdateEstablishmentDto>}
+      form={form}
+      id={id}
+    />
+  );
 }

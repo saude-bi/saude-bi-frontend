@@ -8,10 +8,9 @@ import { useFindAllUsersQuery } from '@/store/user';
 import { useDebouncedState } from '@mantine/hooks';
 
 export const MedicalWorkerSchema = z.object({
-  name: z
-    .string({
-      required_error: 'Campo nome da categoria é obrigatório',
-    }),
+  name: z.string({
+    required_error: 'Campo nome da categoria é obrigatório',
+  }),
   user: z
     .string({
       required_error: 'Campo nome da usuário é obrigatório',
@@ -70,7 +69,7 @@ export const MedicalWorkerInputs = <T,>({ disabled = false, form }: Props<T>) =>
     })) || [];
 
   return (
-    <Stack>    
+    <Stack>
       <Select
         withAsterisk
         label="Usuário"
