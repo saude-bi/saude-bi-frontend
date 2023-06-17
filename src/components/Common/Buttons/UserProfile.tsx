@@ -8,7 +8,7 @@ import {
   IconSwitchHorizontal,
   IconUser,
 } from '@tabler/icons-react';
-import { logout } from '@/store/auth';
+import { logoutUser } from '@/store/auth';
 import { useRouter } from 'next/router';
 
 type Props = {
@@ -41,7 +41,7 @@ export const UserProfile: React.FC<Props> = ({ user }) => {
   const [userMenuOpened, setUserMenuOpened] = useState(false);
 
   const handleLogout = () => {
-    logout();
+    logoutUser();
     router.push('/auth/login');
   };
 

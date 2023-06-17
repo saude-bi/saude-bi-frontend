@@ -24,7 +24,7 @@ export const authApi = baseApi.injectEndpoints({
           setCookie('token', data.access_token);
         } catch (err) {
           console.error(err);
-          logout();
+          logoutUser();
         }
       },
     }),
@@ -33,7 +33,7 @@ export const authApi = baseApi.injectEndpoints({
 });
 
 export const { useGetCurrentUserQuery, useLoginMutation } = authApi;
-export const logout = () => {
+export const logoutUser = () => {
   deleteCookie('token');
   authApi.util.resetApiState();
 };
