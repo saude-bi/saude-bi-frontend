@@ -15,48 +15,12 @@ import { menuAdmin, menuMedicalWorker } from '@/utils/menu-role';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { User } from '@/types/user';
 
-type AuthRequest = {
-  currentUser: User;
-};
-
-type Repo = {
-  name: string
-  stargazers_count: number
-  menu: Menu[]
-}
-
-export const getServerSideProps: GetServerSideProps<{
-  repo?: Repo,
-  menu: Menu[]
-}> = async () => {
-  console.log('teste');
-  const { isLoading, isError, currentData: currentUser } = useGetCurrentUserQuery();
-  const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  const repo = await res.json()
-  let menu: Menu[] = [];
-  if (!!currentUser && currentUser.isAdmin) {
-    menu = menuAdmin;
-  } else {
-    menu = menuMedicalWorker;
-  }
-  if (isError) {
-    return {
-      redirect: {
-        destination: '/auth/login',
-        permanent: false,
-      },
-    };
-  }
-  return { props: { repo, menu } }
-}
-
 type Props = {
   children: React.ReactNode;
   title: string;
-  serverProps: InferGetServerSidePropsType<typeof getServerSideProps>;
 };
 
-export const CommonLayout: React.FC<Props> = ({ children, title, ...props }) => {
+export const CommonLayout: React.FC<Props> = ({ children, title }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -65,20 +29,12 @@ export const CommonLayout: React.FC<Props> = ({ children, title, ...props }) => 
     }
   }, [router.query]);
 
-  useEffect(() => {
-    console.log(props);
-  }, [props]);
-
   return (
     <Box bg="gray.2">
       <Flex sx={{ minHeight: '100vh', minWidth: '100vw' }}>
-        <Center p="xl">
-          <Drawer menu={props.menu} />
-        </Center>
         <Stack sx={{ flexGrow: 1 }} px="xl" py="md">
           <Flex align="center" justify="space-between">
             <PageTitle title={title} />
-            
           </Flex>
           {children}
         </Stack>
