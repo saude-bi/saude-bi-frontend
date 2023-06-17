@@ -5,7 +5,7 @@ const isAdminRoute = (pathname: string) => {
   return pathname.startsWith('/admin');
 };
 
-const isPublicPage = (pathname: string) => {
+export const isPublicPage = (pathname: string) => {
   return pathname.startsWith('/auth');
 };
 
@@ -17,12 +17,12 @@ interface DecodedJwt {
 }
 
 export async function middleware(req: NextRequest) {
-  const cookie = req.cookies.get("token");
+  const cookie = req.cookies.get('token');
   const { pathname } = req.nextUrl;
 
   if (!isPublicPage(pathname)) {
     if (cookie === undefined) {
-      req.nextUrl.pathname = "/auth/login";
+      req.nextUrl.pathname = '/auth/login';
       return NextResponse.redirect(req.nextUrl);
     }
 
@@ -36,5 +36,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: "/((?!api|static|.*\\..*|_next).*)",
+  matcher: '/((?!api|static|.*\\..*|_next).*)',
 };
