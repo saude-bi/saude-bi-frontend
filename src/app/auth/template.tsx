@@ -1,5 +1,5 @@
 'use client';
 
-export default function Template({ children }: { children: JSX.Element }) {
+export default function Template({ children }: { children: React.ReactNode }) {
   return children;
 }
