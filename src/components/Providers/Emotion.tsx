@@ -9,8 +9,9 @@ import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
 import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
 import { CommonLayout } from '../Common/Layout/CommonLayout';
+import React from 'react';
 
-export default function EmotionProvider({ children }: { children: JSX.Element }) {
+export default function EmotionProvider({ children }: { children: React.ReactNode }) {
   const cache = useGluedEmotionCache();
   return (
     <CacheProvider value={cache}>
@@ -25,7 +26,7 @@ export default function EmotionProvider({ children }: { children: JSX.Element })
           <ApiProvider api={baseApi}>
             <AuthProvider>
               <ProtectRoute>
-                <CommonLayout title="Dashboards">{children}</CommonLayout>
+                {children}
                 <Notifications position="top-center" autoClose={5000} />
               </ProtectRoute>
             </AuthProvider>
