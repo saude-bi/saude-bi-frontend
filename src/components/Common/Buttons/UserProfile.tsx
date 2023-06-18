@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Stack, Text, Group, Menu, UnstyledButton, Avatar, createStyles, rem } from '@mantine/core';
 import { User } from '@/types/user';
@@ -9,7 +11,7 @@ import {
   IconUser,
 } from '@tabler/icons-react';
 import { logoutUser } from '@/store/auth';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   user: User;

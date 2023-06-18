@@ -1,8 +1,10 @@
+'use client';
+
 import React, { Children, useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
 import { User } from '@/types/user';
 import { logoutUser, useGetCurrentUserQuery } from '@/store/auth';
-import { CookieValueTypes, getCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 import { isPublicPage } from '@/middleware';
 import { LoadingOverlay } from '@mantine/core';
 
@@ -23,6 +25,7 @@ const AuthContext = React.createContext(
 export const AuthProvider: React.FC<Props> = ({ children }) => {
   const { isLoading, isError, currentData: currentUser } = useGetCurrentUserQuery();
   const router = useRouter();
+  const pathname = usePathname();
   const isAuthenticated = !!currentUser;
 
   const logout = (redirectLocation = '/auth/login') => {
@@ -40,7 +43,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     // If it doesn't require auth, everything's good.
-    if (isPublicPage(router.pathname)) return;
+    if (isPublicPage(pathname)) return;
 
     // If we're already authenticated, everything's good.
     if (isAuthenticated) return;

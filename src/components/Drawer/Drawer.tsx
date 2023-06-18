@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Stack, Title } from '@mantine/core';
 import { ContentCard } from '../Common/ContentCard/ContentCard';
 import { DrawerMenu, Menu, MenuItem } from '@/components/Drawer/DrawerMenu';
