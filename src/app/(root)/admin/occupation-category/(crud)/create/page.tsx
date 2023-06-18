@@ -1,3 +1,5 @@
+'use client';
+
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React from 'react';
 import { CreateOccupationCategoryDto } from '@/types/occupation-category';
@@ -6,12 +8,9 @@ import {
   OccupationCategoryInputs,
   OccupationCategorySchema,
 } from '@/components/Forms/occupation-category';
-import { useRouter } from 'next/router';
 import { useCreateOccupationCategoryMutation } from '@/store/occupation-categories';
 
 export default function OccupationCategories() {
-  const router = useRouter();
-
   const form = useForm<CreateOccupationCategoryDto>({
     initialValues: {
       name: '',
