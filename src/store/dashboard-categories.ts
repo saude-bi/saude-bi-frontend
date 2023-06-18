@@ -5,7 +5,7 @@ import {
   UpdateDashboardCategoryDto,
 } from '@/types/dashboard-category';
 
-const endpoint = 'category';
+const endpoint = 'dashboard-categories';
 
 export const { useFindDashboardCategoryQuery } = injectFindById<DashboardCategory>(
   'findDashboardCategory',
