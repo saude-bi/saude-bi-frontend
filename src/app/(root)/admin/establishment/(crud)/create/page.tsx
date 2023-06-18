@@ -1,10 +1,12 @@
+'use client';
+
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React from 'react';
 import { CreateEstablishmentDto } from '@/types/establishment';
 import { useForm, zodResolver } from '@mantine/form';
 import { EstablishmentInputs, EstablishmentSchema } from '@/components/Forms/establishment';
 import { useCreateEstablishmentMutation } from '@/store/establishments';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function EstablishmentPage() {
   const router = useRouter();

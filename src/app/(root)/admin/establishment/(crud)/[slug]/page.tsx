@@ -1,4 +1,5 @@
-import { useRouter } from 'next/router';
+'use client';
+
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useForm } from '@mantine/form';
 import { useEffect } from 'react';
@@ -6,10 +7,10 @@ import { UpdateEstablishmentDto } from '@/types/establishment';
 import { useFindEstablishmentQuery, useRemoveEstablishmentMutation } from '@/store/establishments';
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import { EstablishmentInputs } from '@/components/Forms/establishment';
+import { useParams } from 'next/navigation';
 
 export default function EstablishmentPage() {
-  const router = useRouter();
-  const { slug } = router.query;
+  const { slug } = useParams();
   const id = parseInt(slug as string, 10);
 
   const { data, isSuccess, isError, isLoading } = useFindEstablishmentQuery(slug ? id : skipToken);
