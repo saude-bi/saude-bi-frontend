@@ -1,15 +1,16 @@
+'use client';
+
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React, { useEffect } from 'react';
 import { useForm, zodResolver } from '@mantine/form';
-import { useRouter } from 'next/router';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { UpdateMedicalWorkerDto } from '@/types/medical-worker';
 import { useFindMedicalWorkerQuery, useUpdateMedicalWorkerMutation } from '@/store/medical-worker';
 import { MedicalWorkerInputs, MedicalWorkerSchema } from '@/components/Forms/medical-worker';
+import { useParams } from 'next/navigation';
 
 export default function DashboardCategoriesPage() {
-  const router = useRouter();
-  const { slug } = router.query;
+  const { slug } = useParams();
   const id = parseInt(slug as string, 10);
 
   const { data, isSuccess, isError, isLoading } = useFindMedicalWorkerQuery(

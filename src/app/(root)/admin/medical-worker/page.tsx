@@ -1,6 +1,7 @@
+'use client';
+
 import { useMemo } from 'react';
 import { MRT_ColumnDef } from 'mantine-react-table';
-import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
 import { DataTable } from '@/components/Common/DataTable/DataTable';
 import {
   useFindAllMedicalWorkersQuery,
@@ -19,15 +20,13 @@ export default function MedicalWorkerPage() {
   );
 
   return (
-    <CommonLayout title="Cadastro de Profissionais">
-      <DataTable
-        useFindAllQuery={useFindAllMedicalWorkersQuery}
-        useRemoveMutation={useRemoveMedicalWorkerMutation}
-        columns={columns}
-        canCreate
-        canUpdate
-        canPreview
-      />
-    </CommonLayout>
+    <DataTable
+      useFindAllQuery={useFindAllMedicalWorkersQuery}
+      useRemoveMutation={useRemoveMedicalWorkerMutation}
+      columns={columns}
+      canCreate
+      canUpdate
+      canPreview
+    />
   );
 }
