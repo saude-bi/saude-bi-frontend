@@ -37,7 +37,7 @@ export const CommonLayout: React.FC<Props> = ({ children, title }) => {
   }, [currentUser]);
 
   useEffect(() => {
-    if (searchParams.get('type') !== undefined) {
+    if (searchParams.get('type') !== null) {
       ShowStateNotification({ ...searchParams.getAll } as BaseNotificationProps);
     }
   }, [searchParams]);

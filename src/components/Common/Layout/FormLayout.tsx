@@ -1,3 +1,5 @@
+'use client';
+
 import {
   ButtonBack,
   ButtonDelete,
@@ -5,17 +7,16 @@ import {
   ButtonSave,
 } from '@/components/Common/Buttons/Buttons';
 import { Grid, Stack, Text } from '@mantine/core';
-import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
 import { ContentCard } from '../ContentCard/ContentCard';
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
 import { UseForm } from '@mantine/form/lib/types';
 import {
   GenericCreateMutation,
   GenericRemoveMutation,
   GenericUpdateMutation,
 } from '@/store/common';
-import { getUpdatePath, routePushToPreviousPage } from '@/utils/routes';
+import { getPreviousPage, getUpdatePath } from '@/utils/routes';
 
 export type GenericForm<T> = ReturnType<UseForm<T>>;
 
@@ -31,39 +32,38 @@ type Props<T> = {
 
 export const FormLayout = <T,>({ title, form, FormInputs, ...props }: Props<T>) => {
   const router = useRouter();
-  const handleBack = () => routePushToPreviousPage(router);
+  const pathname = usePathname();
+
+  const handleBack = () => {
+    const previousPath = getPreviousPage(pathname);
+    router.push(previousPath);
+  };
 
   return (
-    <CommonLayout title={title}>
-      <Grid>
-        <Grid.Col span={3}>
-          <ContentCard>
-            <Stack>
-              <Text color="dark.3">Ações</Text>
-              {props.type === 'create' && (
-                <CreateAction form={form} useCreateMutation={props.useCreateMutation} />
-              )}
-              {props.type === 'update' && (
-                <UpdateAction
-                  id={props.id}
-                  form={form}
-                  useUpdateMutation={props.useUpdateMutation}
-                />
-              )}
-              {props.type === 'preview' && <PreviewAction {...props} />}
-              <ButtonBack onClick={handleBack} />
-            </Stack>
-          </ContentCard>
-        </Grid.Col>
-        <Grid.Col span={9}>
-          <ContentCard>
-            <form onSubmit={form.onSubmit(() => {})}>
-              <FormInputs disabled={props.type === 'preview'} form={form} />
-            </form>
-          </ContentCard>
-        </Grid.Col>
-      </Grid>
-    </CommonLayout>
+    <Grid>
+      <Grid.Col span={3}>
+        <ContentCard>
+          <Stack>
+            <Text color="dark.3">Ações</Text>
+            {props.type === 'create' && (
+              <CreateAction form={form} useCreateMutation={props.useCreateMutation} />
+            )}
+            {props.type === 'update' && (
+              <UpdateAction id={props.id} form={form} useUpdateMutation={props.useUpdateMutation} />
+            )}
+            {props.type === 'preview' && <PreviewAction {...props} />}
+            <ButtonBack onClick={handleBack} />
+          </Stack>
+        </ContentCard>
+      </Grid.Col>
+      <Grid.Col span={9}>
+        <ContentCard>
+          <form onSubmit={form.onSubmit(() => {})}>
+            <FormInputs disabled={props.type === 'preview'} form={form} />
+          </form>
+        </ContentCard>
+      </Grid.Col>
+    </Grid>
   );
 };
 
@@ -74,22 +74,27 @@ type PropsPreviewActions = {
 
 const PreviewAction = ({ id, useRemoveMutation }: PropsPreviewActions) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [remove, { isSuccess }] = useRemoveMutation();
   const onDelete = () => remove(id);
 
   useEffect(() => {
     if (isSuccess) {
-      routePushToPreviousPage(router, {
-        title: 'Item deletado com sucesso',
-        message: 'O item foi removido da base de dados.',
-        type: 'success',
+      const previousPath = getPreviousPage(pathname);
+      router.push(previousPath, {
+        pathname: previousPath,
+        query: {
+          title: 'Item deletado com sucesso',
+          message: 'O item foi removido da base de dados.',
+          type: 'success',
+        },
       });
     }
   }, [isSuccess]);
 
   return (
     <>
-      <ButtonEdit href={getUpdatePath(router.asPath)} />
+      <ButtonEdit href={getUpdatePath(pathname)} />
       <ButtonDelete onDelete={onDelete} />
     </>
   );
@@ -102,6 +107,7 @@ interface PropsCreateAction<T> {
 
 const CreateAction = <T,>({ form, useCreateMutation }: PropsCreateAction<T>) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [save, { isSuccess }] = useCreateMutation();
 
   const onSave = () => {
@@ -112,10 +118,14 @@ const CreateAction = <T,>({ form, useCreateMutation }: PropsCreateAction<T>) => 
 
   useEffect(() => {
     if (isSuccess) {
-      routePushToPreviousPage(router, {
-        title: 'Item cadastrado com sucesso',
-        message: 'O item foi cadastrado na base de dados.',
-        type: 'success',
+      const previousPath = getPreviousPage(pathname);
+      router.push(previousPath, {
+        pathname: previousPath,
+        query: {
+          title: 'Item cadastrado com sucesso',
+          message: 'O item foi cadastrado na base de dados.',
+          type: 'success',
+        },
       });
     }
   }, [isSuccess]);
@@ -131,6 +141,7 @@ interface PropsUpdateAction<T> {
 
 const UpdateAction = <T,>({ id, form, useUpdateMutation }: PropsUpdateAction<T>) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [update, { isSuccess }] = useUpdateMutation();
 
   const onSave = () => {
@@ -141,10 +152,14 @@ const UpdateAction = <T,>({ id, form, useUpdateMutation }: PropsUpdateAction<T>)
 
   useEffect(() => {
     if (isSuccess) {
-      routePushToPreviousPage(router, {
-        title: 'Item atualizado com sucesso',
-        message: 'O item foi atualizado.',
-        type: 'success',
+      const previousPath = getPreviousPage(pathname);
+      router.push(previousPath, {
+        pathname: previousPath,
+        query: {
+          title: 'Item atualizado com sucesso',
+          message: 'O item foi atualizado.',
+          type: 'success',
+        },
       });
     }
   }, [isSuccess]);
