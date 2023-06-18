@@ -1,3 +1,5 @@
+'use client';
+
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React from 'react';
 import { CreateDashboardCategoryDto } from '@/types/dashboard-category';
@@ -7,11 +9,8 @@ import {
   DashboardCategorySchema,
 } from '@/components/Forms/dashboard-category';
 import { useCreateDashboardCategoryMutation } from '@/store/dashboard-categories';
-import { useRouter } from 'next/router';
 
-export default function DashboardCategoriesPage() {
-  const router = useRouter();
-
+export default function DashboardCategoriesCreatePage() {
   const form = useForm<CreateDashboardCategoryDto>({
     initialValues: {
       name: '',
