@@ -1,4 +1,5 @@
 'use client';
+
 import { AuthProvider, ProtectRoute } from '@/context/auth';
 import { useGluedEmotionCache } from '@/lib/emotionNextjsGlue';
 import { baseApi } from '@/store/api';
@@ -8,7 +9,6 @@ import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
 import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
-import { CommonLayout } from '../Common/Layout/CommonLayout';
 import React from 'react';
 
 export default function EmotionProvider({ children }: { children: React.ReactNode }) {
