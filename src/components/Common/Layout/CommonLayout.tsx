@@ -1,5 +1,7 @@
-import { use, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+'use client';
+
+import { useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Box, Center, Flex, LoadingOverlay, Stack } from '@mantine/core';
 import { useGetCurrentUserQuery } from '@/store/auth';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
@@ -12,6 +14,7 @@ import {
 } from '@/components/Common/Feedback/Notifications';
 import { Menu } from '@/components/Drawer/DrawerMenu';
 import { menuAdmin, menuMedicalWorker } from '@/utils/menu-role';
+import { isPublicPage } from '@/middleware';
 
 type Props = {
   children: React.ReactNode;
@@ -20,6 +23,8 @@ type Props = {
 
 export const CommonLayout: React.FC<Props> = ({ children, title }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [menu, setMenu] = useState<Menu[]>([]);
   const { isLoading, isError, currentData: currentUser } = useGetCurrentUserQuery();
 
@@ -31,14 +36,14 @@ export const CommonLayout: React.FC<Props> = ({ children, title }) => {
     }
   }, [currentUser]);
 
-  /*useEffect(() => {
-    if (router.query.type !== undefined) {
-      ShowStateNotification({ ...router.query } as BaseNotificationProps);
+  useEffect(() => {
+    if (searchParams.get('type') !== undefined) {
+      ShowStateNotification({ ...searchParams.getAll } as BaseNotificationProps);
     }
-  }, [router.query]);*/
+  }, [searchParams]);
 
   useEffect(() => {
-    if (isError) {
+    if (isError && !isPublicPage(pathname)) {
       router.push('/auth/login');
     }
   }, [isError]);
