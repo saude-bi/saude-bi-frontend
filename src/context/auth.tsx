@@ -30,7 +30,6 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 
   const logout = (redirectLocation = '/auth/login') => {
     logoutUser();
-    console.log('Redirecting');
     router.push(redirectLocation);
   };
 
@@ -76,19 +75,16 @@ export const ProtectRoute = ({ children }: any) => {
   const { isAuthenticated, isLoading } = useAuth();
   const [isPageLoading, setPageIsLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    console.log('tentando carregar');
-    // Show loading while page is not ready
-    if (!router.isReady) return;
-
     // Show loading if we're not authenticated and we're not on a public page
-    if (!isPublicPage(router.pathname) && !isAuthenticated) return;
+    if (!isPublicPage(pathname) && !isAuthenticated) return;
 
     setPageIsLoading(false);
-  }, [router, isLoading]);
+  }, [isLoading]);
 
-  if (isLoading) {
+  if (isPageLoading) {
     return <LoadingOverlay visible={isPageLoading} />;
   }
   return children;
