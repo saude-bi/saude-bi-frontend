@@ -1,3 +1,5 @@
+'use client';
+
 import { createStyles, Title, Text, Button, Container, Group, rem } from '@mantine/core';
 import Link from 'next/link';
 
@@ -39,7 +41,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function NotFoundPage() {
+export default function NotFound() {
   const { classes } = useStyles();
 
   return (
@@ -47,8 +49,8 @@ export default function NotFoundPage() {
       <div className={classes.label}>404</div>
       <Title className={classes.title}>Página não encontrada</Title>
       <Text color="dimmed" size="lg" align="center" className={classes.description}>
-        Infelizmente não conseguimos encontrar a página que você tentou acessar,
-        verifique o endereço digitado ou volte para página inicial
+        Infelizmente não conseguimos encontrar a página que você tentou acessar, verifique o
+        endereço digitado ou volte para página inicial
       </Text>
       <Group position="center">
         <Link href="/">
