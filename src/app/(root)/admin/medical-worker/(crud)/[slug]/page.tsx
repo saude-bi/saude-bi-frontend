@@ -8,6 +8,7 @@ import { useFindMedicalWorkerQuery, useRemoveMedicalWorkerMutation } from '@/sto
 import { UpdateMedicalWorkerDto } from '@/types/medical-worker';
 import { MedicalWorkerInputs } from '@/components/Forms/medical-worker';
 import { useParams } from 'next/navigation';
+import { MedicalWorkerUpdateInputs } from '@/components/Forms/medical-worker-update';
 
 export default function DashboardCategoriesPage() {
   const { slug } = useParams();
@@ -23,11 +24,15 @@ export default function DashboardCategoriesPage() {
     if (isSuccess) {
       form.setValues({
         // TODO: Fix username not being found on query
-        user: data.user.username,
+        user: {
+          username: data.user.username,
+          hasAccess: data.user.username.length > 0
+        },
         name: data.name,
         gender: data.gender,
         cns: data.cns,
         cpf: data.cpf,
+        workRelations: data.workRelations
       });
     }
   }, [isSuccess]);
@@ -37,7 +42,7 @@ export default function DashboardCategoriesPage() {
       title="Profissional de Saúde"
       useRemoveMutation={useRemoveMedicalWorkerMutation}
       type="preview"
-      FormInputs={MedicalWorkerInputs<UpdateMedicalWorkerDto>}
+      FormInputs={MedicalWorkerUpdateInputs<UpdateMedicalWorkerDto>}
       form={form}
       id={id}
     />

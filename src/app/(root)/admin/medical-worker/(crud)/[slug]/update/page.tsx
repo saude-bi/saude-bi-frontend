@@ -24,6 +24,7 @@ export default function DashboardCategoriesPage() {
       gender: '',
       cns: '',
       cpf: '',
+      workRelations: []
     },
     validate: zodResolver(MedicalWorkerSchema),
     validateInputOnChange: true,
