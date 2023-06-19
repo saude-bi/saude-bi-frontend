@@ -1,22 +1,59 @@
-import { TextInput, InputBase, Stack, Radio, Group, Select } from '@mantine/core';
+import {
+  TextInput,
+  InputBase,
+  Stack,
+  Radio,
+  Group,
+  Select,
+  Switch,
+  PasswordInput,
+} from '@mantine/core';
 import { z } from 'zod';
 import { GenericForm } from '@/components/Common/Layout/FormLayout';
 import { IMaskInput } from 'react-imask';
 import { validateCNS, validateCPF } from '@/utils/validation';
 import { useEffect, useState } from 'react';
 import { useFindAllUsersQuery } from '@/store/user';
-import { useDebouncedState } from '@mantine/hooks';
+import { useDebouncedState, useDisclosure } from '@mantine/hooks';
 
 export const MedicalWorkerSchema = z.object({
-  name: z.string({
-    required_error: 'Campo nome da categoria é obrigatório',
-  }),
-  user: z
+  name: z
     .string({
-      required_error: 'Campo nome da usuário é obrigatório',
+      required_error: 'Campo nome da categoria é obrigatório',
     })
-    .min(4, { message: 'O nome de usuário informado é muito curto' }),
-  gender: z.enum(['F', 'M'], {
+    .nonempty({
+      message: 'Campo nome da categoria é obrigatório',
+    }),
+  user: z
+    .object({
+      username: z
+        .string({
+          required_error: 'Campo nome da usuário é obrigatório',
+        })
+        .nonempty({
+          message: 'Campo nome da usuário é obrigatório',
+        })
+        .min(4, { message: 'O nome de usuário informado é muito curto' }),
+      password: z
+        .string({
+          required_error: 'Campo senha é obrigatório',
+        })
+        .nonempty({
+          message: 'Campo senha é obrigatório',
+        }),
+      confirmPassword: z
+        .string({
+          required_error: 'Campo senha é obrigatório',
+        })
+        .nonempty({
+          message: 'Campo senha é obrigatório',
+        }),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: 'As senhas informadas não coincidem',
+      path: ['confirmPassword'],
+    }),
+  gender: z.enum(['Female', 'Male'], {
     errorMap: (issue, _ctx) => {
       switch (issue.code) {
         case 'invalid_type':
@@ -50,7 +87,9 @@ type Props<T> = {
 };
 
 export const MedicalWorkerInputs = <T,>({ disabled = false, form }: Props<T>) => {
+  const [access, setAccess] = useState(false);
   const [search, setSearch] = useState('');
+  const [visible, { toggle }] = useDisclosure(false);
   const [currentSearch, setCurrentSearch] = useDebouncedState(search, 250);
 
   useEffect(() => {
@@ -70,18 +109,6 @@ export const MedicalWorkerInputs = <T,>({ disabled = false, form }: Props<T>) =>
 
   return (
     <Stack>
-      <Select
-        withAsterisk
-        label="Usuário"
-        placeholder="Selecione um usuário"
-        {...form.getInputProps('user')}
-        data={occupationCategoriesList}
-        disabled={disabled}
-        searchable
-        searchValue={search}
-        onSearchChange={setSearch}
-      />
-
       <TextInput
         required
         withAsterisk
@@ -94,8 +121,8 @@ export const MedicalWorkerInputs = <T,>({ disabled = false, form }: Props<T>) =>
       <Stack spacing={2}>
         <Radio.Group label="Sexo" {...form.getInputProps('gender')} withAsterisk>
           <Group mt="xs">
-            <Radio value="F" label="Feminino" />
-            <Radio value="M" label="Masculino" />
+            <Radio value="Female" label="Feminino" />
+            <Radio value="Male" label="Masculino" />
           </Group>
         </Radio.Group>
       </Stack>
@@ -119,6 +146,40 @@ export const MedicalWorkerInputs = <T,>({ disabled = false, form }: Props<T>) =>
         {...form.getInputProps('cns')}
         disabled={disabled}
       />
+
+      <Switch
+        label="Acesso ao sistema?"
+        onChange={(event) => setAccess(event.currentTarget.checked)}
+      />
+
+      {access === true && (
+        <>
+          <TextInput
+            required
+            withAsterisk
+            label="Usuário"
+            placeholder="Usuário de acesso ao sistema"
+            {...form.getInputProps('user.username')}
+            disabled={disabled}
+          />
+
+          <PasswordInput
+            label="Senha"
+            placeholder="Informe uma senha"
+            {...form.getInputProps('user.password')}
+            visible={visible}
+            onVisibilityChange={toggle}
+          />
+
+          <PasswordInput
+            label="Confirmar Senha"
+            placeholder="Digite novamente a senha"
+            {...form.getInputProps('user.confirmPassword')}
+            visible={visible}
+            onVisibilityChange={toggle}
+          />
+        </>
+      )}
     </Stack>
   );
 };

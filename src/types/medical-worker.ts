@@ -10,7 +10,11 @@ export interface MedicalWorker extends Entity {
 }
 
 export type CreateMedicalWorkerDto = {
-  user: string;
+  user: {
+    username: string;
+    password: string;
+    confirmPassword: string;
+  };
   name: string;
   gender: string;
   cns: string;

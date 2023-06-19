@@ -10,7 +10,11 @@ import { MedicalWorkerInputs, MedicalWorkerSchema } from '@/components/Forms/med
 export default function CreateMedicalWorkerPage() {
   const form = useForm<CreateMedicalWorkerDto>({
     initialValues: {
-      user: '',
+      user: {
+        username: '',
+        password: '',
+        confirmPassword: '',
+      },
       name: '',
       gender: '',
       cns: '',
