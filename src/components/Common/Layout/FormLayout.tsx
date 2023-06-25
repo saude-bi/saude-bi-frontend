@@ -153,8 +153,12 @@ const UpdateAction = <T,>({ id, form, useUpdateMutation }: PropsUpdateAction<T>)
   useEffect(() => {
     if (isSuccess) {
       const previousPath = getPreviousPage(pathname);
-      router.push(previousPath, {
+      // HACK: Refresh the page to update the data, because nexjs BUG
+      // more info https://github.com/vercel/next.js/issues/49300
+      router.refresh();
+      router.replace(previousPath, {
         pathname: previousPath,
+        shalow: false,
         query: {
           title: 'Item atualizado com sucesso',
           message: 'O item foi atualizado.',
