@@ -3,10 +3,12 @@ import {
   IconBuildingHospital,
   IconCategory,
   IconCategory2,
+  IconDashboard,
   IconDatabase,
   IconHome,
   IconSchool,
   IconServerCog,
+  IconSourceCode,
   IconUser,
 } from '@tabler/icons-react';
 
@@ -56,9 +58,19 @@ export const menuAdmin: Menu[] = [
     icon: IconDatabase,
     submenu: [
       {
+        name: 'Dashboards',
+        uri: '/admin/dashboard',
+        icon: IconDashboard,
+      },
+      {
         name: 'Categories de Dashboards',
         uri: '/admin/dashboard-category',
         icon: IconCategory,
+      },
+      {
+        name: 'Fonte de Dados',
+        uri: '/admin/data-source',
+        icon: IconSourceCode,
       },
     ],
   },
