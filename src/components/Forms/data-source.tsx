@@ -4,7 +4,19 @@ import { GenericForm } from '@/components/Common/Layout/FormLayout';
 
 export const DataSourceSchema = z.object({
   name: z.string({
-    required_error: 'Campo nome e Obrigatorio',
+    required_error: 'Campo Nome e Obrigatorio',
+  }).nonempty({
+    message: 'Campo Nome é obrigatório',
+  }),
+  url: z.string({
+    required_error: 'Campo Url e Obrigatorio',
+  }).url({
+    message: 'Campo URL precisa ser valido',
+  }),
+  secret: z.string({
+    required_error: 'Campo Codigo e Obrigatorio',
+  }).nonempty({
+    message: 'Campo Codigo é obrigatório',
   }),
 });
 
@@ -31,17 +43,10 @@ export const DataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => (
       />
       <TextInput
         withAsterisk
-        label="Login"
-        placeholder="Login"
-        {...form.getInputProps('credentials.login')}
-        disabled={disabled}
-      />
-      <TextInput
-        withAsterisk
-        label="Senha"
-        placeholder="Senha"
+        label="Codigo"
+        placeholder="Codigo"
         type="password"
-        {...form.getInputProps('credentials.password')}
+        {...form.getInputProps('secret')}
         disabled={disabled}
       />
     </Box>

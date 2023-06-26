@@ -1,19 +1,31 @@
-import { Entity } from '@/types/common';
-import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from './common';
+import {
+  injectFindById,
+  injectRemove,
+  injectFindAll,
+  injectUpdate,
+  injectCreate,
+} from '@/store/common';
 
-const endpoint = 'dashboard';
+import { Dashboard, CreateDashboardDto, UpdateDashboardDto } from "@/types/dashboards"
 
-interface Dashboard extends Entity {}
+const endpoint = 'dashboards';
+
 
 export const { useFindDashboardQuery } = injectFindById<Dashboard>('findDashboard', endpoint);
 
-export const { useFindAllDashboardsQuery } = injectFindAll<Dashboard>(
-  'findAllDashboards',
+export const { useFindAllDashboardQuery } = injectFindAll<Dashboard>(
+  'findAllDashboard',
   endpoint
 );
 
-export const { useCreateDashboardMutation } = injectCreate<Dashboard>('createDashboard', endpoint);
+export const { useCreateDashboardMutation } = injectCreate<Dashboard, CreateDashboardDto>(
+  'createDashboard',
+  endpoint
+);
 
-export const { useUpdateDashboardMutation } = injectUpdate<Dashboard>('updateDashboard', endpoint);
+export const { useUpdateDashboardMutation } = injectUpdate<Dashboard, UpdateDashboardDto>(
+  'updateDashboard',
+  endpoint
+);
 
 export const { useRemoveDashboardMutation } = injectRemove('removeDashboard', endpoint);

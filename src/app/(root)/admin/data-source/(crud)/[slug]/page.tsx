@@ -26,7 +26,7 @@ export default function DataSource() {
 
   return (
     <FormLayout
-      title="Dashboard de DataSource"
+      title="Fonte dos Dados"
       useRemoveMutation={useRemoveEstablishmentMutation}
       type="preview"
       FormInputs={DataSourceInputs<UpdateDataSourceDto>}
