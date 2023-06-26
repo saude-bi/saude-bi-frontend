@@ -34,6 +34,22 @@ export const injectFindById = <T extends Entity>(name: string, endpoint: string)
   return entityApi;
 };
 
+export const injectFindByIdChild = <T extends Entity, U = {}>(name: string, endpoint: string) => {
+  const entityApi = baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
+    endpoints: (build) => ({
+      [name]: build.query<T, { id: number; params: U }>({
+        query: ({ id, params }) => ({
+          url: endpoint.replace('[slug]', id.toString()),
+          params: params || undefined,
+        }),
+        providesTags: (_, __, { id }) => [{ type: endpoint, id }],
+      }),
+    }),
+  });
+
+  return entityApi;
+};
+
 export type GenericFindAllQuery<T extends Entity> = UseQuery<
   QueryDefinition<
     void | PaginationQuery,
