@@ -3,62 +3,80 @@
 import { useEffect } from 'react';
 import { useFindAllDashboardQuery } from '@/store/dashboards';
 import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
+import { Center, Flex, Group, SimpleGrid, Stack, Text, Title } from '@mantine/core';
 import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
-import { Group, Stack, Text, Title } from '@mantine/core';
-import Link from 'next/link';
 import { FilterSelector } from '@/components/FilterSelector/FilterSelector';
+import Link from 'next/link';
+import { IconDashboard, IconMap } from '@tabler/icons-react';
 
 type Props = {
+  type: 'dashboard' | 'map';
   title: string;
-  text: string;
   href: string;
 };
 
-const AccessCard: React.FC<Props> = ({ title, text, href }) => {
+const DashboardCard: React.FC<Props> = ({ title, type, href }) => {
   return (
     <Link href={href} style={{ textDecoration: 'none' }}>
-      <ContentCard>
-        <Stack spacing={'sm'}>
-          <Text fz="sm" fw={500}>
-            {title}
-          </Text>
-          <Text component="p" sx={{ margin: 0 }}>
-            {text}
-          </Text>
-        </Stack>
+      <ContentCard h={90}>
+        <Flex h="100%">
+          <Group spacing={'sm'} noWrap align="center">
+            {type === 'dashboard' && <IconDashboard size={24} />}
+            {type === 'map' && <IconMap size={24} />}
+            <Text fz="sm" fw={500}>
+              {title}
+            </Text>
+          </Group>
+        </Flex>
       </ContentCard>
     </Link>
   );
 };
 
 export default function Home() {
-  const { currentData: dashboards } = useFindAllDashboardQuery();
-
-  useEffect(() => {
-    console.log(dashboards);
-  }, [dashboards]);
-
   return (
     <Stack>
       <ContentCard>
         <Stack align="center" justify="center">
           <Text>Filtrar por Diretoria:</Text>
           <FilterSelector
-            options={['DIAT', 'DIAC', 'DIES', 'DIFC', 'DIRS', 'DIVS', 'DIEC']}
+            options={[
+              'Previne Brasil',
+              'Saúde da Mulher',
+              'Saúde da Criança ',
+              'Saúde da Familia',
+              'Gerencial',
+            ]}
             setSelectedOption={() => {}}
           />
         </Stack>
       </ContentCard>
       <Stack>
-        <Title order={4}>Selecione o acesso que deseja utilizar:</Title>
-        <Group>
-          <AccessCard title="Núcleo de Saúde AKLP" text="CBO - Enfermeiro" href="dashboards" />
-          <AccessCard
-            title="Núcleo de Saúde AKLP"
-            text="CBO - Gerente de Serviços em Saúde"
-            href="dashboards"
+        <Title order={4}>Previne Brasil:</Title>
+        <SimpleGrid
+          cols={3}
+          breakpoints={[
+            { maxWidth: 'md', cols: 2, spacing: 'md' },
+            { maxWidth: 'sm', cols: 1, spacing: 'sm' },
+            { maxWidth: 'xs', cols: 1, spacing: 'sm' },
+          ]}
+        >
+          <DashboardCard
+            type="map"
+            title="Gestantes sem cartão SUS informado"
+            href="dashboards/1"
           />
-        </Group>
+          <DashboardCard
+            type="dashboard"
+            title="Agendamentos Sem Pedido de Eletrocardiograma - Hospital Madre de Dio"
+            href="dashboard/1"
+          />
+          <DashboardCard
+            type="map"
+            title="Agendamentos Sem Pedido de Eletrocardiograma - Hospital Madre de Dio"
+            href="dashboard/2"
+          />
+        </SimpleGrid>
       </Stack>
     </Stack>
   );

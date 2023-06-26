@@ -130,7 +130,7 @@ export const MedicalWorkerUpdateInputs = <T,>({ disabled = false, form }: Props<
   const { slug } = useParams();
   const id = parseInt(slug as string, 10);
 
-  const { classes, theme } = useStyles();
+  const { classes } = useStyles();
   const [opened, { open, close }] = useDisclosure(false);
 
   const onDelete = (idItem: number) => {
@@ -205,9 +205,9 @@ export const MedicalWorkerUpdateInputs = <T,>({ disabled = false, form }: Props<
           <>
             <Card withBorder radius="md" className={classes.card}>
               <Group position="apart">
-                <Text className={classes.title}>Services</Text>
+                <Text className={classes.title}>Vínculos de Trabalho</Text>
                 <Anchor onClick={open} size="xs" color="dimmed" sx={{ lineHeight: 1 }}>
-                  + 21 other services
+                  Vincular
                 </Anchor>
               </Group>
               <SimpleGrid
