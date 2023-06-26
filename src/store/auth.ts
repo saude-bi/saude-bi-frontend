@@ -33,7 +33,13 @@ export const authApi = baseApi.injectEndpoints({
 });
 
 export const { useGetCurrentUserQuery, useLoginMutation } = authApi;
+
 export const logoutUser = () => {
   deleteCookie('token');
+  switchWorkRelation();
   authApi.util.resetApiState();
+};
+
+export const switchWorkRelation = () => {
+  deleteCookie('workRelation');
 };

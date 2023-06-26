@@ -5,6 +5,10 @@ const isAdminRoute = (pathname: string) => {
   return pathname.startsWith('/admin');
 };
 
+const isSwitchRoute = (pathname: string) => {
+  return pathname.startsWith('/switch-work');
+};
+
 export const isPublicPage = (pathname: string) => {
   return pathname.startsWith('/auth');
 };
@@ -24,6 +28,15 @@ export async function middleware(req: NextRequest) {
     if (cookie === undefined) {
       req.nextUrl.pathname = '/auth/login';
       return NextResponse.redirect(req.nextUrl);
+    }
+
+    if (!isSwitchRoute(pathname) && !isAdminRoute(pathname)) {
+      const workRelation = req.cookies.get('workRelation');
+
+      if (workRelation === undefined) {
+        req.nextUrl.pathname = '/switch-work';
+        return NextResponse.redirect(req.nextUrl);
+      }
     }
 
     const decodedJwt: DecodedJwt = jwt.decode(cookie.value) as DecodedJwt;

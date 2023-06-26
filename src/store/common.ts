@@ -19,6 +19,8 @@ export type GenericFindByIdQuery<T extends Entity> = UseQuery<
   >
 >;
 
+type InjectOptions = { addTagTypes: string[]; invalidatesTags: [{ type: string; id?: string }] };
+
 export const injectFindById = <T extends Entity>(name: string, endpoint: string) => {
   const entityApi = baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
     endpoints: (build) => ({
@@ -80,20 +82,26 @@ export const injectCreate = <T extends Entity, U = Partial<T>>(name: string, end
 
 export const injectCreateChild = <T extends Entity, U = Partial<T>>(
   name: string,
-  endpoint: string
+  endpoint: string,
+  options?: InjectOptions
 ) => {
-  return baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
-    endpoints: (build) => ({
-      [name]: build.mutation<T, { id: number; body: U }>({
-        query: ({ id, body }) => ({
-          url: endpoint.replace('[slug]', id.toString()),
-          body,
-          method: 'POST',
+  return baseApi
+    .enhanceEndpoints({ addTagTypes: [endpoint, ...(options?.addTagTypes || [])] })
+    .injectEndpoints({
+      endpoints: (build) => ({
+        [name]: build.mutation<T, { id: number; body: U }>({
+          query: ({ id, body }) => ({
+            url: endpoint.replace('[slug]', id.toString()),
+            body,
+            method: 'POST',
+          }),
+          invalidatesTags: () => [
+            { type: endpoint, id: 'PAGE' },
+            ...(options?.invalidatesTags || []),
+          ],
         }),
-        invalidatesTags: () => [{ type: endpoint, id: 'PAGE' }],
       }),
-    }),
-  });
+    });
 };
 
 export type GenericUpdateMutation<T extends Entity, U = Partial<T>> = UseMutation<
@@ -139,19 +147,22 @@ export const injectRemove = (name: string, endpoint: string) => {
   });
 };
 
-export const injectRemoveChild = (name: string, endpoint: string) => {
-  return baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
-    endpoints: (build) => ({
-      [name]: build.mutation<null, { idDomain: number; idChild: number }>({
-        query: ({ idDomain, idChild }) => ({
-          url: endpoint.replace('[slug]', idDomain.toString()) + '/' + idChild,
-          method: 'DELETE',
+export const injectRemoveChild = (name: string, endpoint: string, options?: InjectOptions) => {
+  return baseApi
+    .enhanceEndpoints({ addTagTypes: [endpoint, ...(options?.addTagTypes || [])] })
+    .injectEndpoints({
+      endpoints: (build) => ({
+        [name]: build.mutation<null, { idDomain: number; idChild: number }>({
+          query: ({ idDomain, idChild }) => ({
+            url: endpoint.replace('[slug]', idDomain.toString()) + '/' + idChild,
+            method: 'DELETE',
+          }),
+          invalidatesTags: (_, __, { idChild }) => [
+            { type: endpoint, id: idChild },
+            { type: endpoint, id: 'PAGE' },
+            ...(options?.invalidatesTags || []),
+          ],
         }),
-        invalidatesTags: (_, __, { idChild }) => [
-          { type: endpoint, id: idChild },
-          { type: endpoint, id: 'PAGE' },
-        ],
       }),
-    }),
-  });
+    });
 };
