@@ -6,7 +6,7 @@ const endpoint = 'occupations';
 
 export const { useFindOccupationQuery } = injectFindById<Occupation>('findOccupation', endpoint);
 
-export const { useFindAllOccupationsQuery } = injectFindAll<Occupation>(
+export const { useFindAllOccupationsQuery } = injectFindAll<Occupation, { name?: string }>(
   'findAllOccupations',
   endpoint
 );

@@ -1,17 +1,11 @@
-import {
-  injectCreate,
-  injectRemove,
-} from '@/store/common';
-import {
-  CreateWorkRelationDto,
-  MedicalWorker,
-} from '@/types/medical-worker';
+import { injectCreate, injectCreateChild, injectRemove, injectRemoveChild } from '@/store/common';
+import { CreateWorkRelationDto, MedicalWorker, WorkRelation } from '@/types/medical-worker';
 
-const endpoint = 'medical-workers';
+const endpoint = 'medical-workers/[slug]/work-relations';
 
-export const { useCreateWorkRelationMutation } = injectCreate<
+export const { useCreateWorkRelationMutation } = injectCreateChild<
   MedicalWorker,
   CreateWorkRelationDto
 >('createWorkRelation', endpoint);
 
-export const { useRemoveWorkRelationMutation } = injectRemove('removeWorkRelation', endpoint);
+export const { useRemoveWorkRelationMutation } = injectRemoveChild('removeWorkRelation', endpoint);

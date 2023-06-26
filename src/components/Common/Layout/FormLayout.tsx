@@ -24,13 +24,14 @@ type Props<T> = {
   title: string;
   form: GenericForm<T>;
   FormInputs: React.FC<{ disabled: boolean; form: GenericForm<T> }>;
+  extraButtons?: React.ReactNode;
 } & (
   | (PropsPreviewActions & { type: 'preview' })
   | (PropsCreateAction<T> & { type: 'create' })
   | (PropsUpdateAction<T> & { type: 'update' })
 );
 
-export const FormLayout = <T,>({ title, form, FormInputs, ...props }: Props<T>) => {
+export const FormLayout = <T,>({ title, form, FormInputs, extraButtons, ...props }: Props<T>) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -52,6 +53,7 @@ export const FormLayout = <T,>({ title, form, FormInputs, ...props }: Props<T>) 
               <UpdateAction id={props.id} form={form} useUpdateMutation={props.useUpdateMutation} />
             )}
             {props.type === 'preview' && <PreviewAction {...props} />}
+            {extraButtons}
             <ButtonBack onClick={handleBack} />
           </Stack>
         </ContentCard>

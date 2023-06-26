@@ -14,7 +14,7 @@ export const { useFindEstablishmentQuery } = injectFindById<Establishment>(
   endpoint
 );
 
-export const { useFindAllEstablishmentsQuery } = injectFindAll<Establishment>(
+export const { useFindAllEstablishmentsQuery } = injectFindAll<Establishment, { name?: string }>(
   'findAllEstablishments',
   endpoint
 );

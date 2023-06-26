@@ -78,6 +78,24 @@ export const injectCreate = <T extends Entity, U = Partial<T>>(name: string, end
   });
 };
 
+export const injectCreateChild = <T extends Entity, U = Partial<T>>(
+  name: string,
+  endpoint: string
+) => {
+  return baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
+    endpoints: (build) => ({
+      [name]: build.mutation<T, { id: number; body: U }>({
+        query: ({ id, body }) => ({
+          url: endpoint.replace('[slug]', id.toString()),
+          body,
+          method: 'POST',
+        }),
+        invalidatesTags: () => [{ type: endpoint, id: 'PAGE' }],
+      }),
+    }),
+  });
+};
+
 export type GenericUpdateMutation<T extends Entity, U = Partial<T>> = UseMutation<
   MutationDefinition<
     { id: number; body: U },
@@ -114,6 +132,23 @@ export const injectRemove = (name: string, endpoint: string) => {
         query: (id) => ({ url: endpoint + '/' + id, method: 'DELETE' }),
         invalidatesTags: (_, __, id) => [
           { type: endpoint, id },
+          { type: endpoint, id: 'PAGE' },
+        ],
+      }),
+    }),
+  });
+};
+
+export const injectRemoveChild = (name: string, endpoint: string) => {
+  return baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
+    endpoints: (build) => ({
+      [name]: build.mutation<null, { idDomain: number; idChild: number }>({
+        query: ({ idDomain, idChild }) => ({
+          url: endpoint.replace('[slug]', idDomain.toString()) + '/' + idChild,
+          method: 'DELETE',
+        }),
+        invalidatesTags: (_, __, { idChild }) => [
+          { type: endpoint, id: idChild },
           { type: endpoint, id: 'PAGE' },
         ],
       }),
