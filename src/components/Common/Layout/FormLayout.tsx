@@ -17,6 +17,7 @@ import {
   GenericUpdateMutation,
 } from '@/store/common';
 import { getPreviousPage, getUpdatePath } from '@/utils/routes';
+import {notifications} from "@mantine/notifications";
 
 export type GenericForm<T> = ReturnType<UseForm<T>>;
 
@@ -110,7 +111,7 @@ interface PropsCreateAction<T> {
 const CreateAction = <T,>({ form, useCreateMutation }: PropsCreateAction<T>) => {
   const router = useRouter();
   const pathname = usePathname();
-  const [save, { isSuccess }] = useCreateMutation();
+  const [save, { isSuccess, isError, data }] = useCreateMutation();
 
   const onSave = () => {
     if (!form.validate().hasErrors) {
@@ -131,6 +132,11 @@ const CreateAction = <T,>({ form, useCreateMutation }: PropsCreateAction<T>) => 
       });
     }
   }, [isSuccess]);
+  useEffect(() => {
+    if (isError) {
+      notifications.show({message: "Falha ao Salvar, Verifique os Campos"});
+    }
+  }, [isError]);
 
   return <ButtonSave onClick={onSave} />;
 };
@@ -144,7 +150,7 @@ interface PropsUpdateAction<T> {
 const UpdateAction = <T,>({ id, form, useUpdateMutation }: PropsUpdateAction<T>) => {
   const router = useRouter();
   const pathname = usePathname();
-  const [update, { isSuccess }] = useUpdateMutation();
+  const [update, { isSuccess, isError, data }] = useUpdateMutation();
 
   const onSave = () => {
     if (!form.validate().hasErrors) {
@@ -169,6 +175,10 @@ const UpdateAction = <T,>({ id, form, useUpdateMutation }: PropsUpdateAction<T>)
       });
     }
   }, [isSuccess]);
-
+  useEffect(() => {
+    if (isError) {
+      notifications.show({message: "Falha ao Salvar, Verifique os Campos"});
+    }
+  }, [isError]);
   return <ButtonSave onClick={onSave} />;
 };
