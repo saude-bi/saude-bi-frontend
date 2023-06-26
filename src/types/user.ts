@@ -1,8 +1,10 @@
 import { Entity } from './common';
+import { MedicalWorker } from './medical-worker';
 
 export interface User extends Entity {
   username: string;
   isAdmin: boolean;
+  medicalWorker?: MedicalWorker;
 }
 
 export type CreateUserDto = {
