@@ -1,12 +1,7 @@
 'use client';
 
-import {
-  ButtonBack,
-  ButtonDelete,
-  ButtonEdit,
-  ButtonSave,
-} from '@/components/Common/Buttons/Buttons';
-import { Grid, Stack, Text } from '@mantine/core';
+import { ButtonDelete, ButtonEdit, ButtonSave } from '@/components/Common/Buttons/Buttons';
+import { Button, Grid, Stack, Text } from '@mantine/core';
 import { ContentCard } from '../ContentCard/ContentCard';
 import React, { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -17,6 +12,7 @@ import {
   GenericUpdateMutation,
 } from '@/store/common';
 import { getPreviousPage, getUpdatePath } from '@/utils/routes';
+import { IconEye, IconList } from '@tabler/icons-react';
 
 export type GenericForm<T> = ReturnType<UseForm<T>>;
 
@@ -35,10 +31,9 @@ export const FormLayout = <T,>({ title, form, FormInputs, extraButtons, ...props
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleBack = () => {
-    const previousPath = getPreviousPage(pathname);
-    router.push(previousPath);
-  };
+  useEffect(() => {
+    console.log(pathname.split('/').slice(0, 4).join('/'));
+  }, [pathname]);
 
   return (
     <Grid>
@@ -54,7 +49,24 @@ export const FormLayout = <T,>({ title, form, FormInputs, extraButtons, ...props
             )}
             {props.type === 'preview' && <PreviewAction {...props} />}
             {extraButtons}
-            <ButtonBack onClick={handleBack} />
+            <Button
+              variant="outline"
+              color="primary"
+              leftIcon={<IconList size="1rem" />}
+              onClick={() => router.push(pathname.split('/').slice(0, 3).join('/'))}
+            >
+              Listar
+            </Button>
+            {props.type === 'update' && (
+              <Button
+                variant="outline"
+                color="primary"
+                leftIcon={<IconEye size="1rem" />}
+                onClick={() => router.push(pathname.split('/').slice(0, 4).join('/'))}
+              >
+                Visualizar
+              </Button>
+            )}
           </Stack>
         </ContentCard>
       </Grid.Col>
