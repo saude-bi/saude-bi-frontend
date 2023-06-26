@@ -31,17 +31,10 @@ export const DataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => (
       />
       <TextInput
         withAsterisk
-        label="Login"
-        placeholder="Login"
-        {...form.getInputProps('credentials.login')}
-        disabled={disabled}
-      />
-      <TextInput
-        withAsterisk
-        label="Senha"
-        placeholder="Senha"
+        label="Codigo"
+        placeholder="Codigo"
         type="password"
-        {...form.getInputProps('credentials.password')}
+        {...form.getInputProps('secret')}
         disabled={disabled}
       />
     </Box>

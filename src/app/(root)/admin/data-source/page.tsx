@@ -12,7 +12,6 @@ export default function DataSource() {
     () => [
       { accessorKey: 'name', header: 'Nome' },
       { accessorKey: 'url', header: 'URL' },
-      { accessorKey: 'credentials.login', header: 'Login' },
     ],
     []
   );

@@ -13,10 +13,7 @@ export default function DataSourcePage() {
     initialValues: {
       name: '',
       url: '',
-      credentials: {
-        login: '',
-        password: '',
-      },
+      secret: '',
     },
     validate: zodResolver(DataSourceSchema),
     validateInputOnChange: true,
@@ -24,7 +21,7 @@ export default function DataSourcePage() {
 
   return (
     <FormLayout
-      title="DataSource"
+      title="Fonte dos Dados"
       useCreateMutation={useCreateDataSourceMutation}
       FormInputs={DataSourceInputs<CreateDataSourceDto>}
       form={form}
