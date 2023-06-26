@@ -10,7 +10,7 @@ import {
   IconSwitchHorizontal,
   IconUser,
 } from '@tabler/icons-react';
-import { logoutUser } from '@/store/auth';
+import { logoutUser, switchWorkRelation } from '@/store/auth';
 import { useRouter } from 'next/navigation';
 
 type Props = {
@@ -47,6 +47,11 @@ export const UserProfile: React.FC<Props> = ({ user }) => {
     router.push('/auth/login');
   };
 
+  const handleSwitchProfile = () => {
+    switchWorkRelation();
+    router.push('/switch-work');
+  };
+
   return (
     <Group spacing="lg">
       <Menu
@@ -81,7 +86,10 @@ export const UserProfile: React.FC<Props> = ({ user }) => {
           <Menu.Item icon={<IconSettings size="0.9rem" stroke={1.5} />}>
             Configurações da Conta
           </Menu.Item>
-          <Menu.Item icon={<IconSwitchHorizontal size="0.9rem" stroke={1.5} />}>
+          <Menu.Item
+            onClick={handleSwitchProfile}
+            icon={<IconSwitchHorizontal size="0.9rem" stroke={1.5} />}
+          >
             Trocar Perfil de Acesso
           </Menu.Item>
           <Menu.Item onClick={handleLogout} icon={<IconLogout size="0.9rem" stroke={1.5} />}>
