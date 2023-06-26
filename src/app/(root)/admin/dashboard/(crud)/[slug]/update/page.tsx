@@ -3,8 +3,8 @@
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React, { useEffect } from 'react';
 import { UpdateDashboardDto } from '@/types/dashboards';
-import { useForm, zodResolver } from '@mantine/form';
-import { DashboardSchema, DashboardInputs } from '@/components/Forms/dashboard';
+import { useForm } from '@mantine/form';
+import { DashboardInputs } from '@/components/Forms/dashboard';
 import  {useUpdateDashboardMutation, useFindDashboardQuery} from "@/store/dashboards";
 
 import { skipToken } from '@reduxjs/toolkit/dist/query';
@@ -24,7 +24,9 @@ export default function DashboardPage() {
 
         if (isSuccess && establishmentsWithAccessListId) {
             console.log(data)
-            form.setValues({...data, establishmentsWithAccess: [...establishmentsWithAccessListId], dataSource: data.dataSource.id.toString(), category: data.category.id.toString()});
+            form.setValues({establishmentsWithAccess: [...establishmentsWithAccessListId], dataSource: data.dataSource.id.toString(), 
+                category: data.category.id.toString(),
+            establishmentPropertyName: data.establishmentPropertyName, metabaseId: data.metabaseId, name: data.name});
         }
     }, [isSuccess])
 

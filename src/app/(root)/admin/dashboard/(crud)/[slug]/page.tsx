@@ -18,12 +18,15 @@ export default function Dashboards() {
     useEffect(()=> {
 
         const establishmentsWithAccessListId = data?.establishmentsWithAccess.map((establishment: Establishment) => {
-            return establishment.id
+            return establishment.id.toString()
         })
 
         if (isSuccess && establishmentsWithAccessListId) {
             console.log(data)
-            form.setValues({...data, establishmentsWithAccess: [...establishmentsWithAccessListId], dataSource: data.dataSource.id, category: data.category.id});
+            form.setValues({ establishmentsWithAccess: [...establishmentsWithAccessListId], dataSource: data.dataSource.id.toString(), 
+                category: data.category.id.toString(),
+                establishmentPropertyName: data.establishmentPropertyName, metabaseId: data.metabaseId, name: data.name
+            });
         }
     }, [isSuccess])
 
