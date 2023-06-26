@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useFindAllDashboardsQuery } from '@/store/dashboards';
+import { useFindAllDashboardQuery } from '@/store/dashboards';
 import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
 import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
 import { Group, Stack, Text, Title } from '@mantine/core';
@@ -32,7 +32,7 @@ const AccessCard: React.FC<Props> = ({ title, text, href }) => {
 };
 
 export default function Home() {
-  const { currentData: dashboards } = useFindAllDashboardsQuery();
+  const { currentData: dashboards } = useFindAllDashboardQuery();
 
   useEffect(() => {
     console.log(dashboards);
