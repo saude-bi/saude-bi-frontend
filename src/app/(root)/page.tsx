@@ -34,6 +34,11 @@ const DashboardCard: React.FC<Props> = ({ title, type, href }) => {
 };
 
 export default function Home() {
+  const { data: dashboards } = useFindAllDashboardQuery(
+    { page: 0, perPage: 1000 },
+    { pollingInterval: 30000 }
+  );
+
   return (
     <Stack>
       <ContentCard>
@@ -61,6 +66,16 @@ export default function Home() {
             { maxWidth: 'xs', cols: 1, spacing: 'sm' },
           ]}
         >
+          {dashboards &&
+            dashboards.data.map((dashboard) => (
+              <DashboardCard
+                key={dashboard.id}
+                type="dashboard"
+                title={dashboard.name}
+                href={`dashboard/${dashboard.id}`}
+              />
+            ))}
+
           <DashboardCard
             type="map"
             title="Gestantes sem cartão SUS informado"
