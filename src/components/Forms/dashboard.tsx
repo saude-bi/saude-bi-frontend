@@ -9,24 +9,7 @@ import { useDebouncedState } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 
 export const DashboardSchema = z.object({
-    establishmentsWithAccess: z.number({
-        required_error: "Campo obrigatorio"
-    }),
-    dataSource: z.number({
-        required_error: "Campo obrigatorio"
-    }),
-    category: z.number({
-        required_error: "Campo obrigatorio"
-    }),
-    metabaseId: z.number({
-        required_error: "Campo obrigatorio"
-    }),
-    name: z.number({
-        required_error: "Campo obrigatorio"
-    }),
-    establishmentPropertyName: z.string({
-        required_error: "Campo obrigatorio"
-    })
+   
 })
 
 
@@ -44,6 +27,18 @@ export const DashboardInputs = <T,>({ disabled = false, form }: Props<T>) => {
     const [currentSearchDataSource, setCurrentSearchDataSource] = useDebouncedState(searchDataSource, 250);
     const [currentSearchDashboardCategory, setCurrentSearchDashboardCategory] = useDebouncedState(searchDashboardCategory, 250);
     
+    useEffect(() => {
+        setSearchEstablishment(searchEstablishment);
+    }, [searchEstablishment]);
+
+    useEffect(() => {
+        setSearchDataSource(searchDataSource);
+    }, [searchDataSource]);
+
+    useEffect(() => {
+        setSearchDashboardCategory(searchDashboardCategory);
+    }, [searchDashboardCategory]);
+
     const { data: dataEstablishment } = useFindAllEstablishmentsQuery(
         { page: 0, perPage: 1000, name: currentSearchEstablishment },
         { pollingInterval: 30000 }
