@@ -66,10 +66,6 @@ export function OccupationCard({ idItem, title, icon, value, onDelete }: Occupat
       <Group align="flex-end" spacing="xs" mt={25}>
         <Text className={classes.value}>{value}</Text>
       </Group>
-
-      <Text fz="xs" c="dimmed" mt={7}>
-        Compared to previous month
-      </Text>
     </Paper>
   );
 }
