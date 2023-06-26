@@ -11,7 +11,7 @@ const endpoint = 'data-sources';
 
 export const { useFindDataSourceQuery } = injectFindById<DataSource>('findDataSource', endpoint);
 
-export const { useFindAllDataSourceQuery } = injectFindAll<DataSource>(
+export const { useFindAllDataSourceQuery } = injectFindAll<DataSource, { name?: string }>(
   'findAllDataSource',
   endpoint
 );
