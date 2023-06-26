@@ -2,14 +2,15 @@
 
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React, { useEffect } from 'react';
-import { useForm } from '@mantine/form';
-import { useFindDashboardQuery, useRemoveDashboardMutation } from '@/store/dashboards';
-import { skipToken } from '@reduxjs/toolkit/dist/query';
-import { DashboardInputs } from '@/components/Forms/dashboard';
 import { UpdateDashboardDto } from '@/types/dashboards';
+import { useForm, zodResolver } from '@mantine/form';
+import { DashboardSchema, DashboardInputs } from '@/components/Forms/dashboard';
+import  {useUpdateDashboardMutation, useFindDashboardQuery} from "@/store/dashboards";
+
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useParams } from 'next/navigation';
 import { Establishment } from '@/types/establishment';
-export default function Dashboards() {
+export default function DashboardPage() {
     const { slug } = useParams();
     const id = parseInt(slug as string, 10);
     const {data, isSuccess, isError, isLoading } = useFindDashboardQuery(!!slug ? id : skipToken);
@@ -18,20 +19,20 @@ export default function Dashboards() {
     useEffect(()=> {
 
         const establishmentsWithAccessListId = data?.establishmentsWithAccess.map((establishment: Establishment) => {
-            return establishment.id
+            return establishment.id.toString()
         })
 
         if (isSuccess && establishmentsWithAccessListId) {
             console.log(data)
-            form.setValues({...data, establishmentsWithAccess: [...establishmentsWithAccessListId], dataSource: data.dataSource.id, category: data.category.id});
+            form.setValues({...data, establishmentsWithAccess: [...establishmentsWithAccessListId], dataSource: data.dataSource.id.toString(), category: data.category.id.toString()});
         }
     }, [isSuccess])
 
     return (
         <FormLayout
             title="Dashboard"
-            useRemoveMutation={useRemoveDashboardMutation}
-            type="preview"
+            useUpdateMutation={useUpdateDashboardMutation}
+            type="update"
             FormInputs={DashboardInputs<UpdateDashboardDto>}
             form={form}
             id={id}
