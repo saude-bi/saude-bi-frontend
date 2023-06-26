@@ -28,15 +28,15 @@ export const DashboardInputs = <T,>({ disabled = false, form }: Props<T>) => {
     const [currentSearchDashboardCategory, setCurrentSearchDashboardCategory] = useDebouncedState(searchDashboardCategory, 250);
     
     useEffect(() => {
-        setSearchEstablishment(searchEstablishment);
+        setCurrentSearchEstablishment(searchEstablishment);
     }, [searchEstablishment]);
 
     useEffect(() => {
-        setSearchDataSource(searchDataSource);
+        setCurrentSearchDataSource(searchDataSource);
     }, [searchDataSource]);
 
     useEffect(() => {
-        setSearchDashboardCategory(searchDashboardCategory);
+        setCurrentSearchDashboardCategory(searchDashboardCategory);
     }, [searchDashboardCategory]);
 
     const { data: dataEstablishment } = useFindAllEstablishmentsQuery(
@@ -69,6 +69,7 @@ export const DashboardInputs = <T,>({ disabled = false, form }: Props<T>) => {
         label: item.name,
     })) || [];
     
+    console.log(form)
     return (
         <Box>
             <MultiSelect
