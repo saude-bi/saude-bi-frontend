@@ -45,6 +45,10 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(new URL('/auth/unauthorized', req.url));
     }
   }
+  if (isPublicPage(pathname) && cookie !== undefined) {
+    req.nextUrl.pathname = '/';
+    return NextResponse.redirect(req.nextUrl);
+  }
   return NextResponse.next();
 }
 
