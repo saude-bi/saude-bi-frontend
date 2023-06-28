@@ -30,7 +30,8 @@ export const LoginForm: React.FC<{}> = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push('/');
+      router.refresh();
+      router.push('/', { shallow: true });
     }
   }, [isSuccess]);
 
