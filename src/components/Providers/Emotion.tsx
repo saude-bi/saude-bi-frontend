@@ -1,6 +1,5 @@
 'use client';
 
-import { AuthProvider, ProtectRoute } from '@/context/auth';
 import { useGluedEmotionCache } from '@/lib/emotionNextjsGlue';
 import { baseApi } from '@/store/api';
 import { theme } from '@/utils/theme';
@@ -24,12 +23,8 @@ export default function EmotionProvider({ children }: { children: React.ReactNod
       >
         <ModalsProvider>
           <ApiProvider api={baseApi}>
-            <AuthProvider>
-              <ProtectRoute>
-                {children}
-                <Notifications position="top-center" autoClose={5000} />
-              </ProtectRoute>
-            </AuthProvider>
+            {children}
+            <Notifications position="top-center" autoClose={5000} />
           </ApiProvider>
         </ModalsProvider>
       </MantineProvider>
