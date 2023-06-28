@@ -2,7 +2,10 @@ import EmotionProvider from '@/components/Providers/Emotion';
 import React from 'react';
 
 export const metadata = {
-  title: 'Saúde BI',
+  title: {
+    default: 'Saúde BI',
+    template: '%s - Saúde BI',
+  },
   description: 'O sistema de gestão de BI para a área da saúde!',
 };
 
