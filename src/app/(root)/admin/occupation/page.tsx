@@ -9,9 +9,9 @@ import { DataTable } from '@/components/Common/DataTable/DataTable';
 export default function Occupations() {
   const columns = useMemo<MRT_ColumnDef<Occupation>[]>(
     () => [
+      { accessorKey: 'id', header: 'Identificador' },
       { accessorKey: 'name', header: 'Nome' },
-      { accessorKey: 'created', header: 'Data de Criacao' },
-      { accessorKey: 'updated', header: 'Data de Atualizacao' },
+      { accessorKey: 'cbo', header: 'CBO' },
       { accessorKey: 'category.name', header: 'Nome da Categoria' },
     ],
     []
