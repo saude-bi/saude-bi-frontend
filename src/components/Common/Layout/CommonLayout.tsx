@@ -17,12 +17,11 @@ import { useAuth } from '@/context/auth';
 
 type Props = {
   children: React.ReactNode;
-  title: string;
 };
 
-export const CommonLayout: React.FC<Props> = ({ children, title }) => {
+export const CommonLayout: React.FC<Props> = ({ children }) => {
   const router = useRouter();
-  const { isAuthenticated, currentUser, menu, isLoading } = useAuth();
+  const { isAuthenticated, menu, isLoading } = useAuth();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
@@ -48,10 +47,6 @@ export const CommonLayout: React.FC<Props> = ({ children, title }) => {
             <Drawer menu={menu} />
           </Center>
           <Stack sx={{ flexGrow: 1 }} px="xl" py="md">
-            <Flex align="center" justify="space-between">
-              <PageTitle title={title} />
-              <UserProfile user={!!currentUser ? currentUser : {} as User} />
-            </Flex>
             {children}
           </Stack>
         </Flex>
