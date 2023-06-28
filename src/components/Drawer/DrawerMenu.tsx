@@ -26,6 +26,7 @@ export interface Menu extends MenuItem {
 
 type Props = {
   menu: Menu;
+  active: string;
 };
 
 const useStyles = createStyles((theme) => ({
@@ -41,6 +42,10 @@ const useStyles = createStyles((theme) => ({
     '&:active': theme.activeStyles,
   },
 
+  sublinkActive: {
+    color: 'red',
+  }
+
   hiddenMobile: {
     [theme.fn.smallerThan('sm')]: {
       display: 'none',
@@ -54,13 +59,13 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export const DrawerMenu: React.FC<Props> = ({ menu }) => {
-  const { classes, theme } = useStyles();
+export const DrawerMenu: React.FC<Props> = ({ menu, active }) => {
+  const { classes, theme, } = useStyles();
 
   const submenus = (menu: MenuItem[]) =>
     menu.map((item) => (
       <Link href={item.uri} key={item.name}>
-        <UnstyledButton className={classes.subLink} key={item.name}>
+        <UnstyledButton className={cx(classes.subLink, { [classes.sublinkActive]: item.name === active})} key={item.name}>
           <Group noWrap align="center">
             <ThemeIcon size={34} variant="default" radius="md">
               <item.icon size={rem(22)} color={theme.fn.primaryColor()} />

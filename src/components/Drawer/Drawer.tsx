@@ -1,17 +1,24 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { Stack, Title } from '@mantine/core';
 import { ContentCard } from '../Common/ContentCard/ContentCard';
 import { DrawerMenu, Menu, MenuItem } from '@/components/Drawer/DrawerMenu';
+import { usePathname } from 'next/navigation';
 
 type Props = {
   menu: Menu[];
 };
 
 export const Drawer: React.FC<Props> = ({ menu }) => {
-  const router = useRouter();
+  const [active, setActive] = React.useState<string>('');
+  const pathname = usePathname();
+
+  React.useEffect(() => {
+    const path = pathname.split('/')[1];
+    setActive('Profissionais');
+  }, [pathname]);
+
 
   return (
     <ContentCard bg="indigo.4" h="100%">
@@ -19,7 +26,7 @@ export const Drawer: React.FC<Props> = ({ menu }) => {
         <Title color="white">SBI</Title>
         <Stack sx={{ flexGrow: 1 }} align="center" justify="center" spacing="xl">
           {menu.map((item) => (
-            <DrawerMenu menu={item} key={item.name} />
+            <DrawerMenu menu={item} key={item.name} active={active} />
           ))}
         </Stack>
       </Stack>
