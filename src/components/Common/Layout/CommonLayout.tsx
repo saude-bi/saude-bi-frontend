@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Box, Center, Flex, LoadingOverlay, Stack } from '@mantine/core';
-import { useGetCurrentUserQuery } from '@/store/auth';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
 import { Drawer } from '@/components/Drawer/Drawer';
 import { UserProfile } from '@/components/Common/Buttons/UserProfile';
@@ -12,9 +11,9 @@ import {
   BaseNotificationProps,
   ShowStateNotification,
 } from '@/components/Common/Feedback/Notifications';
-import { Menu } from '@/components/Drawer/DrawerMenu';
-import { menuAdmin, menuMedicalWorker } from '@/utils/menu-role';
+import { User } from '@/types/user';
 import { isPublicPage } from '@/middleware';
+import { useAuth } from '@/context/auth';
 
 type Props = {
   children: React.ReactNode;
@@ -23,18 +22,9 @@ type Props = {
 
 export const CommonLayout: React.FC<Props> = ({ children, title }) => {
   const router = useRouter();
+  const { isAuthenticated, currentUser, menu, isLoading } = useAuth();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const [menu, setMenu] = useState<Menu[]>([]);
-  const { isLoading, isError, currentData: currentUser } = useGetCurrentUserQuery();
-
-  useEffect(() => {
-    if (!!currentUser && currentUser.isAdmin) {
-      setMenu(menuAdmin);
-    } else {
-      setMenu(menuMedicalWorker);
-    }
-  }, [currentUser]);
 
   useEffect(() => {
     if (searchParams.get('type') !== null) {
@@ -43,14 +33,14 @@ export const CommonLayout: React.FC<Props> = ({ children, title }) => {
   }, [searchParams]);
 
   useEffect(() => {
-    if (isError && !isPublicPage(pathname)) {
+    if (!isLoading && !isAuthenticated && !isPublicPage(pathname)) {
       router.push('/auth/login');
     }
-  }, [isError]);
+  }, [isAuthenticated, isLoading]);
 
   return (
     <Box bg="gray.2">
-      {isLoading || isError ? (
+      {isLoading ? (
         <LoadingOverlay visible />
       ) : (
         <Flex sx={{ minHeight: '100vh', minWidth: '100vw' }}>
@@ -60,7 +50,7 @@ export const CommonLayout: React.FC<Props> = ({ children, title }) => {
           <Stack sx={{ flexGrow: 1 }} px="xl" py="md">
             <Flex align="center" justify="space-between">
               <PageTitle title={title} />
-              <UserProfile user={currentUser!} />
+              <UserProfile user={!!currentUser ? currentUser : {} as User} />
             </Flex>
             {children}
           </Stack>

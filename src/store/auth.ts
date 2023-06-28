@@ -21,7 +21,9 @@ export const authApi = baseApi.injectEndpoints({
       onQueryStarted: async (_, { queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled;
-          setCookie('token', data.access_token);
+          if (data) {
+            setCookie('token', data.access_token);
+          }
         } catch (err) {
           console.error(err);
           logoutUser();

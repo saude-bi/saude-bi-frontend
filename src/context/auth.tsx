@@ -7,6 +7,8 @@ import { logoutUser, useGetCurrentUserQuery } from '@/store/auth';
 import { getCookie } from 'cookies-next';
 import { isPublicPage } from '@/middleware';
 import { LoadingOverlay } from '@mantine/core';
+import { menuAdmin, menuMedicalWorker } from '@/utils/menu-role';
+import { Menu } from '@/components/Drawer/DrawerMenu';
 
 type Props = {
   children: React.ReactNode;
@@ -16,6 +18,7 @@ const AuthContext = React.createContext(
   {} as {
     currentUser: User | undefined;
     logout: (redirectLocation?: string) => void;
+    menu: Menu[];
     isLoading: boolean;
     isAuthenticated: boolean;
     token: string | undefined;
@@ -27,6 +30,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const router = useRouter();
   const pathname = usePathname();
   const isAuthenticated = !!currentUser;
+  const menu = !!currentUser && currentUser.isAdmin ? menuAdmin : menuMedicalWorker;
 
   const logout = (redirectLocation = '/auth/login') => {
     logoutUser();
@@ -59,6 +63,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       value={{
         currentUser,
         logout,
+        menu,
         isLoading,
         isAuthenticated: !!currentUser,
         token: getCookie('token')?.toString(),
