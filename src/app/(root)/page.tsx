@@ -1,9 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useFindAllDashboardQuery } from '@/store/dashboards';
-import { CommonLayout } from '@/components/Common/Layout/CommonLayout';
-import { Center, Flex, Group, SimpleGrid, Stack, Text, Title } from '@mantine/core';
+import { Flex, Group, SimpleGrid, Stack, Text, Title } from '@mantine/core';
 import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
 import { FilterSelector } from '@/components/FilterSelector/FilterSelector';
 import Link from 'next/link';
