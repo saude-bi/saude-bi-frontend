@@ -1,6 +1,7 @@
 import { Menu } from '@/components/Drawer/DrawerMenu';
 import {
   IconBuildingHospital,
+  IconBuildingWarehouse,
   IconCategory,
   IconCategory2,
   IconDashboard,
@@ -49,6 +50,11 @@ export const menuAdmin: Menu[] = [
         name: 'Estabelecimentos',
         uri: '/admin/establishment',
         icon: IconBuildingHospital,
+      },
+      {
+        name: 'Diretorias',
+        uri: '/admin/directorship',
+        icon: IconBuildingWarehouse,
       },
     ],
   },
