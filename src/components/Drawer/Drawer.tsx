@@ -5,6 +5,7 @@ import { Stack, Title } from '@mantine/core';
 import { ContentCard } from '../Common/ContentCard/ContentCard';
 import { DrawerMenu, Menu, MenuItem } from '@/components/Drawer/DrawerMenu';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/context/auth';
 
 type Props = {
   menu: Menu[];
@@ -15,10 +16,19 @@ export const Drawer: React.FC<Props> = ({ menu }) => {
   const pathname = usePathname();
 
   React.useEffect(() => {
-    const path = pathname.split('/')[1];
-    setActive('Profissionais');
+    let pathAdminFound = false;
+    menu?.map((item) => {
+      item?.submenu?.map((subitem) => {
+        if (pathname.includes(subitem.uri)) {
+          pathAdminFound = true;
+          setActive(item.name);
+        }
+      });
+    });
+    if (!pathAdminFound) {
+      setActive('Home');
+    }
   }, [pathname]);
-
 
   return (
     <ContentCard bg="indigo.4" h="100%">

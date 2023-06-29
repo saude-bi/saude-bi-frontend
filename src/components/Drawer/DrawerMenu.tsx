@@ -6,6 +6,7 @@ import {
   SimpleGrid,
   Text,
   ThemeIcon,
+  Tooltip,
   UnstyledButton,
   createStyles,
   rem,
@@ -42,9 +43,9 @@ const useStyles = createStyles((theme) => ({
     '&:active': theme.activeStyles,
   },
 
-  sublinkActive: {
-    color: 'red',
-  }
+  mainLinkActive: {
+    backgroundColor: theme.colors.indigo[6],
+  },
 
   hiddenMobile: {
     [theme.fn.smallerThan('sm')]: {
@@ -60,12 +61,12 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const DrawerMenu: React.FC<Props> = ({ menu, active }) => {
-  const { classes, theme, } = useStyles();
+  const { classes, theme, cx } = useStyles();
 
   const submenus = (menu: MenuItem[]) =>
     menu.map((item) => (
       <Link href={item.uri} key={item.name}>
-        <UnstyledButton className={cx(classes.subLink, { [classes.sublinkActive]: item.name === active})} key={item.name}>
+        <UnstyledButton className={cx(classes.subLink)} key={item.name}>
           <Group noWrap align="center">
             <ThemeIcon size={34} variant="default" radius="md">
               <item.icon size={rem(22)} color={theme.fn.primaryColor()} />
@@ -86,9 +87,22 @@ export const DrawerMenu: React.FC<Props> = ({ menu, active }) => {
   return menu.submenu?.length ? (
     <HoverCard width={300} position="right-start" radius="md" shadow="md" withinPortal>
       <HoverCard.Target>
-        <ActionIcon color="indigo.4" variant="filled" size={48}>
-          <menu.icon size="32px" />
-        </ActionIcon>
+        <Tooltip
+          label={menu.name}
+          position="top"
+          withArrow
+          transitionProps={{ duration: 0 }}
+          key={menu.name}
+        >
+          <ActionIcon
+            className={cx({ [classes.mainLinkActive]: menu.name === active })}
+            color="indigo.4"
+            variant="filled"
+            size={48}
+          >
+            <menu.icon size="32px" color="white" />
+          </ActionIcon>
+        </Tooltip>
       </HoverCard.Target>
 
       <HoverCard.Dropdown sx={{ overflow: 'hidden' }}>
@@ -105,9 +119,22 @@ export const DrawerMenu: React.FC<Props> = ({ menu, active }) => {
     </HoverCard>
   ) : (
     <Link href={menu.uri}>
-      <ActionIcon color="indigo.4" variant="filled" size={48}>
-        <menu.icon size="32px" />
-      </ActionIcon>
+      <Tooltip
+        label={menu.name}
+        position="top"
+        withArrow
+        transitionProps={{ duration: 0 }}
+        key={menu.name}
+      >
+        <ActionIcon
+          className={cx({ [classes.mainLinkActive]: menu.name === active })}
+          color="indigo.4"
+          variant="filled"
+          size={48}
+        >
+          <menu.icon size="32px" color="white" />
+        </ActionIcon>
+      </Tooltip>
     </Link>
   );
 };
