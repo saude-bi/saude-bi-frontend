@@ -19,7 +19,11 @@ export default function EstablishmentPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      form.setValues(data);
+      form.setValues({
+        name: data.name,
+        cnes: data.cnes,
+        directorship: data.directorship.id.toString(),
+      });
     }
   }, [isSuccess]);
 

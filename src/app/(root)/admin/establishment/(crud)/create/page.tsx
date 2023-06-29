@@ -15,9 +15,7 @@ export default function EstablishmentPage() {
     initialValues: {
       name: '',
       cnes: '',
-      directorship: {
-        id: -1,
-      },
+      directorship: '',
     },
     validate: zodResolver(EstablishmentSchema),
     validateInputOnChange: true,

@@ -12,6 +12,9 @@ export const EstablishmentSchema = z.object({
   cnes: z.string({
     required_error: 'Campo cnes do estabelecimento é obrigatório',
   }),
+  directorship: z.string({
+    required_error: 'Campo diretoria do estabelecimento é obrigatório',
+  }),
 });
 
 type Props<T> = {
@@ -60,7 +63,7 @@ export const EstablishmentInputs = <T,>({ disabled = false, form }: Props<T>) =>
         withAsterisk
         label="Diretoria"
         placeholder="Diretoria"
-        {...form.getInputProps('directorship.id')}
+        {...form.getInputProps('directorship')}
         data={directorshipList}
         disabled={disabled}
         searchable
