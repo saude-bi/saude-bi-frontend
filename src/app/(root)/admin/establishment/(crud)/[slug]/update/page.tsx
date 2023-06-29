@@ -19,6 +19,9 @@ export default function EstablishmentPage() {
     initialValues: {
       name: '',
       cnes: '',
+      directorship: {
+        id: -1,
+      },
     },
 
     validate: zodResolver(EstablishmentSchema),
@@ -30,6 +33,9 @@ export default function EstablishmentPage() {
       form.setValues({
         name: data.name,
         cnes: data.cnes,
+        directorship: {
+          id: data.directorship.id,
+        },
       });
     }
   }, [isSuccess]);
