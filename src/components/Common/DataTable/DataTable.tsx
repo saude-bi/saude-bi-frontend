@@ -31,6 +31,7 @@ export const DataTable = <T extends Entity>({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const pageModuleUrl = pathname.split('?')[0];
+  const [globalFilter, setGlobalFilter] = useState('');
 
   const [pagination, setPagination] = useState({
     pageIndex: searchParams.get('page') ? parseInt(searchParams.get('page') as string, 10) : 0,
@@ -48,7 +49,7 @@ export const DataTable = <T extends Entity>({
   }, [pagination]);
 
   const { isLoading, data } = useFindAllQuery(
-    { page: pagination.pageIndex, perPage: pagination.pageSize },
+    { page: pagination.pageIndex, perPage: pagination.pageSize, name: globalFilter },
     { pollingInterval: 1000 }
   );
 
@@ -68,7 +69,7 @@ export const DataTable = <T extends Entity>({
       initialState={{
         showGlobalFilter: true,
       }}
-      state={{ isLoading, pagination }}
+      state={{ isLoading, globalFilter, pagination }}
       renderToolbarInternalActions={() =>
         canCreate && <ButtonCreate href={getCreatePath(pageModuleUrl)}>NOVO</ButtonCreate>
       }
@@ -85,6 +86,7 @@ export const DataTable = <T extends Entity>({
           onRemove={remove}
         />
       )}
+      onGlobalFilterChange={setGlobalFilter}
     />
   );
 };

@@ -25,7 +25,10 @@ export const { useFindDashboardUrlQuery } = injectFindByIdChild<
   { workRelation: number }
 >('findDashboardUrl', endpointUrl);
 
-export const { useFindAllDashboardQuery } = injectFindAll<Dashboard>('findAllDashboard', endpoint);
+export const { useFindAllDashboardQuery } = injectFindAll<Dashboard, { name?: string }>(
+  'findAllDashboard',
+  endpoint
+);
 
 export const { useCreateDashboardMutation } = injectCreate<Dashboard, CreateDashboardDto>(
   'createDashboard',

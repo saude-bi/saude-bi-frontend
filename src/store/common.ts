@@ -50,9 +50,9 @@ export const injectFindByIdChild = <T extends Entity, U = {}>(name: string, endp
   return entityApi;
 };
 
-export type GenericFindAllQuery<T extends Entity> = UseQuery<
+export type GenericFindAllQuery<T extends Entity, U = { name?: string }> = UseQuery<
   QueryDefinition<
-    void | PaginationQuery,
+    void | (PaginationQuery & U),
     BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>,
     string,
     PaginatedResponse<T>
