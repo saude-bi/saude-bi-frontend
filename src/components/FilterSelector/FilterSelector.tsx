@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Chip, Group } from '@mantine/core';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 type Props = {
@@ -10,40 +10,30 @@ type Props = {
 
 export const FilterSelector: React.FC<Props> = ({ options, setSelectedOption }) => {
   const pathname = usePathname();
-  const [currentOption, setCurrentOption] = useState('todos');
+  const searchParam = useSearchParams();
+  const filter: string =
+    !!searchParam && searchParam.get('filter') !== null ? searchParam.get('filter')! : 'todos';
+  const [currentOption, setCurrentOption] = useState(filter);
 
   useEffect(() => {
     setSelectedOption(currentOption);
   }, [currentOption]);
 
   return (
-    <Chip.Group multiple={false} value={currentOption}  onChange={setCurrentOption}>
+    <Chip.Group multiple={false} value={currentOption} onChange={setCurrentOption}>
       <Group position="center">
-        <Link 
-          href={pathname + '?' + `filter=todos`}
-          onClick={() => (setCurrentOption('todos'))}
-        >
-          <Chip
-            color="teal"
-            radius="md"
-            value="todos"
-            wrapperProps={{ border: 'none' }}
-          >
+        <Link href={pathname + '?' + `filter=todos`} onClick={() => setCurrentOption('todos')}>
+          <Chip color="teal" radius="md" value="todos" wrapperProps={{ border: 'none' }}>
             Todos
           </Chip>
         </Link>
         {options.map((option, idx) => (
-          <Link 
+          <Link
             key={idx}
-            href={pathname + '?' + `filter=${option}`}               
-            onClick={() => (setCurrentOption(option))}
+            href={pathname + '?' + `filter=${option}`}
+            onClick={() => setCurrentOption(option)}
           >
-            <Chip
-              color="teal"
-              radius="md"
-              value={option}
-              wrapperProps={{ border: 'none' }}
-            >
+            <Chip color="teal" radius="md" value={option} wrapperProps={{ border: 'none' }}>
               {option}
             </Chip>
           </Link>

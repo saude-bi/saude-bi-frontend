@@ -5,27 +5,34 @@ import { Group, Title } from '@mantine/core';
 import { AccessCard } from './_components/access-card';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-
+import { WorkRelation } from '@/types/medical-worker';
 
 export const ClientSwitchWork: React.FC = () => {
   const searchParams = useSearchParams();
   const { currentData: currentUser, isLoading } = useGetCurrentUserQuery();
-  const [workRelations, setWorkRelations] = useState(currentUser?.medicalWorker?.workRelations);
+  const [workRelations, setWorkRelations] = useState<WorkRelation[]>();
 
-  useEffect(() => {
+  const updateWorkRelations = () => {
     if (searchParams.get('filter') !== 'todos') {
-      setWorkRelations(currentUser?.medicalWorker?.workRelations?.filter((workRelation) => 
-        workRelation.establishment?.directorship?.acronym === searchParams.get('filter'))
+      setWorkRelations(
+        currentUser?.medicalWorker?.workRelations?.filter(
+          (workRelation) =>
+            workRelation.establishment?.directorship?.acronym === searchParams.get('filter')
+        )
       );
     } else {
-      console.log(currentUser?.medicalWorker?.workRelations)
+      console.log(currentUser?.medicalWorker?.workRelations);
       setWorkRelations(currentUser?.medicalWorker?.workRelations);
     }
+  };
+
+  useEffect(() => {
+    updateWorkRelations();
   }, [searchParams]);
 
   useEffect(() => {
     if (!isLoading) {
-      setWorkRelations(currentUser?.medicalWorker?.workRelations);
+      updateWorkRelations();
     }
   }, [currentUser]);
 
@@ -44,4 +51,4 @@ export const ClientSwitchWork: React.FC = () => {
       </Group>
     </>
   );
-}
+};
