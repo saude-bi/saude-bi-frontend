@@ -50,7 +50,7 @@ export const DataTable = <T extends Entity>({
 
   const { isLoading, data } = useFindAllQuery(
     { page: pagination.pageIndex, perPage: pagination.pageSize, name: globalFilter },
-    { pollingInterval: 1000 }
+    { pollingInterval: 30000 }
   );
 
   const remove = !!useRemoveMutation ? useRemoveMutation()[0] : undefined;
