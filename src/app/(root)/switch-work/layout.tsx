@@ -3,7 +3,7 @@ import { NavBar } from '@/components/Common/NavBar/NavBar';
 import { SwitchWorkLayout } from './_components/switch-work-layout';
 
 export const metadata = {
-  title: 'Alterar Vínculo'
+  title: 'Alterar Vínculo',
 };
 
 import { PaginatedResponse } from '@/types/common';
@@ -16,27 +16,23 @@ async function getData() {
   requestHeaders.set('credentials', 'same-origin');
   requestHeaders.set('mode', 'cors');
 
-  const cookieStore = cookies()
-  const token = cookieStore.get('token')
+  const cookieStore = cookies();
+  const token = cookieStore.get('token');
 
   if (token) {
     requestHeaders.set('Authorization', `Bearer ${token}`);
   }
 
-  const res = await fetch('http://localhost:8000/directorships', {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/directorships`, {
     method: 'GET',
     headers: requestHeaders,
   });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
- 
-  // Recommendation: handle errors
+
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
+    throw new Error('Failed to fetch data');
   }
- 
-  return await res.json() as PaginatedResponse<Directorship>
+
+  return (await res.json()) as PaginatedResponse<Directorship>;
 }
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
@@ -44,9 +40,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
   return (
     <>
       <NavBar title="Alterar Vínculo"></NavBar>
-      <SwitchWorkLayout directorship={directorship.data}>
-        {children}
-      </SwitchWorkLayout>
+      <SwitchWorkLayout directorship={directorship.data}>{children}</SwitchWorkLayout>
     </>
   );
 }
