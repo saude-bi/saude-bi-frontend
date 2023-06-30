@@ -1,11 +1,11 @@
 import { setCookie, deleteCookie } from 'cookies-next';
-import { LoginFormDto, User } from '@/types/user';
+import { LoginFormDto, UserInfo } from '@/types/user';
 import { TokenResponse } from '@/types/auth';
 import { baseApi } from './api';
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getCurrentUser: build.query<User, void>({
+    getCurrentUser: build.query<UserInfo, void>({
       query: () => ({
         url: `auth`,
       }),
@@ -21,10 +21,12 @@ export const authApi = baseApi.injectEndpoints({
       onQueryStarted: async (_, { queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled;
-          setCookie('token', data.access_token);
+          if (data) {
+            setCookie('token', data.access_token);
+          }
         } catch (err) {
           console.error(err);
-          logout();
+          logoutUser();
         }
       },
     }),
@@ -33,7 +35,13 @@ export const authApi = baseApi.injectEndpoints({
 });
 
 export const { useGetCurrentUserQuery, useLoginMutation } = authApi;
-export const logout = () => {
+
+export const logoutUser = () => {
   deleteCookie('token');
+  switchWorkRelation();
   authApi.util.resetApiState();
+};
+
+export const switchWorkRelation = () => {
+  deleteCookie('workRelation');
 };

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Stack, Text, Group, Menu, UnstyledButton, Avatar, createStyles, rem } from '@mantine/core';
 import { User } from '@/types/user';
@@ -8,8 +10,8 @@ import {
   IconSwitchHorizontal,
   IconUser,
 } from '@tabler/icons-react';
-import { logout } from '@/store/auth';
-import { useRouter } from 'next/router';
+import { logoutUser, switchWorkRelation } from '@/store/auth';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   user: User;
@@ -41,8 +43,13 @@ export const UserProfile: React.FC<Props> = ({ user }) => {
   const [userMenuOpened, setUserMenuOpened] = useState(false);
 
   const handleLogout = () => {
-    logout();
+    logoutUser();
     router.push('/auth/login');
+  };
+
+  const handleSwitchProfile = () => {
+    switchWorkRelation();
+    router.push('/switch-work');
   };
 
   return (
@@ -79,7 +86,10 @@ export const UserProfile: React.FC<Props> = ({ user }) => {
           <Menu.Item icon={<IconSettings size="0.9rem" stroke={1.5} />}>
             Configurações da Conta
           </Menu.Item>
-          <Menu.Item icon={<IconSwitchHorizontal size="0.9rem" stroke={1.5} />}>
+          <Menu.Item
+            onClick={handleSwitchProfile}
+            icon={<IconSwitchHorizontal size="0.9rem" stroke={1.5} />}
+          >
             Trocar Perfil de Acesso
           </Menu.Item>
           <Menu.Item onClick={handleLogout} icon={<IconLogout size="0.9rem" stroke={1.5} />}>

@@ -1,13 +1,6 @@
-import { BaseNotificationProps } from '@/components/Common/Feedback/Notifications';
-import { NextRouter } from 'next/router';
-
-export const routePushToPreviousPage = (
-  router: NextRouter,
-  message: BaseNotificationProps | undefined = undefined
-) => {
-  const finalSlashIndex = router.asPath.lastIndexOf('/');
-  const previousPath = router.asPath.slice(0, finalSlashIndex);
-  router.push({ pathname: previousPath, query: message as {} }, previousPath);
+export const getPreviousPage = (pathname: string) => {
+  const finalSlashIndex = pathname.lastIndexOf('/');
+  return pathname.slice(0, finalSlashIndex);
 };
 
 const getEncodedPath = (path: string, uriParams: string): string => {

@@ -1,19 +1,43 @@
-import { Entity } from '@/types/common';
-import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from './common';
+import {
+  injectFindById,
+  injectRemove,
+  injectFindAll,
+  injectUpdate,
+  injectCreate,
+  injectFindByIdChild,
+} from '@/store/common';
 
-const endpoint = 'dashboard';
+import {
+  Dashboard,
+  CreateDashboardDto,
+  UpdateDashboardDto,
+  FindDashboardUrlDto,
+} from '@/types/dashboards';
 
-interface Dashboard extends Entity {}
+const endpoint = 'dashboards';
+
+const endpointUrl = 'dashboards/[slug]/url';
 
 export const { useFindDashboardQuery } = injectFindById<Dashboard>('findDashboard', endpoint);
 
-export const { useFindAllDashboardsQuery } = injectFindAll<Dashboard>(
-  'findAllDashboards',
+export const { useFindDashboardUrlQuery } = injectFindByIdChild<
+  FindDashboardUrlDto,
+  { workRelation: number }
+>('findDashboardUrl', endpointUrl);
+
+export const { useFindAllDashboardQuery } = injectFindAll<Dashboard, { name?: string }>(
+  'findAllDashboard',
   endpoint
 );
 
-export const { useCreateDashboardMutation } = injectCreate<Dashboard>('createDashboard', endpoint);
+export const { useCreateDashboardMutation } = injectCreate<Dashboard, CreateDashboardDto>(
+  'createDashboard',
+  endpoint
+);
 
-export const { useUpdateDashboardMutation } = injectUpdate<Dashboard>('updateDashboard', endpoint);
+export const { useUpdateDashboardMutation } = injectUpdate<Dashboard, UpdateDashboardDto>(
+  'updateDashboard',
+  endpoint
+);
 
 export const { useRemoveDashboardMutation } = injectRemove('removeDashboard', endpoint);

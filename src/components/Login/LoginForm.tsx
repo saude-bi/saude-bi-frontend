@@ -3,7 +3,7 @@ import { TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useLoginMutation } from '@/store/auth';
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { LoginFormDto } from '@/types/user';
 import { ContentCard } from '../Common/ContentCard/ContentCard';
 
@@ -30,7 +30,8 @@ export const LoginForm: React.FC<{}> = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push('/');
+      router.refresh();
+      router.push('/', { shallow: true });
     }
   }, [isSuccess]);
 

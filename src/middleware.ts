@@ -5,7 +5,11 @@ const isAdminRoute = (pathname: string) => {
   return pathname.startsWith('/admin');
 };
 
-const isPublicPage = (pathname: string) => {
+const isSwitchRoute = (pathname: string) => {
+  return pathname.startsWith('/switch-work');
+};
+
+export const isPublicPage = (pathname: string) => {
   return pathname.startsWith('/auth');
 };
 
@@ -17,13 +21,22 @@ interface DecodedJwt {
 }
 
 export async function middleware(req: NextRequest) {
-  const cookie = req.cookies.get("token");
+  const cookie = req.cookies.get('token');
   const { pathname } = req.nextUrl;
 
   if (!isPublicPage(pathname)) {
     if (cookie === undefined) {
-      req.nextUrl.pathname = "/auth/login";
+      req.nextUrl.pathname = '/auth/login';
       return NextResponse.redirect(req.nextUrl);
+    }
+
+    if (!isSwitchRoute(pathname) && !isAdminRoute(pathname)) {
+      const workRelation = req.cookies.get('workRelation');
+
+      if (workRelation === undefined) {
+        req.nextUrl.pathname = '/switch-work';
+        return NextResponse.redirect(req.nextUrl);
+      }
     }
 
     const decodedJwt: DecodedJwt = jwt.decode(cookie.value) as DecodedJwt;
@@ -32,9 +45,13 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(new URL('/auth/unauthorized', req.url));
     }
   }
+  if (isPublicPage(pathname) && cookie !== undefined) {
+    req.nextUrl.pathname = '/';
+    return NextResponse.redirect(req.nextUrl);
+  }
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: "/((?!api|static|.*\\..*|_next).*)",
+  matcher: '/((?!api|static|.*\\..*|_next).*)',
 };

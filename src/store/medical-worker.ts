@@ -18,7 +18,7 @@ export const { useFindMedicalWorkerQuery } = injectFindById<MedicalWorker>(
   endpoint
 );
 
-export const { useFindAllMedicalWorkersQuery } = injectFindAll<MedicalWorker>(
+export const { useFindAllMedicalWorkersQuery } = injectFindAll<MedicalWorker, { name?: string }>(
   'findAllMedicalWorkers',
   endpoint
 );

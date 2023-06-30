@@ -1,12 +1,14 @@
+'use client';
+
 import { GenericFindAllQuery, GenericRemoveMutation } from '@/store/common';
 import { Entity } from '@/types/common';
 import { MantineReactTable, MRT_ColumnDef } from 'mantine-react-table';
 import { MRT_Localization_PT_BR } from 'mantine-react-table/locales/pt-BR';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ButtonCreate } from '../Buttons/Buttons';
 import { RowActions } from './RowActions';
 import { getCreatePath, getPreviewPath, getUpdatePath } from '@/utils/routes';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 interface Props<T extends Entity> {
   useFindAllQuery: GenericFindAllQuery<T>;
@@ -26,22 +28,29 @@ export const DataTable = <T extends Entity>({
   canUpdate,
 }: Props<T>) => {
   const router = useRouter();
-  const pageModuleUrl = router.asPath.split('?')[0];
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const pageModuleUrl = pathname.split('?')[0];
+  const [globalFilter, setGlobalFilter] = useState('');
 
   const [pagination, setPagination] = useState({
-    pageIndex: router.query.page ? parseInt(router.query.page as string, 10) : 0,
-    pageSize: router.query.perPage ? parseInt(router.query.perPage as string, 10) : 10,
+    pageIndex: searchParams.get('page') ? parseInt(searchParams.get('page') as string, 10) : 0,
+    pageSize: searchParams.get('perPage')
+      ? parseInt(searchParams.get('perPage') as string, 10)
+      : 10,
   });
 
   useEffect(() => {
-    router.replace({
-      query: { ...router.query, page: pagination.pageIndex, perPage: pagination.pageSize },
-    });
+    const query = new URLSearchParams(searchParams.toString());
+    query.set('page', pagination.pageIndex.toString());
+    query.set('perPage', pagination.pageSize.toString());
+
+    router.push(`${pathname}?${query}`);
   }, [pagination]);
 
   const { isLoading, data } = useFindAllQuery(
-    { page: pagination.pageIndex, perPage: pagination.pageSize },
-    { pollingInterval: 1000 }
+    { page: pagination.pageIndex, perPage: pagination.pageSize, name: globalFilter },
+    { pollingInterval: 30000 }
   );
 
   const remove = !!useRemoveMutation ? useRemoveMutation()[0] : undefined;
@@ -60,7 +69,7 @@ export const DataTable = <T extends Entity>({
       initialState={{
         showGlobalFilter: true,
       }}
-      state={{ isLoading, pagination }}
+      state={{ isLoading, globalFilter, pagination }}
       renderToolbarInternalActions={() =>
         canCreate && <ButtonCreate href={getCreatePath(pageModuleUrl)}>NOVO</ButtonCreate>
       }
@@ -77,6 +86,7 @@ export const DataTable = <T extends Entity>({
           onRemove={remove}
         />
       )}
+      onGlobalFilterChange={setGlobalFilter}
     />
   );
 };
