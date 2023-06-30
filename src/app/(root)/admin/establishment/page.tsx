@@ -14,6 +14,7 @@ export default function EstablishmentPage() {
     () => [
       { accessorKey: 'name', header: 'Nome' },
       { accessorKey: 'cnes', header: 'CNES' },
+      { accessorKey: 'directorship.name', header: 'Diretoria' },
     ],
     []
   );
