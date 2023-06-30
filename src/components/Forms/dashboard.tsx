@@ -9,7 +9,7 @@ import { useDebouncedState } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 
 export const DashboardSchema = z.object({
-   
+
 })
 
 
@@ -22,11 +22,11 @@ export const DashboardInputs = <T,>({ disabled = false, form }: Props<T>) => {
     const [searchEstablishment, setSearchEstablishment] = useState('');
     const [searchDataSource, setSearchDataSource] = useState('');
     const [searchDashboardCategory, setSearchDashboardCategory] = useState('');
-    
+
     const [currentSearchEstablishment, setCurrentSearchEstablishment] = useDebouncedState(searchEstablishment, 250);
     const [currentSearchDataSource, setCurrentSearchDataSource] = useDebouncedState(searchDataSource, 250);
     const [currentSearchDashboardCategory, setCurrentSearchDashboardCategory] = useDebouncedState(searchDashboardCategory, 250);
-    
+
     useEffect(() => {
         setCurrentSearchEstablishment(searchEstablishment);
     }, [searchEstablishment]);
@@ -43,7 +43,7 @@ export const DashboardInputs = <T,>({ disabled = false, form }: Props<T>) => {
         { page: 0, perPage: 1000, name: currentSearchEstablishment },
         { pollingInterval: 30000 }
     )
-    
+
     const { data: dataDataSource } = useFindAllDataSourceQuery({
         page: 0, perPage: 1000, name: currentSearchDataSource },
         { pollingInterval: 30000}
@@ -68,7 +68,7 @@ export const DashboardInputs = <T,>({ disabled = false, form }: Props<T>) => {
         value: item.id.toString(),
         label: item.name,
     })) || [];
-    
+
     console.log(form)
     return (
         <Box>
@@ -120,7 +120,6 @@ export const DashboardInputs = <T,>({ disabled = false, form }: Props<T>) => {
                 disabled={disabled}
             />
             <TextInput
-                withAsterisk
                 label="Parametro"
                 placeholder="Parametro"
                 {...form.getInputProps('establishmentPropertyName')}
