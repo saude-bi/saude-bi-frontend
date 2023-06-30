@@ -1,11 +1,11 @@
 import { setCookie, deleteCookie } from 'cookies-next';
-import { LoginFormDto, User } from '@/types/user';
+import { LoginFormDto, UserInfo } from '@/types/user';
 import { TokenResponse } from '@/types/auth';
 import { baseApi } from './api';
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getCurrentUser: build.query<User, void>({
+    getCurrentUser: build.query<UserInfo, void>({
       query: () => ({
         url: `auth`,
       }),

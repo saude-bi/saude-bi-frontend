@@ -4,6 +4,11 @@ import { MedicalWorker } from './medical-worker';
 export interface User extends Entity {
   username: string;
   isAdmin: boolean;
+}
+
+export interface UserInfo extends Entity {
+  username: string;
+  isAdmin: boolean;
   medicalWorker?: MedicalWorker;
 }
 

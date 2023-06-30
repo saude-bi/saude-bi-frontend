@@ -1,5 +1,4 @@
-
-'use client'
+'use client';
 
 import { useMemo } from 'react';
 import { MRT_ColumnDef } from 'mantine-react-table';
@@ -14,8 +13,8 @@ export default function MedicalWorkerDatatable() {
   const columns = useMemo<MRT_ColumnDef<MedicalWorker>[]>(
     () => [
       { accessorKey: 'name', header: 'Nome' },
-      { accessorKey: 'created', header: 'Data de Criacao' },
-      { accessorKey: 'updated', header: 'Data de Atualizacao' },
+      { accessorKey: 'cpf', header: 'CPF' },
+      { accessorKey: 'user.username', header: 'Usuário' },
     ],
     []
   );
