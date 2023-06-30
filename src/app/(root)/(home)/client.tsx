@@ -7,6 +7,9 @@ import { FilterSelector } from '@/components/FilterSelector/FilterSelector';
 import Link from 'next/link';
 import { IconDashboard, IconMap } from '@tabler/icons-react';
 import { Dashboard } from '@/types/dashboards';
+import { string } from 'zod';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 type Props = {
   type: 'dashboard' | 'map';
@@ -37,39 +40,70 @@ type DashboardGroups = {
 };
 
 export const ClientDashboards: React.FC = () => {
-  const { data: dashboards } = useFindAllDashboardQuery(
-    { page: 0, perPage: 1000 },
-    { pollingInterval: 30000 }
-  );
+  const searchParams = useSearchParams();
+  const {
+    data: dashboards,
+    isLoading,
+    isSuccess,
+  } = useFindAllDashboardQuery({ page: 0, perPage: 1000 }, { pollingInterval: 30000 });
+  const [dashboardsMap, setdashboardsMap] = useState<Map<string, Dashboard[]>>(new Map());
+
+  const allDashboardsMap: Map<string, Dashboard[]> = new Map();
+
+  dashboards?.data.forEach((dashboard) => {
+    allDashboardsMap.has(dashboard.category.name)
+      ? allDashboardsMap.get(dashboard.category.name)?.push(dashboard)
+      : allDashboardsMap.set(dashboard.category.name, [dashboard]);
+  });
+
+  const updateDashboards = () => {
+    if (searchParams.get('filter') && searchParams.get('filter') !== 'todos') {
+      setdashboardsMap(
+        new Map().set(searchParams.get('filter'), allDashboardsMap.get(searchParams.get('filter')!))
+      );
+    } else {
+      setdashboardsMap(allDashboardsMap);
+    }
+  };
+
+  useEffect(() => {
+    if (!isLoading) {
+      updateDashboards();
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    updateDashboards();
+  }, [dashboards, isSuccess]);
 
   console.log(dashboards);
-
-  const teste: Map<string, Dashboard> = new Map();
-
-  dashboards?.data.map((dashboard) => teste.set(dashboard.category.name, dashboard));
 
   return (
     <Stack>
       <Stack>
-        <Title order={4}>Previne Brasil:</Title>
-        <SimpleGrid
-          cols={3}
-          breakpoints={[
-            { maxWidth: 'md', cols: 2, spacing: 'md' },
-            { maxWidth: 'sm', cols: 1, spacing: 'sm' },
-            { maxWidth: 'xs', cols: 1, spacing: 'sm' },
-          ]}
-        >
-          {dashboards &&
-            dashboards.data.map((dashboard) => (
-              <DashboardCard
-                key={dashboard.id}
-                type="dashboard"
-                title={dashboard.name}
-                href={`dashboard/${dashboard.id}`}
-              />
-            ))}
-        </SimpleGrid>
+        {dashboardsMap &&
+          Array.from(dashboardsMap.keys()).map((key) => (
+            <>
+              <Title order={4}>{key}</Title>
+              <SimpleGrid
+                cols={3}
+                breakpoints={[
+                  { maxWidth: 'md', cols: 2, spacing: 'md' },
+                  { maxWidth: 'sm', cols: 1, spacing: 'sm' },
+                  { maxWidth: 'xs', cols: 1, spacing: 'sm' },
+                ]}
+              >
+                {dashboardsMap.get(key)?.map((dashboard) => (
+                  <DashboardCard
+                    key={dashboard.id}
+                    type="dashboard"
+                    title={dashboard.name}
+                    href={`dashboard/${dashboard.id}`}
+                  />
+                ))}
+              </SimpleGrid>
+            </>
+          ))}
       </Stack>
     </Stack>
   );
