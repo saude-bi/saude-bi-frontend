@@ -9,11 +9,11 @@ import { WorkRelation } from '@/types/medical-worker';
 
 export const ClientSwitchWork: React.FC = () => {
   const searchParams = useSearchParams();
-  const { currentData: currentUser, isLoading } = useGetCurrentUserQuery();
+  const { currentData: currentUser, isLoading, isSuccess } = useGetCurrentUserQuery();
   const [workRelations, setWorkRelations] = useState<WorkRelation[]>();
 
   const updateWorkRelations = () => {
-    if (searchParams.get('filter') !== 'todos') {
+    if (searchParams.get('filter') && searchParams.get('filter') !== 'todos') {
       setWorkRelations(
         currentUser?.medicalWorker?.workRelations?.filter(
           (workRelation) =>
@@ -21,20 +21,19 @@ export const ClientSwitchWork: React.FC = () => {
         )
       );
     } else {
-      console.log(currentUser?.medicalWorker?.workRelations);
       setWorkRelations(currentUser?.medicalWorker?.workRelations);
     }
   };
 
   useEffect(() => {
-    updateWorkRelations();
-  }, [searchParams]);
-
-  useEffect(() => {
     if (!isLoading) {
       updateWorkRelations();
     }
-  }, [currentUser]);
+  }, [searchParams]);
+
+  useEffect(() => {
+    updateWorkRelations();
+  }, [currentUser, isSuccess]);
 
   return (
     <>
