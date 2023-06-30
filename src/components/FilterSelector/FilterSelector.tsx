@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Chip, Group } from '@mantine/core';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 type Props = {
   options: string[];
@@ -7,6 +9,7 @@ type Props = {
 };
 
 export const FilterSelector: React.FC<Props> = ({ options, setSelectedOption }) => {
+  const pathname = usePathname();
   const [currentOption, setCurrentOption] = useState(-1);
 
   useEffect(() => {
@@ -17,16 +20,18 @@ export const FilterSelector: React.FC<Props> = ({ options, setSelectedOption }) 
     <Chip.Group>
       <Group position="center">
         {options.map((option, idx) => (
-          <Chip
-            key={idx}
-            color="teal"
-            radius="md"
-            checked={currentOption === idx}
-            onClick={() => (currentOption === idx ? setCurrentOption(-1) : setCurrentOption(idx))}
-            wrapperProps={{ border: 'none' }}
-          >
-            {option}
-          </Chip>
+          <Link href={pathname + '?' + `filter=${option}`}>
+            <Chip
+              key={idx}
+              color="teal"
+              radius="md"
+              checked={currentOption === idx}
+              onClick={() => (currentOption === idx ? setCurrentOption(-1) : setCurrentOption(idx))}
+              wrapperProps={{ border: 'none' }}
+            >
+              {option}
+            </Chip>
+          </Link>
         ))}
       </Group>
     </Chip.Group>
