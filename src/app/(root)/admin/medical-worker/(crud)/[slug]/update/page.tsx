@@ -8,6 +8,7 @@ import { UpdateMedicalWorkerDto } from '@/types/medical-worker';
 import { useFindMedicalWorkerQuery, useUpdateMedicalWorkerMutation } from '@/store/medical-worker';
 import { MedicalWorkerInputs, MedicalWorkerSchema } from '@/components/Forms/medical-worker';
 import { useParams } from 'next/navigation';
+import { MedicalWorkerUpdateInputs } from '@/components/Forms/medical-worker-update';
 
 export default function DashboardCategoriesPage() {
   const { slug } = useParams();
@@ -19,12 +20,14 @@ export default function DashboardCategoriesPage() {
 
   const form = useForm<UpdateMedicalWorkerDto>({
     initialValues: {
-      user: '',
+      user: {
+        username: '',
+      },
       name: '',
       gender: '',
       cns: '',
       cpf: '',
-      workRelations: []
+      workRelations: [],
     },
     validate: zodResolver(MedicalWorkerSchema),
     validateInputOnChange: true,
@@ -34,7 +37,9 @@ export default function DashboardCategoriesPage() {
     if (isSuccess) {
       form.setValues({
         // TODO: Fix username not being found on query
-        user: data.user.username,
+        user: {
+          username: '',
+        },
         name: data.name,
         gender: data.gender,
         cns: data.cns,
@@ -48,7 +53,7 @@ export default function DashboardCategoriesPage() {
       title="Profissinal de Saúde"
       useUpdateMutation={useUpdateMedicalWorkerMutation}
       type="update"
-      FormInputs={MedicalWorkerInputs<UpdateMedicalWorkerDto>}
+      FormInputs={MedicalWorkerUpdateInputs<UpdateMedicalWorkerDto>}
       form={form}
       id={id}
     />
