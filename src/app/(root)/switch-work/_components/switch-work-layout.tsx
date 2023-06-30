@@ -9,7 +9,7 @@ import { Directorship } from '@/types/directorship';
 
 type Props = {
   children: React.ReactNode;
-  directorship: Directorship[]
+  directorship: Directorship[];
 };
 
 export const SwitchWorkLayout: React.FC<Props> = ({ children, directorship }) => {
@@ -24,9 +24,7 @@ export const SwitchWorkLayout: React.FC<Props> = ({ children, directorship }) =>
           />
         </Stack>
       </ContentCard>
-      <Stack>
-        {children}
-      </Stack>
+      <Stack>{children}</Stack>
     </Stack>
   );
-}
+};
