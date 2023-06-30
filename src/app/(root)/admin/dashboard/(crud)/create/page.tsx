@@ -11,9 +11,9 @@ export default function DashboardPage() {
     const form = useForm<CreateDashboardDto>({
         initialValues: {
             establishmentsWithAccess: [],
-            dataSource: 0,
-            category: 0,
-            metabaseId: 0,
+            dataSource: '',
+            category: '',
+            metabaseId: '',
             name: '',
             establishmentPropertyName: ''
         },
@@ -22,7 +22,7 @@ export default function DashboardPage() {
     })
 
     return (
-        <FormLayout 
+        <FormLayout
             title="Dashboards"
             useCreateMutation={useCreateDashboardMutation}
             FormInputs={DashboardInputs<CreateDashboardDto>}
