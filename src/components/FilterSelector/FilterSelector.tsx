@@ -5,28 +5,43 @@ import Link from 'next/link';
 
 type Props = {
   options: string[];
-  setSelectedOption: (option: number) => void;
+  setSelectedOption: (option: string) => void;
 };
 
 export const FilterSelector: React.FC<Props> = ({ options, setSelectedOption }) => {
   const pathname = usePathname();
-  const [currentOption, setCurrentOption] = useState(-1);
+  const [currentOption, setCurrentOption] = useState('todos');
 
   useEffect(() => {
     setSelectedOption(currentOption);
   }, [currentOption]);
 
   return (
-    <Chip.Group>
+    <Chip.Group multiple={false} value={currentOption}  onChange={setCurrentOption}>
       <Group position="center">
+        <Link 
+          href={pathname + '?' + `filter=todos`}
+          onClick={() => (setCurrentOption('todos'))}
+        >
+          <Chip
+            color="teal"
+            radius="md"
+            value="todos"
+            wrapperProps={{ border: 'none' }}
+          >
+            Todos
+          </Chip>
+        </Link>
         {options.map((option, idx) => (
-          <Link href={pathname + '?' + `filter=${option}`}>
+          <Link 
+            key={idx}
+            href={pathname + '?' + `filter=${option}`}               
+            onClick={() => (setCurrentOption(option))}
+          >
             <Chip
-              key={idx}
               color="teal"
               radius="md"
-              checked={currentOption === idx}
-              onClick={() => (currentOption === idx ? setCurrentOption(-1) : setCurrentOption(idx))}
+              value={option}
               wrapperProps={{ border: 'none' }}
             >
               {option}

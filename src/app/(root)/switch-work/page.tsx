@@ -1,25 +1,16 @@
 'use client';
 
-import { useGetCurrentUserQuery } from '@/store/auth';
-import { Group, Title } from '@mantine/core';
-import { useState } from 'react';
-import { AccessCard } from './_components/access-card';
+import { Suspense } from "react";
+import { ClientSwitchWork } from "./client";
 
-export default function Home() {
-  const { currentData: currentUser } = useGetCurrentUserQuery();
-  const [workRelations] = useState(currentUser?.medicalWorker?.workRelations);
+
+export default async function Home() {
+
   return (
     <>
-      <Title order={4}>Selecione o acesso que deseja utilizar:</Title>
-      <Group>
-        {workRelations?.map((workRelation) => (
-          <AccessCard
-            establishment={workRelation.establishment?.name}
-            occupation={workRelation.occupation?.name}
-            workRelation={workRelation.id}
-          />
-        ))}
-      </Group>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ClientSwitchWork />
+      </Suspense>
     </>
   );
 }
