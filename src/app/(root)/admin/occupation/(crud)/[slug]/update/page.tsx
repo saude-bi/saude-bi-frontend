@@ -20,7 +20,6 @@ export default function OccupationsPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data);
       form.setValues({ name: data.name, cbo: data.cbo, category: data.category.id.toString() });
     }
   }, [isSuccess]);

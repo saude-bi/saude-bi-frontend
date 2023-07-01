@@ -76,8 +76,6 @@ export const ClientDashboards: React.FC = () => {
     updateDashboards();
   }, [dashboards, isSuccess]);
 
-  console.log(dashboards);
-
   return (
     <Stack>
       <Stack>

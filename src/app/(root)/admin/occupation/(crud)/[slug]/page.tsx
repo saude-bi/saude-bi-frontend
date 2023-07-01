@@ -18,7 +18,6 @@ export default function Occupations() {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data);
       form.setValues({ ...data, category: data.category.id.toString() });
     }
   }, [isSuccess]);
