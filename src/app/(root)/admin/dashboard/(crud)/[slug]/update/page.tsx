@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormUpdate } from '@/components/Common/Layout/FormUpdate';
 import React, { useEffect } from 'react';
 import { UpdateDashboardDto } from '@/types/dashboards';
 import { useForm } from '@mantine/form';
@@ -36,7 +36,7 @@ export default function DashboardPage() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormUpdate
       title="Dashboard"
       useUpdateMutation={useUpdateDashboardMutation}
       type="update"

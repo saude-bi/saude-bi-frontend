@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormCreate } from '@/components/Common/Layout/FormCreate';
 import React from 'react';
 import { useForm, zodResolver } from '@mantine/form';
 import { CreateMedicalWorkerDto } from '@/types/medical-worker';
@@ -25,7 +25,7 @@ export default function CreateMedicalWorkerPage() {
   });
 
   return (
-    <FormLayout
+    <FormCreate
       title="Categorias de Dashboard"
       useCreateMutation={useCreateMedicalWorkerMutation}
       FormInputs={MedicalWorkerInputs<CreateMedicalWorkerDto>}

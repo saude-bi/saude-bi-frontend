@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormPreview } from '@/components/Common/Layout/FormPreview';
 import React, { useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { useFindDashboardQuery, useRemoveDashboardMutation } from '@/store/dashboards';
@@ -35,7 +35,7 @@ export default function Dashboards() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormPreview
       title="Dashboard"
       useRemoveMutation={useRemoveDashboardMutation}
       type="preview"

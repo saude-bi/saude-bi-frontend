@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormUpdate } from '@/components/Common/Layout/FormUpdate';
 import React, { useEffect } from 'react';
 import { UpdateOccupationCategoryDto } from '@/types/occupation-category';
 import { useForm, zodResolver } from '@mantine/form';
@@ -19,7 +19,7 @@ export default function OccupationCategoriesPage() {
   const { slug } = useParams();
   const id = parseInt(slug as string, 10);
 
-  const { data, isSuccess, isError, isLoading } = useFindOccupationCategoryQuery(
+  const { data, isSuccess } = useFindOccupationCategoryQuery(
     !!slug ? id : skipToken
   );
 
@@ -40,7 +40,7 @@ export default function OccupationCategoriesPage() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormUpdate
       title="Categorias de Ocupações"
       useUpdateMutation={useUpdateOccupationCategoryMutation}
       type="update"

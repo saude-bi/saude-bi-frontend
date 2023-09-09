@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormUpdate } from '@/components/Common/Layout/FormUpdate';
 import React, { useEffect } from 'react';
 import { useForm, zodResolver } from '@mantine/form';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
@@ -34,7 +34,7 @@ export default function UpdateDirectorshipPage() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormUpdate
       title="Diretoria"
       useUpdateMutation={useUpdateDirectorshipMutation}
       type="update"

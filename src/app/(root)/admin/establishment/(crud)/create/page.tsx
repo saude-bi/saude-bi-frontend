@@ -1,6 +1,7 @@
 'use client';
 
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormCreate } from '@/components/Common/Layout/FormCreate';
 import React from 'react';
 import { CreateEstablishmentDto } from '@/types/establishment';
 import { useForm, zodResolver } from '@mantine/form';
@@ -22,7 +23,7 @@ export default function EstablishmentPage() {
   });
 
   return (
-    <FormLayout
+    <FormCreate
       title="Estabelecimentos"
       useCreateMutation={useCreateEstablishmentMutation}
       FormInputs={EstablishmentInputs<CreateEstablishmentDto>}

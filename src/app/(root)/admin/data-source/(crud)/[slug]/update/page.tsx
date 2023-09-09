@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useFindDataSourceQuery, useUpdateDataSourceMutation } from '@/store/data-source';
 import { UpdateDataSourceDto } from '@/types/data-source';
 import { DataSourceInputs, DataSourceSchema } from '@/components/Forms/data-source';
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormUpdate } from '@/components/Common/Layout/FormUpdate';
 import { useParams } from 'next/navigation';
 
 export default function DataSourcePage() {
@@ -36,7 +36,7 @@ export default function DataSourcePage() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormUpdate
       title="Fonte dos Dados"
       useUpdateMutation={useUpdateDataSourceMutation}
       type="update"

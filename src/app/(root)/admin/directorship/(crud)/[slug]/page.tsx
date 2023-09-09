@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormPreview } from '@/components/Common/Layout/FormPreview';
 import React, { useEffect } from 'react';
 import { UpdateOccupationCategoryDto } from '@/types/occupation-category';
 import { useForm } from '@mantine/form';
@@ -24,7 +24,7 @@ export default function PreviewDirectorshipPage() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormPreview
       title="Diretorias"
       useRemoveMutation={useRemoveDirectorshipMutation}
       type="preview"

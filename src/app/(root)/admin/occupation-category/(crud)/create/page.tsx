@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormCreate } from '@/components/Common/Layout/FormCreate';
 import React from 'react';
 import { CreateOccupationCategoryDto } from '@/types/occupation-category';
 import { useForm, zodResolver } from '@mantine/form';
@@ -20,7 +20,7 @@ export default function OccupationCategories() {
   });
 
   return (
-    <FormLayout
+    <FormCreate
       title="Categoria de Ocupações"
       useCreateMutation={useCreateOccupationCategoryMutation}
       FormInputs={OccupationCategoryInputs<CreateOccupationCategoryDto>}

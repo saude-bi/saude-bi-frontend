@@ -1,13 +1,11 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormUpdate } from '@/components/Common/Layout/FormUpdate';
 import React, { useEffect } from 'react';
 import { UpdateOccupationDto } from '@/types/occupations';
-import { useForm, zodResolver } from '@mantine/form';
-import { OccupationSchema, OccupationInputs } from '@/components/Forms/occupation';
+import { useForm } from '@mantine/form';
+import {  OccupationInputs } from '@/components/Forms/occupation';
 import { useUpdateOccupationMutation, useFindOccupationQuery } from '@/store/occupations';
-
-import { useRouter } from 'next/router';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useParams } from 'next/navigation';
 
@@ -25,7 +23,7 @@ export default function OccupationsPage() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormUpdate
       title="Operações"
       useUpdateMutation={useUpdateOccupationMutation}
       type="update"

@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormUpdate } from '@/components/Common/Layout/FormUpdate';
 import React, { useEffect } from 'react';
 import { UpdateDashboardCategoryDto } from '@/types/dashboard-category';
 import { useForm, zodResolver } from '@mantine/form';
@@ -40,7 +40,7 @@ export default function DashboardCategoriesPage() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormUpdate
       title="Categorias de Dashboard"
       useUpdateMutation={useUpdateDashboardCategoryMutation}
       type="update"

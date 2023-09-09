@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormUpdate } from '@/components/Common/Layout/FormUpdate';
 import React, { useEffect } from 'react';
 import { useForm, zodResolver } from '@mantine/form';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
@@ -49,7 +49,7 @@ export default function DashboardCategoriesPage() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormUpdate
       title="Profissinal de Saúde"
       useUpdateMutation={useUpdateMedicalWorkerMutation}
       type="update"

@@ -5,7 +5,7 @@ import { useForm } from '@mantine/form';
 import { useEffect } from 'react';
 import { UpdateEstablishmentDto } from '@/types/establishment';
 import { useFindEstablishmentQuery, useRemoveEstablishmentMutation } from '@/store/establishments';
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormPreview } from '@/components/Common/Layout/FormPreview';
 import { EstablishmentInputs } from '@/components/Forms/establishment';
 import { useParams } from 'next/navigation';
 
@@ -28,7 +28,7 @@ export default function EstablishmentPage() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormPreview
       title="Dashboard de Estabelecimentos"
       useRemoveMutation={useRemoveEstablishmentMutation}
       type="preview"
