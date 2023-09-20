@@ -12,14 +12,14 @@ jobs:
        - uses: actions/checkout@v2
        - name: yarn install
          run: |
-           yarn build
+           yarn run build
   test:
     runs-on: ubuntu-latest
     steps:
        - uses: actions/checkout@v2
        - name: yarn install
          run: |
-           yarn test
+           yarn run test
   deploy-production:
     runs-on: ubuntu-latest
     steps:
