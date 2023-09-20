@@ -11,15 +11,16 @@ jobs:
     steps:
        - uses: actions/checkout@v2
        - name: yarn install
-         run: |
-           yarn run build
+         run: yarn
+       - name: yarn build
+       - run: yarn build
   test:
     runs-on: ubuntu-latest
     steps:
        - uses: actions/checkout@v2
        - name: yarn install
-         run: |
-           yarn run test
+       - name: yarn test
+       - run: yarn test
   deploy-production:
     runs-on: ubuntu-latest
     steps:
