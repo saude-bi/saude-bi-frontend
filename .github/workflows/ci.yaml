@@ -7,26 +7,26 @@ concurrency:
   cancel-in-progress: true
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
   workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-       - uses: actions/checkout@v2
-       - name: yarn install
-         run: yarn
-       - name: yarn build
-         run: yarn build
+      - uses: actions/checkout@v2
+      - name: yarn install
+        run: yarn --production
+      - name: yarn build
+        run: yarn build
   test:
     runs-on: ubuntu-latest
     needs: build
     steps:
-       - uses: actions/checkout@v2
-       - name: yarn install
-         run: yarn
-       - name: yarn test
-         run: yarn test
+      - uses: actions/checkout@v2
+      - name: yarn install
+        run: yarn
+      - name: yarn test
+        run: yarn test
   deploy-production:
     runs-on: ubuntu-latest
     needs: test
