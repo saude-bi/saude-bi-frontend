@@ -26,9 +26,7 @@ export const FormCreate = <T,>({ title, form, FormInputs, extraButtons, ...props
             {props.type === 'create' && (
               <CreateAction form={form} useCreateMutation={props.useCreateMutation} />
             )}
-           
             {extraButtons}
-            
             <ButtonForm buttonText='Listar' pathSliceEnd={3}/>  
       </CommonLayoutForm>
       <FormContent form={form} type={props.type} FormInputs={FormInputs} />

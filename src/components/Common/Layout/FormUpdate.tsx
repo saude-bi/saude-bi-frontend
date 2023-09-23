@@ -23,12 +23,10 @@ export const FormUpdate = <T,>({ title, form, FormInputs, extraButtons, ...props
       <Grid>
         <CommonLayoutForm>
         <Text color="dark.3">Ações</Text>
-            
             {props.type === 'update' && (
               <UpdateAction id={props.id} form={form} useUpdateMutation={props.useUpdateMutation} />
             )}
             {extraButtons}
-            
             <ButtonForm buttonText='Listar' pathSliceEnd={3}/>
             {props.type === 'update' && (
               <Button
