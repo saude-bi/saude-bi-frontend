@@ -7,7 +7,10 @@ import { usePathname, useRouter } from 'next/navigation';
 import {  IconList } from '@tabler/icons-react';
 import { Props } from './FormProps';
 import { CreateAction } from './CreateAction';
+import { CommonLayoutForm } from "./CommonFormLayout"
+import {FormContent} from "./FormContent"
 
+import {ButtonForm} from "./ButtonForm"
 export const FormCreate = <T,>({ title, form, FormInputs, extraButtons, ...props }: Props<T>) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -18,34 +21,17 @@ export const FormCreate = <T,>({ title, form, FormInputs, extraButtons, ...props
 
   return (
     <Grid>
-      <Grid.Col span={3}>
-        <ContentCard>
-          <Stack>
-            <Text color="dark.3">Ações</Text>
+      <CommonLayoutForm>
+      <Text color="dark.3">Ações</Text>
             {props.type === 'create' && (
               <CreateAction form={form} useCreateMutation={props.useCreateMutation} />
             )}
            
             {extraButtons}
-            <Button
-              variant="outline"
-              color="primary"
-              leftIcon={<IconList size="1rem" />}
-              onClick={() => router.push(pathname.split('/').slice(0, 3).join('/'))}
-            >
-              Listar
-            </Button>
-           
-          </Stack>
-        </ContentCard>
-      </Grid.Col>
-      <Grid.Col span={9}>
-        <ContentCard>
-          <form onSubmit={form.onSubmit(() => {})}>
-            <FormInputs disabled={props.type === 'preview'} form={form} />
-          </form>
-        </ContentCard>
-      </Grid.Col>
+            
+            <ButtonForm buttonText='Listar' pathSliceEnd={3}/>  
+      </CommonLayoutForm>
+      <FormContent form={form} type={props.type} FormInputs={FormInputs} />
     </Grid>
   );
 };

@@ -14,7 +14,6 @@ export default function DashboardCategoriesPage() {
   const id = parseInt(slug as string, 10);
 
   const { data, isSuccess } = useFindMedicalWorkerQuery(!!slug ? id : skipToken);
-
   const form = useForm<UpdateMedicalWorkerDto>({});
 
   useEffect(() => {
