@@ -12,7 +12,6 @@ import {FormContent} from "./FormContent"
 
 import {ButtonForm} from "./ButtonForm"
 export const FormCreate = <T,>({ title, form, FormInputs, extraButtons, ...props }: Props<T>) => {
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
