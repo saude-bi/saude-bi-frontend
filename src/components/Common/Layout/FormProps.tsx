@@ -2,7 +2,7 @@ import {
     GenericCreateMutation,
     GenericRemoveMutation,
     GenericUpdateMutation,
-  } from '@/store/common';
+} from '@/store/common';
 
 import { UseForm } from '@mantine/form/lib/types';
 export type GenericForm<T> = ReturnType<UseForm<T>>;
@@ -14,7 +14,7 @@ export type PropsPreviewActions = {
 export interface PropsCreateAction<T> {
     form: GenericForm<T>;
     useCreateMutation: GenericCreateMutation<any, T>;
-  }
+}
 export interface PropsUpdateAction<T> {
     id: number;
     form: GenericForm<T>;
@@ -26,7 +26,7 @@ export type Props<T> = {
     FormInputs: React.FC<{ disabled: boolean; form: GenericForm<T> }>;
     extraButtons?: React.ReactNode;
 } & (
-    | (PropsPreviewActions & { type: 'preview' })
-    | (PropsCreateAction<T> & { type: 'create' })
-    | (PropsUpdateAction<T> & { type: 'update' })
-);
+        | (PropsPreviewActions & { type: 'preview' })
+        | (PropsCreateAction<T> & { type: 'create' })
+        | (PropsUpdateAction<T> & { type: 'update' })
+    );

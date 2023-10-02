@@ -6,16 +6,16 @@ import React, { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { UseForm } from '@mantine/form/lib/types';
 
-import {IconList } from '@tabler/icons-react';
+import { IconList } from '@tabler/icons-react';
 import { Props } from './FormProps';
 import { PreviewAction } from './PreviewAction';
-import {CommonLayoutForm} from "./CommonFormLayout"
+import { CommonLayoutForm } from "./CommonFormLayout"
 
 export type GenericForm<T> = ReturnType<UseForm<T>>;
 
-import {FormContent} from "./FormContent"
+import { FormContent } from "./FormContent"
 
-import {ButtonForm} from "./ButtonForm"
+import { ButtonForm } from "./ButtonForm"
 export const FormPreview = <T,>({ title, form, FormInputs, extraButtons, ...props }: Props<T>) => {
   const pathname = usePathname();
 
@@ -26,10 +26,10 @@ export const FormPreview = <T,>({ title, form, FormInputs, extraButtons, ...prop
   return (
     <Grid>
       <CommonLayoutForm>
-            <Text color="dark.3">Ações</Text>
-            {props.type === 'preview' && <PreviewAction {...props} />}
-            {extraButtons}
-            <ButtonForm buttonText='Listar' pathSliceEnd={3}/>
+        <Text color="dark.3">Ações</Text>
+        {props.type === 'preview' && <PreviewAction {...props} />}
+        {extraButtons}
+        <ButtonForm buttonText='Listar' pathSliceEnd={3} />
       </CommonLayoutForm>
       <FormContent form={form} type={props.type} FormInputs={FormInputs} />
     </Grid>
