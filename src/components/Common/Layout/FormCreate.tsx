@@ -1,4 +1,4 @@
-'use client';;
+'use client';
 import { Grid, Text } from '@mantine/core';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';

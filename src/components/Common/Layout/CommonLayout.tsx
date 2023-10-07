@@ -1,4 +1,4 @@
-'use client';;
+'use client';
 import { useEffect } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Box, Center, Flex, LoadingOverlay, Stack } from '@mantine/core';
