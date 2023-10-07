@@ -1,25 +1,39 @@
-'use client';
-
 import React from 'react';
 import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
-import { useFindDashboardUrlQuery } from '@/store/dashboards';
-import { useParams } from 'next/navigation';
-import { skipToken } from '@reduxjs/toolkit/dist/query';
-import { getCookie } from 'cookies-next';
+import { cookies } from 'next/dist/client/components/headers';
+import { FindDashboardUrlDto } from '@/types/dashboards';
 
-export default function Home() {
-  const { slug } = useParams();
-  const id = parseInt(slug as string, 10);
-  const workRelation = parseInt(getCookie('workRelation') as string, 10);
+async function getData(dashboard: string) {
+  const requestHeaders: HeadersInit = new Headers();
+  requestHeaders.set('Content-Type', 'application/json');
+  requestHeaders.set('credentials', 'same-origin');
+  requestHeaders.set('mode', 'cors');
 
-  const { data, isSuccess, isError, isLoading } = useFindDashboardUrlQuery(
-    !!slug && !!workRelation
-      ? {
-          id,
-          params: { workRelation },
-        }
-      : skipToken
+  const cookieStore = cookies();
+  const token = cookieStore.get('token');
+  const workRelation = cookieStore.get('workRelation');
+
+  if (token) {
+    requestHeaders.set('Authorization', `Bearer ${token.value}`);
+  }
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/dashboards/${dashboard}/url?workRelation=${workRelation?.value}`,
+    {
+      method: 'GET',
+      headers: requestHeaders,
+    }
   );
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return (await res.json()) as FindDashboardUrlDto;
+}
+
+export default async function Home({ params }: { params: { slug: string } }) {
+  const data = await getData(params.slug);
 
   return (
     <ContentCard h="100%">

@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormPreview } from '@/components/Common/Layout/FormPreview';
 import React, { useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { useFindOccupationQuery, useRemoveOccupationMutation } from '@/store/occupations';
@@ -18,13 +18,12 @@ export default function Occupations() {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data);
       form.setValues({ ...data, category: data.category.id.toString() });
     }
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormPreview
       title="Ocupação"
       useRemoveMutation={useRemoveOccupationMutation}
       type="preview"

@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormCreate } from '@/components/Common/Layout/FormCreate';
 import React from 'react';
 import { CreateDashboardCategoryDto } from '@/types/dashboard-category';
 import { useForm, zodResolver } from '@mantine/form';
@@ -20,7 +20,7 @@ export default function DashboardCategoriesCreatePage() {
   });
 
   return (
-    <FormLayout
+    <FormCreate
       title="Categorias de Dashboard"
       useCreateMutation={useCreateDashboardCategoryMutation}
       FormInputs={DashboardCategoryInputs<CreateDashboardCategoryDto>}

@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useFindEstablishmentQuery, useUpdateEstablishmentMutation } from '@/store/establishments';
 import { UpdateEstablishmentDto } from '@/types/establishment';
 import { EstablishmentInputs, EstablishmentSchema } from '@/components/Forms/establishment';
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormUpdate } from '@/components/Common/Layout/FormUpdate';
 import { useParams } from 'next/navigation';
 
 export default function EstablishmentPage() {
@@ -37,7 +37,7 @@ export default function EstablishmentPage() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormUpdate
       title="Categoria de Estabelecimento"
       useUpdateMutation={useUpdateEstablishmentMutation}
       type="update"

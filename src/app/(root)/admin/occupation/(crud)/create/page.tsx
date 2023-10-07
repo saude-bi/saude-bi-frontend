@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormCreate } from '@/components/Common/Layout/FormCreate';
 import React from 'react';
 import { useForm, zodResolver } from '@mantine/form';
 import { CreateOccupationDto } from '@/types/occupations';
@@ -19,7 +19,7 @@ export default function Occupations() {
   });
 
   return (
-    <FormLayout
+    <FormCreate
       title="Ocupações"
       useCreateMutation={useCreateOccupationMutation}
       FormInputs={OccupationInputs<CreateOccupationDto>}

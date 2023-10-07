@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormCreate } from '@/components/Common/Layout/FormCreate';
 import React from 'react';
 import { useForm, zodResolver } from '@mantine/form';
 import { CreateDirectorshipDto } from '@/types/directorship';
@@ -18,7 +18,7 @@ export default function CreateDirectorshipPage() {
   });
 
   return (
-    <FormLayout
+    <FormCreate
       title="Categoria de Ocupações"
       useCreateMutation={useCreateDirectorshipMutation}
       FormInputs={DirectorshipInputs<CreateDirectorshipDto>}

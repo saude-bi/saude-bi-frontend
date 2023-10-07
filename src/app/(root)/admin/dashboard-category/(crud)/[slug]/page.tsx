@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormPreview } from '@/components/Common/Layout/FormPreview';
 import React, { useEffect } from 'react';
 import { UpdateDashboardCategoryDto } from '@/types/dashboard-category';
 import { useForm } from '@mantine/form';
@@ -29,7 +29,7 @@ export default function DashboardCategoriesPage() {
   }, [isSuccess]);
 
   return (
-    <FormLayout
+    <FormPreview
       title="Categorias de Dashboard"
       useRemoveMutation={useRemoveDashboardCategoryMutation}
       type="preview"

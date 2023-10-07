@@ -1,6 +1,6 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { FormPreview } from '@/components/Common/Layout/FormPreview';
 import React, { useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
@@ -14,7 +14,6 @@ export default function DashboardCategoriesPage() {
   const id = parseInt(slug as string, 10);
 
   const { data, isSuccess } = useFindMedicalWorkerQuery(!!slug ? id : skipToken);
-
   const form = useForm<UpdateMedicalWorkerDto>({});
 
   useEffect(() => {
@@ -36,7 +35,7 @@ export default function DashboardCategoriesPage() {
 
   return (
     <>
-      <FormLayout
+      <FormPreview
         title="Profissional de Saúde"
         useRemoveMutation={useRemoveMedicalWorkerMutation}
         type="preview"
