@@ -1,10 +1,7 @@
-'use client';
-
-import { Button, Grid, Stack, Text } from '@mantine/core';
-import { ContentCard } from '../ContentCard/ContentCard';
-import React, { useEffect } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import { IconList } from '@tabler/icons-react';
+'use client';;
+import { Grid, Text } from '@mantine/core';
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Props } from './FormProps';
 import { CreateAction } from './CreateAction';
 import { CommonLayoutForm } from "./CommonFormLayout"

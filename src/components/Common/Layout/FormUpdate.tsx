@@ -1,9 +1,9 @@
 'use client';
 
 import { Button, Grid, Text } from '@mantine/core';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { IconEye, IconList } from '@tabler/icons-react';
+import { IconEye } from '@tabler/icons-react';
 import { Props } from './FormProps';
 import { UpdateAction } from './UpdateAction';
 
