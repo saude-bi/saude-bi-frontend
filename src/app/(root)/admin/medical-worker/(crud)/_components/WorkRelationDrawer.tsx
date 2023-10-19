@@ -1,12 +1,12 @@
 'use client';
 
-import { WorkRelationInputs, WorkRelationSchema } from '@/components/Forms/work-relation';
-import { useCreateWorkRelationMutation } from '@/store/work-relation';
-import { CreateWorkRelationDto } from '@/types/medical-worker';
 import { Drawer } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { CreateWorkRelationDto } from '@/types/medical-worker';
+import { useCreateWorkRelationMutation } from '@/store/work-relation';
+import { WorkRelationInputs, WorkRelationSchema } from '@/components/Forms/work-relation';
 
 type Props = {
   workerId: number;

@@ -1,9 +1,9 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React from 'react';
-import { CreateOccupationCategoryDto } from '@/types/occupation-category';
 import { useForm, zodResolver } from '@mantine/form';
+import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { CreateOccupationCategoryDto } from '@/types/occupation-category';
 import {
   OccupationCategoryInputs,
   OccupationCategorySchema,

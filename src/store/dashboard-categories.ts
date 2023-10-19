@@ -12,10 +12,10 @@ export const { useFindDashboardCategoryQuery } = injectFindById<DashboardCategor
   endpoint
 );
 
-export const { useFindAllDashboardCategoriesQuery } = injectFindAll<DashboardCategory,  { name?: string }>(
-  'findAllDashboardCategories',
-  endpoint
-);
+export const { useFindAllDashboardCategoriesQuery } = injectFindAll<
+  DashboardCategory,
+  { name?: string }
+>('findAllDashboardCategories', endpoint);
 
 export const { useCreateDashboardCategoryMutation } = injectCreate<
   DashboardCategory,

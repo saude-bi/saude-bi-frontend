@@ -1,9 +1,11 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React, { useEffect } from 'react';
-import { UpdateOccupationCategoryDto } from '@/types/occupation-category';
 import { useForm, zodResolver } from '@mantine/form';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
+import { useParams } from 'next/navigation';
+import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { UpdateOccupationCategoryDto } from '@/types/occupation-category';
 import {
   OccupationCategoryInputs,
   OccupationCategorySchema,
@@ -12,15 +14,13 @@ import {
   useUpdateOccupationCategoryMutation,
   useFindOccupationCategoryQuery,
 } from '@/store/occupation-categories';
-import { skipToken } from '@reduxjs/toolkit/dist/query';
-import { useParams } from 'next/navigation';
 
 export default function OccupationCategoriesPage() {
   const { slug } = useParams();
   const id = parseInt(slug as string, 10);
 
   const { data, isSuccess, isError, isLoading } = useFindOccupationCategoryQuery(
-    !!slug ? id : skipToken
+    slug ? id : skipToken
   );
 
   const form = useForm<UpdateOccupationCategoryDto>({

@@ -4,6 +4,7 @@ import {
   CreateOccupationCategoryDto,
   UpdateOccupationCategoryDto,
 } from '@/types/occupation-category';
+
 const endpoint = 'occupation-categories';
 
 export const { useFindOccupationCategoryQuery } = injectFindById<OccupationCategory>(

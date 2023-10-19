@@ -10,7 +10,7 @@ export interface Establishment extends Entity {
 export type CreateEstablishmentDto = {
   name: string;
   cnes: string;
-  directorship: string
+  directorship: string;
 };
 
 export type UpdateEstablishmentDto = Partial<CreateEstablishmentDto>;

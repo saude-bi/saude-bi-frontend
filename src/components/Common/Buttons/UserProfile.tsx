@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { Stack, Text, Group, Menu, UnstyledButton, Avatar, createStyles, rem } from '@mantine/core';
-import { User } from '@/types/user';
 import {
   IconChevronDown,
   IconLogout,
@@ -10,8 +9,9 @@ import {
   IconSwitchHorizontal,
   IconUser,
 } from '@tabler/icons-react';
-import { logoutUser, switchWorkRelation } from '@/store/auth';
 import { useRouter } from 'next/navigation';
+import { User } from '@/types/user';
+import { logoutUser, switchWorkRelation } from '@/store/auth';
 
 type Props = {
   user: User;

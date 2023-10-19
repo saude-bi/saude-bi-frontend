@@ -1,14 +1,14 @@
 'use client';
 
-import { useGluedEmotionCache } from '@/lib/emotionNextjsGlue';
-import { baseApi } from '@/store/api';
-import { theme } from '@/utils/theme';
 import { CacheProvider } from '@emotion/react';
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
 import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
 import React from 'react';
+import { theme } from '@/utils/theme';
+import { baseApi } from '@/store/api';
+import { useGluedEmotionCache } from '@/lib/emotionNextjsGlue';
 
 export default function EmotionProvider({ children }: { children: React.ReactNode }) {
   const cache = useGluedEmotionCache();

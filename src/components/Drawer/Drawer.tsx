@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { Stack, Title } from '@mantine/core';
+import { usePathname } from 'next/navigation';
 import { ContentCard } from '../Common/ContentCard/ContentCard';
 import { DrawerMenu, Menu, MenuItem } from '@/components/Drawer/DrawerMenu';
-import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/auth';
 
 type Props = {

@@ -1,9 +1,8 @@
-import { Box, Stack, TextInput } from '@mantine/core';
+import { Box, Stack, TextInput, Select } from '@mantine/core';
 import { z } from 'zod';
-import { GenericForm } from '../Common/Layout/FormLayout';
-import { Select } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
+import { GenericForm } from '../Common/Layout/FormLayout';
 import { useFindAllOccupationsQuery } from '@/store/occupations';
 import { useFindAllEstablishmentsQuery } from '@/store/establishments';
 import { ButtonSave } from '../Common/Buttons/Buttons';
@@ -92,7 +91,7 @@ export const WorkRelationInputs = <T,>({ disabled = false, form, onSave }: Props
         onSearchChange={setSearchEstablishment}
       />
 
-      <ButtonSave onClick={onSave}></ButtonSave>
+      <ButtonSave onClick={onSave} />
     </Stack>
   );
 };

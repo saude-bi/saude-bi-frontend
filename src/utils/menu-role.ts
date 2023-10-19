@@ -1,4 +1,3 @@
-import { Menu } from '@/components/Drawer/DrawerMenu';
 import {
   IconBuildingHospital,
   IconBuildingWarehouse,
@@ -12,6 +11,7 @@ import {
   IconSourceCode,
   IconUser,
 } from '@tabler/icons-react';
+import { Menu } from '@/components/Drawer/DrawerMenu';
 
 export const menuAdmin: Menu[] = [
   {

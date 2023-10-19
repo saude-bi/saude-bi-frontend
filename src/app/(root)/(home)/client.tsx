@@ -1,15 +1,15 @@
 'use client';
 
-import { useFindAllDashboardQuery } from '@/store/dashboards';
 import { Flex, Group, SimpleGrid, Stack, Text, Title } from '@mantine/core';
-import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
-import { FilterSelector } from '@/components/FilterSelector/FilterSelector';
 import Link from 'next/link';
 import { IconDashboard, IconMap } from '@tabler/icons-react';
-import { Dashboard } from '@/types/dashboards';
 import { string } from 'zod';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Dashboard } from '@/types/dashboards';
+import { FilterSelector } from '@/components/FilterSelector/FilterSelector';
+import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
+import { useFindAllDashboardQuery } from '@/store/dashboards';
 
 type Props = {
   type: 'dashboard' | 'map';
@@ -17,23 +17,21 @@ type Props = {
   href: string;
 };
 
-const DashboardCard: React.FC<Props> = ({ title, type, href }) => {
-  return (
-    <Link href={href} style={{ textDecoration: 'none' }}>
-      <ContentCard h={90}>
-        <Flex h="100%">
-          <Group spacing={'sm'} noWrap align="center">
-            {type === 'dashboard' && <IconDashboard size={24} />}
-            {type === 'map' && <IconMap size={24} />}
-            <Text fz="sm" fw={500}>
-              {title}
-            </Text>
-          </Group>
-        </Flex>
-      </ContentCard>
-    </Link>
-  );
-};
+const DashboardCard: React.FC<Props> = ({ title, type, href }) => (
+  <Link href={href} style={{ textDecoration: 'none' }}>
+    <ContentCard h={90}>
+      <Flex h="100%">
+        <Group spacing="sm" noWrap align="center">
+          {type === 'dashboard' && <IconDashboard size={24} />}
+          {type === 'map' && <IconMap size={24} />}
+          <Text fz="sm" fw={500}>
+            {title}
+          </Text>
+        </Group>
+      </Flex>
+    </ContentCard>
+  </Link>
+);
 
 type DashboardGroups = {
   [key: string]: Dashboard[];

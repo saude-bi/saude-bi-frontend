@@ -1,14 +1,14 @@
-import { NavBar } from '@/components/Common/NavBar/NavBar';
 import React from 'react';
+import { NavBar } from '@/components/Common/NavBar/NavBar';
 
 export const metadata = {
-  title: 'Dashboars'
+  title: 'Dashboars',
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <NavBar title="Dashboars"></NavBar>
+      <NavBar title="Dashboars" />
       {children}
     </>
   );

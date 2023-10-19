@@ -3,11 +3,11 @@
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useForm, zodResolver } from '@mantine/form';
 import { useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import { useFindEstablishmentQuery, useUpdateEstablishmentMutation } from '@/store/establishments';
 import { UpdateEstablishmentDto } from '@/types/establishment';
 import { EstablishmentInputs, EstablishmentSchema } from '@/components/Forms/establishment';
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
-import { useParams } from 'next/navigation';
 
 export default function EstablishmentPage() {
   const { slug } = useParams();
@@ -19,7 +19,7 @@ export default function EstablishmentPage() {
     initialValues: {
       name: '',
       cnes: '',
-      directorship: ''
+      directorship: '',
     },
 
     validate: zodResolver(EstablishmentSchema),

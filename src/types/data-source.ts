@@ -1,4 +1,4 @@
-import {Entity} from "@/types/common";
+import { Entity } from '@/types/common';
 
 export interface DataSource extends Entity {
   name: string;

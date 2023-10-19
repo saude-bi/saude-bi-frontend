@@ -1,6 +1,5 @@
 import { notifications } from '@mantine/notifications';
-import { IconX } from '@tabler/icons-react';
-import { IconCheck } from '@tabler/icons-react';
+import { IconX, IconCheck } from '@tabler/icons-react';
 
 export type BaseNotificationProps = {
   title?: string;
@@ -14,8 +13,8 @@ export const ShowStateNotification = ({
   type = 'success',
 }: BaseNotificationProps) =>
   notifications.show({
-    title: title,
-    message: message,
+    title,
+    message,
     icon: type === 'success' ? <IconCheck size="1.1rem" /> : <IconX size="1.1rem" />,
     color: type === 'success' ? 'teal' : 'red',
   });

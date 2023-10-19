@@ -1,14 +1,14 @@
 'use client';
 
-import { GenericFindAllQuery, GenericRemoveMutation } from '@/store/common';
-import { Entity } from '@/types/common';
 import { MantineReactTable, MRT_ColumnDef } from 'mantine-react-table';
 import { MRT_Localization_PT_BR } from 'mantine-react-table/locales/pt-BR';
 import { useCallback, useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { GenericFindAllQuery, GenericRemoveMutation } from '@/store/common';
+import { Entity } from '@/types/common';
 import { ButtonCreate } from '../Buttons/Buttons';
 import { RowActions } from './RowActions';
 import { getCreatePath, getPreviewPath, getUpdatePath } from '@/utils/routes';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 interface Props<T extends Entity> {
   useFindAllQuery: GenericFindAllQuery<T>;
@@ -53,7 +53,7 @@ export const DataTable = <T extends Entity>({
     { pollingInterval: 30000 }
   );
 
-  const remove = !!useRemoveMutation ? useRemoveMutation()[0] : undefined;
+  const remove = useRemoveMutation ? useRemoveMutation()[0] : undefined;
 
   return (
     <MantineReactTable

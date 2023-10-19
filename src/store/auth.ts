@@ -7,14 +7,14 @@ export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getCurrentUser: build.query<UserInfo, void>({
       query: () => ({
-        url: `auth`,
+        url: 'auth',
       }),
       keepUnusedDataFor: 0.0001,
     }),
 
     login: build.mutation<TokenResponse, LoginFormDto>({
       query: (body) => ({
-        url: `auth`,
+        url: 'auth',
         method: 'POST',
         body,
       }),

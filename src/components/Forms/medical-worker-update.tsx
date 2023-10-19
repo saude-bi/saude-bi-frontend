@@ -13,17 +13,16 @@ import {
   rem,
 } from '@mantine/core';
 import { z } from 'zod';
-import { GenericForm } from '@/components/Common/Layout/FormLayout';
 import { IMaskInput } from 'react-imask';
-import { validateCNS, validateCPF } from '@/utils/validation';
 import { useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { useDisclosure } from '@mantine/hooks';
+import { GenericForm } from '@/components/Common/Layout/FormLayout';
+import { validateCNS, validateCPF } from '@/utils/validation';
 import { WorkRelation } from '@/types/medical-worker';
 import { OccupationCard } from '../Common/ContentCard/OccupationCard';
 import { WorkRelationDrawer } from '@/app/(root)/admin/medical-worker/(crud)/_components/WorkRelationDrawer';
-import { useParams } from 'next/navigation';
 import { useRemoveWorkRelationMutation } from '@/store/work-relation';
-import { useRouter } from 'next/navigation';
-import { useDisclosure } from '@mantine/hooks';
 
 export const MedicalWorkerSchema = z.object({
   name: z
@@ -228,7 +227,7 @@ export const MedicalWorkerUpdateInputs = <T,>({ disabled = false, form }: Props<
                   />
                 ))}
               </SimpleGrid>
-              <SimpleGrid cols={3} mt="md"></SimpleGrid>
+              <SimpleGrid cols={3} mt="md" />
             </Card>
           </>
         )}

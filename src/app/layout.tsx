@@ -1,5 +1,5 @@
-import EmotionProvider from '@/components/Providers/Emotion';
 import React from 'react';
+import EmotionProvider from '@/components/Providers/Emotion';
 
 export const metadata = {
   title: {
@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
-      <head></head>
+      <head />
       <body>
         <EmotionProvider>{children}</EmotionProvider>
       </body>

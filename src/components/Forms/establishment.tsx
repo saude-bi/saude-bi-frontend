@@ -1,8 +1,8 @@
 import { Box, Select, TextInput } from '@mantine/core';
 import { z } from 'zod';
-import { GenericForm } from '@/components/Common/Layout/FormLayout';
 import { useEffect, useState } from 'react';
 import { useDebouncedState } from '@mantine/hooks';
+import { GenericForm } from '@/components/Common/Layout/FormLayout';
 import { useFindAllDirectorshipsQuery } from '@/store/directorship';
 
 export const EstablishmentSchema = z.object({

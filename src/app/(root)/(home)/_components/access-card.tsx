@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
-import { Directorship } from '@/types/directorship';
 import { setCookie } from 'cookies-next';
 import { Anchor, Text, Stack } from '@mantine/core';
+import { Directorship } from '@/types/directorship';
 import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
 
 type PropsAccessCard = {
@@ -10,7 +10,11 @@ type PropsAccessCard = {
   workRelation: number;
 };
 
-export const AccessCard: React.FC<PropsAccessCard> = ({ establishment, occupation, workRelation }) => {
+export const AccessCard: React.FC<PropsAccessCard> = ({
+  establishment,
+  occupation,
+  workRelation,
+}) => {
   const router = useRouter();
 
   const onClick = () => {
@@ -21,7 +25,7 @@ export const AccessCard: React.FC<PropsAccessCard> = ({ establishment, occupatio
   return (
     <Anchor onClick={onClick} style={{ textDecoration: 'none' }}>
       <ContentCard>
-        <Stack spacing={'sm'}>
+        <Stack spacing="sm">
           <Text fz="sm" fw={500}>
             {establishment}
           </Text>

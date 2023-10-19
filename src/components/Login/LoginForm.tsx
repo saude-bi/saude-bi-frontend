@@ -1,9 +1,8 @@
-import { Button, Stack, Title } from '@mantine/core';
-import { TextInput } from '@mantine/core';
+import { Button, Stack, Title, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useLoginMutation } from '@/store/auth';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLoginMutation } from '@/store/auth';
 import { LoginFormDto } from '@/types/user';
 import { ContentCard } from '../Common/ContentCard/ContentCard';
 

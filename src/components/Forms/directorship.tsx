@@ -20,24 +20,22 @@ type Props<T> = {
   form: GenericForm<T>;
 };
 
-export const DirectorshipInputs = <T,>({ disabled = false, form }: Props<T>) => {
-  return (
-    <Box>
-      <TextInput
-        withAsterisk
-        label="Categoria"
-        placeholder="Categoria"
-        {...form.getInputProps('name')}
-        disabled={disabled}
-      />
+export const DirectorshipInputs = <T,>({ disabled = false, form }: Props<T>) => (
+  <Box>
+    <TextInput
+      withAsterisk
+      label="Categoria"
+      placeholder="Categoria"
+      {...form.getInputProps('name')}
+      disabled={disabled}
+    />
 
-      <TextInput
-        withAsterisk
-        label="Sigla"
-        placeholder="Sigla"
-        {...form.getInputProps('acronym')}
-        disabled={disabled}
-      />
-    </Box>
-  );
-};
+    <TextInput
+      withAsterisk
+      label="Sigla"
+      placeholder="Sigla"
+      {...form.getInputProps('acronym')}
+      disabled={disabled}
+    />
+  </Box>
+);

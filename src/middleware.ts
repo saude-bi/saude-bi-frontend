@@ -1,17 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 
-const isAdminRoute = (pathname: string) => {
-  return pathname.startsWith('/admin');
-};
+const isAdminRoute = (pathname: string) => pathname.startsWith('/admin');
 
-const isSwitchRoute = (pathname: string) => {
-  return pathname.startsWith('/switch-work');
-};
+const isSwitchRoute = (pathname: string) => pathname.startsWith('/switch-work');
 
-export const isPublicPage = (pathname: string) => {
-  return pathname.startsWith('/auth');
-};
+export const isPublicPage = (pathname: string) => pathname.startsWith('/auth');
 
 interface DecodedJwt {
   username: string;

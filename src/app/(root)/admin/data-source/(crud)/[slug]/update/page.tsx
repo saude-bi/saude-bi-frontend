@@ -3,11 +3,11 @@
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useForm, zodResolver } from '@mantine/form';
 import { useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import { useFindDataSourceQuery, useUpdateDataSourceMutation } from '@/store/data-source';
 import { UpdateDataSourceDto } from '@/types/data-source';
 import { DataSourceInputs, DataSourceSchema } from '@/components/Forms/data-source';
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
-import { useParams } from 'next/navigation';
 
 export default function DataSourcePage() {
   const { slug } = useParams();

@@ -9,12 +9,12 @@ import {
   PasswordInput,
 } from '@mantine/core';
 import { z } from 'zod';
-import { GenericForm } from '@/components/Common/Layout/FormLayout';
 import { IMaskInput } from 'react-imask';
-import { validateCNS, validateCPF } from '@/utils/validation';
 import { useEffect, useState } from 'react';
-import { useFindAllUsersQuery } from '@/store/user';
 import { useDebouncedState, useDisclosure } from '@mantine/hooks';
+import { GenericForm } from '@/components/Common/Layout/FormLayout';
+import { validateCNS, validateCPF } from '@/utils/validation';
+import { useFindAllUsersQuery } from '@/store/user';
 
 export const MedicalWorkerSchema = z.object({
   name: z

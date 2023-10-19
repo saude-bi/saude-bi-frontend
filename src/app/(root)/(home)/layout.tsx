@@ -1,7 +1,7 @@
-import { NavBar } from '@/components/Common/NavBar/NavBar';
 import React from 'react';
-import { DashboardsLayout } from './_components/dashboards-layout';
 import { cookies } from 'next/dist/client/components/headers';
+import { NavBar } from '@/components/Common/NavBar/NavBar';
+import { DashboardsLayout } from './_components/dashboards-layout';
 import { PaginatedResponse } from '@/types/common';
 import { DashboardCategory } from '@/types/dashboard-category';
 
@@ -39,7 +39,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
 
   return (
     <>
-      <NavBar title="Dashboards"></NavBar>
+      <NavBar title="Dashboards" />
       <DashboardsLayout categories={categories.data}>{children}</DashboardsLayout>
     </>
   );

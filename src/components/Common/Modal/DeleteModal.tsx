@@ -6,8 +6,9 @@ type Props = {
   onConfirm?: () => void;
 };
 
-export const createDeleteModal = ({ onCancel, onConfirm }: Props) => {
-  return () =>
+export const createDeleteModal =
+  ({ onCancel, onConfirm }: Props) =>
+  () =>
     modals.openConfirmModal({
       title: 'Confirmação de exclusão',
       centered: true,
@@ -22,4 +23,3 @@ export const createDeleteModal = ({ onCancel, onConfirm }: Props) => {
       onCancel,
       onConfirm,
     });
-};

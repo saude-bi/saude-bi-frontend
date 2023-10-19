@@ -2,11 +2,11 @@
 
 import React, { Children, useContext, useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { getCookie } from 'cookies-next';
+import { LoadingOverlay } from '@mantine/core';
 import { User } from '@/types/user';
 import { logoutUser, useGetCurrentUserQuery } from '@/store/auth';
-import { getCookie } from 'cookies-next';
 import { isPublicPage } from '@/middleware';
-import { LoadingOverlay } from '@mantine/core';
 import { menuAdmin, menuMedicalWorker } from '@/utils/menu-role';
 import { Menu } from '@/components/Drawer/DrawerMenu';
 

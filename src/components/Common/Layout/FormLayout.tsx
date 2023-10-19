@@ -1,19 +1,19 @@
 'use client';
 
-import { ButtonDelete, ButtonEdit, ButtonSave } from '@/components/Common/Buttons/Buttons';
 import { Button, Grid, Stack, Text } from '@mantine/core';
-import { ContentCard } from '../ContentCard/ContentCard';
 import React, { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { UseForm } from '@mantine/form/lib/types';
+import { notifications } from '@mantine/notifications';
+import { IconEye, IconList } from '@tabler/icons-react';
 import {
   GenericCreateMutation,
   GenericRemoveMutation,
   GenericUpdateMutation,
 } from '@/store/common';
 import { getPreviousPage, getUpdatePath } from '@/utils/routes';
-import {notifications} from "@mantine/notifications";
-import { IconEye, IconList } from '@tabler/icons-react';
+import { ContentCard } from '../ContentCard/ContentCard';
+import { ButtonDelete, ButtonEdit, ButtonSave } from '@/components/Common/Buttons/Buttons';
 
 export type GenericForm<T> = ReturnType<UseForm<T>>;
 
@@ -146,7 +146,7 @@ const CreateAction = <T,>({ form, useCreateMutation }: PropsCreateAction<T>) => 
   }, [isSuccess]);
   useEffect(() => {
     if (isError) {
-      notifications.show({message: "Falha ao Salvar, Verifique os Campos"});
+      notifications.show({ message: 'Falha ao Salvar, Verifique os Campos' });
     }
   }, [isError]);
 
@@ -189,7 +189,7 @@ const UpdateAction = <T,>({ id, form, useUpdateMutation }: PropsUpdateAction<T>)
   }, [isSuccess]);
   useEffect(() => {
     if (isError) {
-      notifications.show({message: "Falha ao Salvar, Verifique os Campos"});
+      notifications.show({ message: 'Falha ao Salvar, Verifique os Campos' });
     }
   }, [isError]);
   return <ButtonSave onClick={onSave} />;

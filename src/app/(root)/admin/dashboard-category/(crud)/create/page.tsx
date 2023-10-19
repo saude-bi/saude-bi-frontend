@@ -1,9 +1,9 @@
 'use client';
 
-import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import React from 'react';
-import { CreateDashboardCategoryDto } from '@/types/dashboard-category';
 import { useForm, zodResolver } from '@mantine/form';
+import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { CreateDashboardCategoryDto } from '@/types/dashboard-category';
 import {
   DashboardCategoryInputs,
   DashboardCategorySchema,

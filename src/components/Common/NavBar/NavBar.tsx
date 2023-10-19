@@ -26,8 +26,8 @@ export const NavBar: React.FC<Props> = ({ title }) => {
 
   return (
     <Flex align="center" justify="space-between">
-        <PageTitle title={title} />
-        <UserProfile user={!!currentUser ? currentUser : {} as User} />
+      <PageTitle title={title} />
+      <UserProfile user={currentUser || ({} as User)} />
     </Flex>
   );
 };

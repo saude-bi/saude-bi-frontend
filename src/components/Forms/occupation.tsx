@@ -1,10 +1,9 @@
-import { Box, TextInput } from '@mantine/core';
+import { Box, TextInput, Select } from '@mantine/core';
 import { z } from 'zod';
-import { GenericForm } from '../Common/Layout/FormLayout';
-import { Select } from '@mantine/core';
-import { useFindAllOccupationCategoriesQuery } from '@/store/occupation-categories';
 import { useDebouncedState } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
+import { GenericForm } from '../Common/Layout/FormLayout';
+import { useFindAllOccupationCategoriesQuery } from '@/store/occupation-categories';
 
 export const OccupationSchema = z.object({
   name: z

@@ -1,6 +1,10 @@
 import { Entity } from '@/types/common';
 import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from './common';
-import { CreateEstablishmentDto, Establishment, UpdateEstablishmentDto } from '@/types/establishment';
+import {
+  CreateEstablishmentDto,
+  Establishment,
+  UpdateEstablishmentDto,
+} from '@/types/establishment';
 
 const endpoint = 'establishments';
 

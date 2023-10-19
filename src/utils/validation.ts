@@ -11,7 +11,8 @@ export const validateCNS = (cns: string): boolean => {
 
 export const validateCns12 = (cns: string): boolean => {
   let soma: number;
-  let resto, dv: number;
+  let resto;
+  let dv: number;
   let pis: string = '';
   let resultado: string = '';
   pis = cns.substring(0, 11);
@@ -53,9 +54,9 @@ export const validateCns12 = (cns: string): boolean => {
 
     resto = soma % 11;
     dv = 11 - resto;
-    resultado = pis + '001' + dv.toString();
+    resultado = `${pis}001${dv.toString()}`;
   } else {
-    resultado = pis + '000' + dv.toString();
+    resultado = `${pis}000${dv.toString()}`;
   }
 
   if (!(cns == resultado)) {
@@ -66,7 +67,8 @@ export const validateCns12 = (cns: string): boolean => {
 
 export const validateCns789 = (cns: string): boolean => {
   let dv: number;
-  let resto, soma: number;
+  let resto;
+  let soma: number;
 
   soma =
     parseInt(cns.substring(0, 1)) * 15 +
@@ -109,8 +111,7 @@ export const validateCPF = (cpf: string): boolean => {
     cpf == '77777777777' ||
     cpf == '88888888888' ||
     cpf == '99999999999'
-  )
-    return false;
+  ) return false;
   // Valida 1o digito
   let add: number = 0;
   for (let i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i);

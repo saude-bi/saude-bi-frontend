@@ -1,6 +1,6 @@
-import { UpdateOccupationCategoryDto } from '@/types/occupation-category';
 import { Box, TextInput } from '@mantine/core';
 import { z } from 'zod';
+import { UpdateOccupationCategoryDto } from '@/types/occupation-category';
 import { GenericForm } from '../Common/Layout/FormLayout';
 
 export const OccupationCategorySchema = z.object({
@@ -16,16 +16,14 @@ type Props<T> = {
   form: GenericForm<T>;
 };
 
-export const OccupationCategoryInputs = <T,>({ disabled = false, form }: Props<T>) => {
-  return (
-    <Box>
-      <TextInput
-        withAsterisk
-        label="Categoria"
-        placeholder="Categoria"
-        {...form.getInputProps('name')}
-        disabled={disabled}
-      />
-    </Box>
-  );
-};
+export const OccupationCategoryInputs = <T,>({ disabled = false, form }: Props<T>) => (
+  <Box>
+    <TextInput
+      withAsterisk
+      label="Categoria"
+      placeholder="Categoria"
+      {...form.getInputProps('name')}
+      disabled={disabled}
+    />
+  </Box>
+);

@@ -1,14 +1,14 @@
 import React from 'react';
+import { cookies } from 'next/dist/client/components/headers';
 import { NavBar } from '@/components/Common/NavBar/NavBar';
 import { SwitchWorkLayout } from './_components/switch-work-layout';
+
+import { PaginatedResponse } from '@/types/common';
+import { Directorship } from '@/types/directorship';
 
 export const metadata = {
   title: 'Alterar Vínculo',
 };
-
-import { PaginatedResponse } from '@/types/common';
-import { Directorship } from '@/types/directorship';
-import { cookies } from 'next/dist/client/components/headers';
 
 async function getData() {
   const requestHeaders: HeadersInit = new Headers();
@@ -39,7 +39,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
   const directorship = await getData();
   return (
     <>
-      <NavBar title="Alterar Vínculo"></NavBar>
+      <NavBar title="Alterar Vínculo" />
       <SwitchWorkLayout directorship={directorship.data}>{children}</SwitchWorkLayout>
     </>
   );

@@ -3,11 +3,11 @@
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useForm } from '@mantine/form';
 import { useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import { UpdateEstablishmentDto } from '@/types/establishment';
 import { useFindEstablishmentQuery, useRemoveEstablishmentMutation } from '@/store/establishments';
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import { EstablishmentInputs } from '@/components/Forms/establishment';
-import { useParams } from 'next/navigation';
 
 export default function EstablishmentPage() {
   const { slug } = useParams();

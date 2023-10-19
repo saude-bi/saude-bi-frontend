@@ -1,4 +1,3 @@
-import { Entity, PaginatedResponse, PaginationQuery } from '@/types/common';
 import {
   BaseQueryFn,
   FetchArgs,
@@ -8,6 +7,7 @@ import {
   QueryDefinition,
 } from '@reduxjs/toolkit/dist/query';
 import { UseMutation, UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { Entity, PaginatedResponse, PaginationQuery } from '@/types/common';
 import { baseApi } from './api';
 
 export type GenericFindByIdQuery<T extends Entity> = UseQuery<
@@ -25,7 +25,7 @@ export const injectFindById = <T extends Entity>(name: string, endpoint: string)
   const entityApi = baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
     endpoints: (build) => ({
       [name]: build.query<T, number>({
-        query: (id) => ({ url: endpoint + '/' + id }),
+        query: (id) => ({ url: `${endpoint}/${id}` }),
         providesTags: (_, __, id) => [{ type: endpoint, id }],
       }),
     }),
@@ -59,8 +59,8 @@ export type GenericFindAllQuery<T extends Entity, U = { name?: string }> = UseQu
   >
 >;
 
-export const injectFindAll = <T extends Entity, U = {}>(name: string, endpoint: string) => {
-  return baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
+export const injectFindAll = <T extends Entity, U = {}>(name: string, endpoint: string) =>
+  baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
     endpoints: (build) => ({
       [name]: build.query<PaginatedResponse<T>, (PaginationQuery & U) | void>({
         query: (params) => ({ url: endpoint, params: params || undefined }),
@@ -74,7 +74,6 @@ export const injectFindAll = <T extends Entity, U = {}>(name: string, endpoint: 
       }),
     }),
   });
-};
 
 export type GenericCreateMutation<T extends Entity, U = Partial<T>> = UseMutation<
   MutationDefinition<
@@ -85,8 +84,8 @@ export type GenericCreateMutation<T extends Entity, U = Partial<T>> = UseMutatio
   >
 >;
 
-export const injectCreate = <T extends Entity, U = Partial<T>>(name: string, endpoint: string) => {
-  return baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
+export const injectCreate = <T extends Entity, U = Partial<T>>(name: string, endpoint: string) =>
+  baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
     endpoints: (build) => ({
       [name]: build.mutation<T, U>({
         query: (body) => ({ url: endpoint, body, method: 'POST' }),
@@ -94,14 +93,13 @@ export const injectCreate = <T extends Entity, U = Partial<T>>(name: string, end
       }),
     }),
   });
-};
 
 export const injectCreateChild = <T extends Entity, U = Partial<T>>(
   name: string,
   endpoint: string,
   options?: InjectOptions
-) => {
-  return baseApi
+) =>
+  baseApi
     .enhanceEndpoints({ addTagTypes: [endpoint, ...(options?.addTagTypes || [])] })
     .injectEndpoints({
       endpoints: (build) => ({
@@ -118,7 +116,6 @@ export const injectCreateChild = <T extends Entity, U = Partial<T>>(
         }),
       }),
     });
-};
 
 export type GenericUpdateMutation<T extends Entity, U = Partial<T>> = UseMutation<
   MutationDefinition<
@@ -129,16 +126,15 @@ export type GenericUpdateMutation<T extends Entity, U = Partial<T>> = UseMutatio
   >
 >;
 
-export const injectUpdate = <T extends Entity, U = Partial<T>>(name: string, endpoint: string) => {
-  return baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
+export const injectUpdate = <T extends Entity, U = Partial<T>>(name: string, endpoint: string) =>
+  baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
     endpoints: (build) => ({
       [name]: build.mutation<T, { id: number; body: U }>({
-        query: ({ id, body }) => ({ url: endpoint + '/' + id, method: 'PATCH', body }),
+        query: ({ id, body }) => ({ url: `${endpoint}/${id}`, method: 'PATCH', body }),
         invalidatesTags: (_, __, { id }) => [{ type: endpoint, id }],
       }),
     }),
   });
-};
 
 export type GenericRemoveMutation = UseMutation<
   MutationDefinition<
@@ -149,11 +145,11 @@ export type GenericRemoveMutation = UseMutation<
   >
 >;
 
-export const injectRemove = (name: string, endpoint: string) => {
-  return baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
+export const injectRemove = (name: string, endpoint: string) =>
+  baseApi.enhanceEndpoints({ addTagTypes: [endpoint] }).injectEndpoints({
     endpoints: (build) => ({
       [name]: build.mutation<null, number>({
-        query: (id) => ({ url: endpoint + '/' + id, method: 'DELETE' }),
+        query: (id) => ({ url: `${endpoint}/${id}`, method: 'DELETE' }),
         invalidatesTags: (_, __, id) => [
           { type: endpoint, id },
           { type: endpoint, id: 'PAGE' },
@@ -161,16 +157,15 @@ export const injectRemove = (name: string, endpoint: string) => {
       }),
     }),
   });
-};
 
-export const injectRemoveChild = (name: string, endpoint: string, options?: InjectOptions) => {
-  return baseApi
+export const injectRemoveChild = (name: string, endpoint: string, options?: InjectOptions) =>
+  baseApi
     .enhanceEndpoints({ addTagTypes: [endpoint, ...(options?.addTagTypes || [])] })
     .injectEndpoints({
       endpoints: (build) => ({
         [name]: build.mutation<null, { idDomain: number; idChild: number }>({
           query: ({ idDomain, idChild }) => ({
-            url: endpoint.replace('[slug]', idDomain.toString()) + '/' + idChild,
+            url: `${endpoint.replace('[slug]', idDomain.toString())}/${idChild}`,
             method: 'DELETE',
           }),
           invalidatesTags: (_, __, { idChild }) => [
@@ -181,4 +176,3 @@ export const injectRemoveChild = (name: string, endpoint: string, options?: Inje
         }),
       }),
     });
-};

@@ -1,10 +1,10 @@
 'use client';
 
-import { useGetCurrentUserQuery } from '@/store/auth';
 import { Group, Title } from '@mantine/core';
-import { AccessCard } from './_components/access-card';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { AccessCard } from './_components/access-card';
+import { useGetCurrentUserQuery } from '@/store/auth';
 import { WorkRelation } from '@/types/medical-worker';
 
 export const ClientSwitchWork: React.FC = () => {
