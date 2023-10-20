@@ -1,6 +1,5 @@
 import { Box, TextInput } from '@mantine/core';
 import { z } from 'zod';
-import { UpdateOccupationCategoryDto } from '@/types/occupation-category';
 import { GenericForm } from '../Common/Layout/FormLayout';
 
 export const OccupationCategorySchema = z.object({

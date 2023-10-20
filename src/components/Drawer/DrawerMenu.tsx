@@ -63,8 +63,8 @@ const useStyles = createStyles((theme) => ({
 export const DrawerMenu: React.FC<Props> = ({ menu, active }) => {
   const { classes, theme, cx } = useStyles();
 
-  const submenus = (menu: MenuItem[]) =>
-    menu.map((item) => (
+  const submenus = (items: MenuItem[]) =>
+    items.map((item) => (
       <Link href={item.uri} key={item.name}>
         <UnstyledButton className={cx(classes.subLink)} key={item.name}>
           <Group noWrap align="center">

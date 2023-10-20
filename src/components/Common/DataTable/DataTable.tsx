@@ -2,7 +2,7 @@
 
 import { MantineReactTable, MRT_ColumnDef } from 'mantine-react-table';
 import { MRT_Localization_PT_BR } from 'mantine-react-table/locales/pt-BR';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { GenericFindAllQuery, GenericRemoveMutation } from '@/store/common';
 import { Entity } from '@/types/common';
@@ -81,8 +81,8 @@ export const DataTable = <T extends Entity>({
       renderRowActions={({ row }) => (
         <RowActions
           id={+row.id}
-          previewUrl={canPreview ? getPreviewPath(pageModuleUrl, parseInt(row.id)) : undefined}
-          updateUrl={canUpdate ? getUpdatePath(pageModuleUrl, parseInt(row.id)) : undefined}
+          previewUrl={canPreview ? getPreviewPath(pageModuleUrl, parseInt(row.id, 10)) : undefined}
+          updateUrl={canUpdate ? getUpdatePath(pageModuleUrl, parseInt(row.id, 10)) : undefined}
           onRemove={remove}
         />
       )}

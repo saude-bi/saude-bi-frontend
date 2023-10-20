@@ -1,13 +1,5 @@
-import { createStyles, Group, Paper, SimpleGrid, Text, rem, ActionIcon } from '@mantine/core';
-import {
-  IconUserPlus,
-  IconDiscount2,
-  IconReceipt2,
-  IconCoin,
-  IconArrowUpRight,
-  IconArrowDownRight,
-  IconTrash,
-} from '@tabler/icons-react';
+import { createStyles, Group, Paper, Text, rem, ActionIcon } from '@mantine/core';
+import { IconTrash } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   root: {

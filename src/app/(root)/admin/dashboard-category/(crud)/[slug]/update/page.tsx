@@ -19,9 +19,7 @@ export default function DashboardCategoriesPage() {
   const { slug } = useParams();
   const id = parseInt(slug as string, 10);
 
-  const { data, isSuccess, isError, isLoading } = useFindDashboardCategoryQuery(
-    slug ? id : skipToken
-  );
+  const { data, isSuccess } = useFindDashboardCategoryQuery(slug ? id : skipToken);
 
   const form = useForm<UpdateDashboardCategoryDto>({
     initialValues: {

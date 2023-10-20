@@ -32,10 +32,6 @@ export const FormLayout = <T,>({ title, form, FormInputs, extraButtons, ...props
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    console.log(pathname.split('/').slice(0, 4).join('/'));
-  }, [pathname]);
-
   return (
     <Grid>
       <Grid.Col span={3}>
@@ -123,7 +119,7 @@ interface PropsCreateAction<T> {
 const CreateAction = <T,>({ form, useCreateMutation }: PropsCreateAction<T>) => {
   const router = useRouter();
   const pathname = usePathname();
-  const [save, { isSuccess, isError, data }] = useCreateMutation();
+  const [save, { isSuccess, isError }] = useCreateMutation();
 
   const onSave = () => {
     if (!form.validate().hasErrors) {
@@ -162,7 +158,7 @@ interface PropsUpdateAction<T> {
 const UpdateAction = <T,>({ id, form, useUpdateMutation }: PropsUpdateAction<T>) => {
   const router = useRouter();
   const pathname = usePathname();
-  const [update, { isSuccess, isError, data }] = useUpdateMutation();
+  const [update, { isSuccess, isError }] = useUpdateMutation();
 
   const onSave = () => {
     if (!form.validate().hasErrors) {

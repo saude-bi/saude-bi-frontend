@@ -22,7 +22,7 @@ export const FilterSelector: React.FC<Props> = ({ options, setSelectedOption }) 
   return (
     <Chip.Group multiple={false} value={currentOption} onChange={setCurrentOption}>
       <Group position="center">
-        <Link href={`${pathname}?` + 'filter=todos'} onClick={() => setCurrentOption('todos')}>
+        <Link href={`${pathname}?filter=todos`} onClick={() => setCurrentOption('todos')}>
           <Chip color="teal" radius="md" value="todos" wrapperProps={{ border: 'none' }}>
             Todos
           </Chip>
@@ -30,7 +30,7 @@ export const FilterSelector: React.FC<Props> = ({ options, setSelectedOption }) 
         {options.map((option, idx) => (
           <Link
             key={idx}
-            href={`${pathname}?` + `filter=${option}`}
+            href={`${pathname}?filter=${option}`}
             onClick={() => setCurrentOption(option)}
           >
             <Chip color="teal" radius="md" value={option} wrapperProps={{ border: 'none' }}>

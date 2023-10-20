@@ -1,6 +1,5 @@
 import { Box, TextInput } from '@mantine/core';
 import { z } from 'zod';
-import { UpdateDashboardCategoryDto } from '@/types/dashboard-category';
 import { GenericForm } from '../Common/Layout/FormLayout';
 
 export const DashboardCategorySchema = z.object({

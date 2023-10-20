@@ -1,24 +1,22 @@
 'use client';
 
-import { useState } from 'react';
 import { Stack, Text } from '@mantine/core';
 import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
 import { FilterSelector } from '@/components/FilterSelector/FilterSelector';
-import { useGetCurrentUserQuery } from '@/store/auth';
 import { Directorship } from '@/types/directorship';
 
 type Props = {
   children: React.ReactNode;
-  directorship: Directorship[];
+  directorships: Directorship[];
 };
 
-export const SwitchWorkLayout: React.FC<Props> = ({ children, directorship }) => (
+export const SwitchWorkLayout: React.FC<Props> = ({ children, directorships }) => (
   <Stack>
     <ContentCard>
       <Stack align="center" justify="center">
         <Text>Filtrar por Diretoria:</Text>
         <FilterSelector
-          options={directorship.map((directorship) => directorship.acronym)}
+          options={directorships.map((directorship) => directorship.acronym)}
           setSelectedOption={() => {}}
         />
       </Stack>

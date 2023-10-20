@@ -25,7 +25,6 @@ export const authApi = baseApi.injectEndpoints({
             setCookie('token', data.access_token);
           }
         } catch (err) {
-          console.error(err);
           logoutUser();
         }
       },

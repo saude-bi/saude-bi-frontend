@@ -3,11 +3,9 @@
 import { Flex, Group, SimpleGrid, Stack, Text, Title } from '@mantine/core';
 import Link from 'next/link';
 import { IconDashboard, IconMap } from '@tabler/icons-react';
-import { string } from 'zod';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Dashboard } from '@/types/dashboards';
-import { FilterSelector } from '@/components/FilterSelector/FilterSelector';
 import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
 import { useFindAllDashboardQuery } from '@/store/dashboards';
 
@@ -32,10 +30,6 @@ const DashboardCard: React.FC<Props> = ({ title, type, href }) => (
     </ContentCard>
   </Link>
 );
-
-type DashboardGroups = {
-  [key: string]: Dashboard[];
-};
 
 export const ClientDashboards: React.FC = () => {
   const searchParams = useSearchParams();
@@ -73,8 +67,6 @@ export const ClientDashboards: React.FC = () => {
   useEffect(() => {
     updateDashboards();
   }, [dashboards, isSuccess]);
-
-  console.log(dashboards);
 
   return (
     <Stack>

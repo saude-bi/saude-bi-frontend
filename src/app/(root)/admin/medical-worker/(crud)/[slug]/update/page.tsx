@@ -7,14 +7,14 @@ import { useParams } from 'next/navigation';
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import { UpdateMedicalWorkerDto } from '@/types/medical-worker';
 import { useFindMedicalWorkerQuery, useUpdateMedicalWorkerMutation } from '@/store/medical-worker';
-import { MedicalWorkerInputs, MedicalWorkerSchema } from '@/components/Forms/medical-worker';
+import { MedicalWorkerSchema } from '@/components/Forms/medical-worker';
 import { MedicalWorkerUpdateInputs } from '@/components/Forms/medical-worker-update';
 
 export default function DashboardCategoriesPage() {
   const { slug } = useParams();
   const id = parseInt(slug as string, 10);
 
-  const { data, isSuccess, isError, isLoading } = useFindMedicalWorkerQuery(slug ? id : skipToken);
+  const { data, isSuccess } = useFindMedicalWorkerQuery(slug ? id : skipToken);
 
   const form = useForm<UpdateMedicalWorkerDto>({
     initialValues: {

@@ -1,4 +1,3 @@
-import { Entity } from '@/types/common';
 import { injectCreate, injectRemove, injectFindAll, injectFindById, injectUpdate } from './common';
 import {
   CreateEstablishmentDto,

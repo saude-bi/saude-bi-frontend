@@ -13,7 +13,7 @@ export default function UpdateDirectorshipPage() {
   const { slug } = useParams();
   const id = parseInt(slug as string, 10);
 
-  const { data, isSuccess, isError, isLoading } = useFindDirectorshipQuery(slug ? id : skipToken);
+  const { data, isSuccess } = useFindDirectorshipQuery(slug ? id : skipToken);
 
   const form = useForm<UpdateDirectorshipDto>({
     initialValues: {

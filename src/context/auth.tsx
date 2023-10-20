@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Children, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { getCookie } from 'cookies-next';
 import { LoadingOverlay } from '@mantine/core';
@@ -79,7 +79,6 @@ export const useAuth = () => useContext(AuthContext);
 export const ProtectRoute = ({ children }: any) => {
   const { isAuthenticated, isLoading } = useAuth();
   const [isPageLoading, setPageIsLoading] = useState(true);
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {

@@ -15,9 +15,7 @@ import { OccupationCategoryInputs } from '@/components/Forms/occupation-category
 export default function OccupationCategoriesPage() {
   const { slug } = useParams();
   const id = parseInt(slug as string, 10);
-  const { data, isSuccess, isError, isLoading } = useFindOccupationCategoryQuery(
-    slug ? id : skipToken
-  );
+  const { data, isSuccess } = useFindOccupationCategoryQuery(slug ? id : skipToken);
 
   const form = useForm<UpdateOccupationCategoryDto>({});
 

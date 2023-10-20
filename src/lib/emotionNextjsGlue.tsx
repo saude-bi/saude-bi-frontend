@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 export const useGluedEmotionCache = (key = 'emotion') => {
   const [cache] = useState(() => {
-    const cache = createCache({ key });
-    cache.compat = true;
-    return cache;
+    const cacheObject = createCache({ key });
+    cacheObject.compat = true;
+    return cacheObject;
   });
 
   useServerInsertedHTML(() => {

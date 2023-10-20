@@ -12,7 +12,7 @@ export default function Home() {
   const id = parseInt(slug as string, 10);
   const workRelation = parseInt(getCookie('workRelation') as string, 10);
 
-  const { data, isSuccess, isError, isLoading } = useFindDashboardUrlQuery(
+  const { data } = useFindDashboardUrlQuery(
     !!slug && !!workRelation
       ? {
           id,
@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     <ContentCard h="100%">
-      <iframe src={data?.url} frameBorder="0" width="100%" height="100%" />
+      <iframe title="dashboard" src={data?.url} frameBorder="0" width="100%" height="100%" />
     </ContentCard>
   );
 }

@@ -62,7 +62,7 @@ export const MedicalWorkerSchema = z.object({
       path: ['confirmPassword'],
     }),
   gender: z.enum(['Female', 'Male'], {
-    errorMap: (issue, _ctx) => {
+    errorMap: (issue) => {
       switch (issue.code) {
         case 'invalid_type':
           return { message: 'Campo Sexo é obrigatório' };

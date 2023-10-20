@@ -3,7 +3,6 @@
 import { Stack, Text } from '@mantine/core';
 import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
 import { FilterSelector } from '@/components/FilterSelector/FilterSelector';
-import { Dashboard } from '@/types/dashboards';
 import { DashboardCategory } from '@/types/dashboard-category';
 
 type Props = {

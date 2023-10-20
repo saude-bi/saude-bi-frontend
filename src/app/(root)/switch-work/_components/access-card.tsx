@@ -1,7 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { setCookie } from 'cookies-next';
 import { Anchor, Text, Stack } from '@mantine/core';
-import { Directorship } from '@/types/directorship';
 import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
 
 type PropsAccessCard = {

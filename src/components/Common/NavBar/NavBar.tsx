@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Flex } from '@mantine/core';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
 import { UserProfile } from '@/components/Common/Buttons/UserProfile';

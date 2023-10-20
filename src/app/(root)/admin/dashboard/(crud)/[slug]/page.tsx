@@ -13,7 +13,7 @@ import { Establishment } from '@/types/establishment';
 export default function Dashboards() {
   const { slug } = useParams();
   const id = parseInt(slug as string, 10);
-  const { data, isSuccess, isError, isLoading } = useFindDashboardQuery(slug ? id : skipToken);
+  const { data, isSuccess } = useFindDashboardQuery(slug ? id : skipToken);
   const form = useForm<UpdateDashboardDto>({});
 
   useEffect(() => {
@@ -22,7 +22,6 @@ export default function Dashboards() {
     );
 
     if (isSuccess && establishmentsWithAccessListId) {
-      console.log(data);
       form.setValues({
         establishmentsWithAccess: [...establishmentsWithAccessListId],
         dataSource: data.dataSource.id.toString(),

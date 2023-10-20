@@ -13,7 +13,7 @@ export default function DataSourcePage() {
   const { slug } = useParams();
   const id = parseInt(slug as string, 10);
 
-  const { data, isSuccess, isError, isLoading } = useFindDataSourceQuery(slug ? id : skipToken);
+  const { data, isSuccess } = useFindDataSourceQuery(slug ? id : skipToken);
 
   const form = useForm<UpdateDataSourceDto>({
     initialValues: {

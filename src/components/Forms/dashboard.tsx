@@ -85,7 +85,6 @@ export const DashboardInputs = <T,>({ disabled = false, form }: Props<T>) => {
       label: item.name,
     })) || [];
 
-  console.log(form);
   return (
     <Box>
       <MultiSelect

@@ -1,20 +1,10 @@
-import {
-  TextInput,
-  InputBase,
-  Stack,
-  Radio,
-  Group,
-  Select,
-  Switch,
-  PasswordInput,
-} from '@mantine/core';
+import { TextInput, InputBase, Stack, Radio, Group, Switch, PasswordInput } from '@mantine/core';
 import { z } from 'zod';
 import { IMaskInput } from 'react-imask';
 import { useEffect, useState } from 'react';
 import { useDebouncedState, useDisclosure } from '@mantine/hooks';
 import { GenericForm } from '@/components/Common/Layout/FormLayout';
 import { validateCNS, validateCPF } from '@/utils/validation';
-import { useFindAllUsersQuery } from '@/store/user';
 
 export const MedicalWorkerSchema = z.object({
   name: z
@@ -54,7 +44,7 @@ export const MedicalWorkerSchema = z.object({
       path: ['confirmPassword'],
     }),
   gender: z.enum(['Female', 'Male'], {
-    errorMap: (issue, _ctx) => {
+    errorMap: (issue) => {
       switch (issue.code) {
         case 'invalid_type':
           return { message: 'Campo Sexo é obrigatório' };
@@ -88,24 +78,26 @@ type Props<T> = {
 
 export const MedicalWorkerInputs = <T,>({ disabled = false, form }: Props<T>) => {
   const [access, setAccess] = useState(false);
-  const [search, setSearch] = useState('');
+  // FIXME: set search state
+  const [search] = useState('');
   const [visible, { toggle }] = useDisclosure(false);
-  const [currentSearch, setCurrentSearch] = useDebouncedState(search, 250);
+  const [_, setCurrentSearch] = useDebouncedState(search, 250);
 
   useEffect(() => {
     setCurrentSearch(search);
   }, [search]);
 
-  const { data } = useFindAllUsersQuery(
-    { page: 0, perPage: 1000, username: currentSearch },
-    { pollingInterval: 30000 }
-  );
-
-  const occupationCategoriesList =
-    data?.data.map((item) => ({
-      value: item.username,
-      label: item.username,
-    })) || [];
+  // FIXME: verificar utilização desta lista
+  //  const { data } = useFindAllUsersQuery(
+  //    { page: 0, perPage: 1000, username: currentSearch },
+  //    { pollingInterval: 30000 }
+  //  );
+  //
+  //  const occupationCategoriesList =
+  //    data?.data.map((item) => ({
+  //      value: item.username,
+  //      label: item.username,
+  //    })) || [];
 
   return (
     <Stack>

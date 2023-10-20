@@ -4,8 +4,7 @@ import React from 'react';
 import { Stack, Title } from '@mantine/core';
 import { usePathname } from 'next/navigation';
 import { ContentCard } from '../Common/ContentCard/ContentCard';
-import { DrawerMenu, Menu, MenuItem } from '@/components/Drawer/DrawerMenu';
-import { useAuth } from '@/context/auth';
+import { DrawerMenu, Menu } from '@/components/Drawer/DrawerMenu';
 
 type Props = {
   menu: Menu[];
@@ -17,8 +16,8 @@ export const Drawer: React.FC<Props> = ({ menu }) => {
 
   React.useEffect(() => {
     let pathAdminFound = false;
-    menu?.map((item) => {
-      item?.submenu?.map((subitem) => {
+    menu?.forEach((item) => {
+      item?.submenu?.forEach((subitem) => {
         if (pathname.includes(subitem.uri)) {
           pathAdminFound = true;
           setActive(item.name);

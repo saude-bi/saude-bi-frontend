@@ -3,15 +3,12 @@
 import { useEffect } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Box, Center, Flex, LoadingOverlay, Stack } from '@mantine/core';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
 import { Drawer } from '@/components/Drawer/Drawer';
-import { UserProfile } from '@/components/Common/Buttons/UserProfile';
 import { ScrollUp } from '@/components/Common/Buttons/ScrollUp';
 import {
   BaseNotificationProps,
   ShowStateNotification,
 } from '@/components/Common/Feedback/Notifications';
-import { User } from '@/types/user';
 import { isPublicPage } from '@/middleware';
 import { useAuth } from '@/context/auth';
 

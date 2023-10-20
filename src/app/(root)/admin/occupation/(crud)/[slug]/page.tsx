@@ -12,13 +12,12 @@ import { UpdateOccupationDto } from '@/types/occupations';
 export default function Occupations() {
   const { slug } = useParams();
   const id = parseInt(slug as string, 10);
-  const { data, isSuccess, isError, isLoading } = useFindOccupationQuery(slug ? id : skipToken);
+  const { data, isSuccess } = useFindOccupationQuery(slug ? id : skipToken);
 
   const form = useForm<UpdateOccupationDto>({});
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data);
       form.setValues({ ...data, category: data.category.id.toString() });
     }
   }, [isSuccess]);

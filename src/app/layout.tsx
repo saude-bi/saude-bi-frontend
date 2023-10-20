@@ -11,8 +11,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
-      <head />
+    <html lang="pt-BR">
       <body>
         <EmotionProvider>{children}</EmotionProvider>
       </body>

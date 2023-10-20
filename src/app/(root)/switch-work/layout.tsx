@@ -40,7 +40,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
   return (
     <>
       <NavBar title="Alterar Vínculo" />
-      <SwitchWorkLayout directorship={directorship.data}>{children}</SwitchWorkLayout>
+      <SwitchWorkLayout directorships={directorship.data}>{children}</SwitchWorkLayout>
     </>
   );
 }
