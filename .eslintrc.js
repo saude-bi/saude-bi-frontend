@@ -1,3 +1,5 @@
+const { off } = require('process');
+
 module.exports = {
   extends: [
     'mantine',
@@ -18,6 +20,7 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'consistent-return': 'off',
+    'no-script-url': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

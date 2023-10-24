@@ -1,14 +1,3 @@
-export const validateCNS = (cns: string): boolean => {
-  if (cns.trim().length !== 15) {
-    return false;
-  }
-
-  if (cns[0] !== '1' && cns[0] !== '2') {
-    return validateCns12(cns);
-  }
-  return validateCns789(cns);
-};
-
 export const validateCns12 = (cns: string): boolean => {
   let soma: number;
   let resto;
@@ -66,16 +55,14 @@ export const validateCns12 = (cns: string): boolean => {
 };
 
 export const validateCns789 = (cns: string): boolean => {
-  let dv: number;
-  let resto;
   let soma: number;
 
   soma = 0;
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 15; i += 1) {
     soma += parseInt(cns.substring(i, i + 1), 10) * 15 - i;
   }
 
-  resto = soma % 11;
+  const resto = soma % 11;
 
   if (resto !== 0) {
     return false;
@@ -84,34 +71,46 @@ export const validateCns789 = (cns: string): boolean => {
 };
 
 export const validateCPF = (cpf: string): boolean => {
-  cpf = cpf.replace(/[^\d]+/g, '');
-  if (cpf === '') return false;
+  const cpf_parsed = cpf.replace(/[^\d]+/g, '');
+  if (cpf_parsed === '') return false;
   // Elimina CPFs invalidos conhecidos
   if (
-    cpf.length !== 11 ||
-    cpf === '00000000000' ||
-    cpf === '11111111111' ||
-    cpf === '22222222222' ||
-    cpf === '33333333333' ||
-    cpf === '44444444444' ||
-    cpf === '55555555555' ||
-    cpf === '66666666666' ||
-    cpf === '77777777777' ||
-    cpf === '88888888888' ||
-    cpf === '99999999999'
-  )
+    cpf_parsed.length !== 11 ||
+    cpf_parsed === '00000000000' ||
+    cpf_parsed === '11111111111' ||
+    cpf_parsed === '22222222222' ||
+    cpf_parsed === '33333333333' ||
+    cpf_parsed === '44444444444' ||
+    cpf_parsed === '55555555555' ||
+    cpf_parsed === '66666666666' ||
+    cpf_parsed === '77777777777' ||
+    cpf_parsed === '88888888888' ||
+    cpf_parsed === '99999999999'
+  ) {
     return false;
+  }
   // Valida 1o digito
   let add: number = 0;
-  for (let i = 0; i < 9; i++) add += parseInt(cpf.charAt(i), 10) * (10 - i);
+  for (let i = 0; i < 9; i += 1) add += parseInt(cpf_parsed.charAt(i), 10) * (10 - i);
   let rev: number = 11 - (add % 11);
   if (rev === 10 || rev === 11) rev = 0;
-  if (rev !== parseInt(cpf.charAt(9))) return false;
+  if (rev !== parseInt(cpf_parsed.charAt(9), 10)) return false;
   // Valida 2o digito
   add = 0;
-  for (let i = 0; i < 10; i++) add += parseInt(cpf.charAt(i), 10) * (11 - i);
+  for (let i = 0; i < 10; i += 1) add += parseInt(cpf_parsed.charAt(i), 10) * (11 - i);
   rev = 11 - (add % 11);
   if (rev === 10 || rev === 11) rev = 0;
-  if (rev !== parseInt(cpf.charAt(10), 10)) return false;
+  if (rev !== parseInt(cpf_parsed.charAt(10), 10)) return false;
   return true;
+};
+
+export const validateCNS = (cns: string): boolean => {
+  if (cns.trim().length !== 15) {
+    return false;
+  }
+
+  if (cns[0] !== '1' && cns[0] !== '2') {
+    return validateCns12(cns);
+  }
+  return validateCns789(cns);
 };

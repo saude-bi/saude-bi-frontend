@@ -81,7 +81,7 @@ export const MedicalWorkerInputs = <T,>({ disabled = false, form }: Props<T>) =>
   // FIXME: set search state
   const [search] = useState('');
   const [visible, { toggle }] = useDisclosure(false);
-  const [_, setCurrentSearch] = useDebouncedState(search, 250);
+  const [, setCurrentSearch] = useDebouncedState(search, 250);
 
   useEffect(() => {
     setCurrentSearch(search);
