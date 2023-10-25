@@ -2,8 +2,8 @@ name: build
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-  AWS_REGION: ${{ env.AWS_REGION }} # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: ${{ env.ECR_REPOSITORY }} # set this to your Amazon ECR repository name
+  AWS_REGION: ${{ vars.AWS_REGION }} # set this to your preferred AWS region, e.g. us-west-1
+  ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }} # set this to your Amazon ECR repository name
 
 on:
   push:
