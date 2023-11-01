@@ -8,7 +8,7 @@ export default function LoginPage() {
     <Group w="100vw" h="100vh" bg="gray.2">
       <Stack w="50%" h="100%" align="center" justify="center" p="xl">
         <Image src="/login-image.png" height={250} fit="contain" />
-        <Title color="dark.3">SAUDE-BI (teste)</Title>
+        <Title color="dark.3">SAUDE-BI</Title>
         <Text color="dark.3" align="center">
           Bem-vindo ao Saude-Bi, o sistema de gestão de B.I para a área da saúde! Nossa solução
           oferece gestão de acessos e filtros de acordo com o perfil de cada usuário, garantindo o
