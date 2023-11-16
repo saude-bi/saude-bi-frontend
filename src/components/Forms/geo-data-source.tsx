@@ -35,33 +35,25 @@ type Props<T> = {
 };
 
 export const DataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => {
-  
-  const [searchDashboardCategory, setSearchDashboardCategory] = useState('');
-  
-  const [currentSearchDashboardCategory, setCurrentSearchDashboardCategory] = useDebouncedState(
-    searchDashboardCategory,
-    250
-  );
+  const [search, setSearch] = useState('');
+  const [currentSearch, setCurrentSearch] = useDebouncedState(search, 250);
 
   useEffect(() => {
-    setCurrentSearchDashboardCategory(searchDashboardCategory);
-  }, [searchDashboardCategory]);
+    setCurrentSearch(search);
+  }, [search]);
 
-  const { data: dataDashboardCategory } = useFindAllDashboardCategoriesQuery(
-    {
-      page: 0,
-      perPage: 1000,
-      name: currentSearchDashboardCategory,
-    },
+  const { data } = useFindAllDashboardCategoriesQuery(
+    { page: 0, perPage: 1000, name: currentSearch },
     { pollingInterval: 30000 }
   );
 
-  const dashboardCategoryList =
-    dataDashboardCategory?.data.map((item) => ({
+  const dashboardCategoriesList =
+    data?.data.map((item) => ({
       value: item.id.toString(),
       label: item.name,
     })) || [];
 
+  return (
   <Box>
     <TextInput
       withAsterisk
@@ -82,11 +74,11 @@ export const DataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => {
         label="Categoria"
         placeholder="Categoria"
         {...form.getInputProps('category')}
-        data={dashboardCategoryList}
+        data={dashboardCategoriesList}
         disabled={disabled}
         searchable
-        searchValue={searchDashboardCategory}
-        onSearchChange={setSearchDashboardCategory}
+        searchValue={search}
+        onSearchChange={setSearch}
       />
     <TextInput
       withAsterisk
@@ -103,4 +95,5 @@ export const DataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => {
       disabled={disabled}
     />
   </Box>
+  );
 };

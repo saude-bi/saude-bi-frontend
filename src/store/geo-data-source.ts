@@ -21,4 +21,4 @@ export const { useUpdateGeoDataSourceMutation } = injectUpdate<GeoDataSource, Up
     endpoint
 );
 
-export const {useRemoveGeoDataSourceMutation } = injectRemove('removeGeoDataSource', endpoint);
+export const { useRemoveGeoDataSourceMutation } = injectRemove('removeGeoDataSource', endpoint);
