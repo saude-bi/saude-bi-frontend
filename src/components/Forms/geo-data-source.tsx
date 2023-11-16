@@ -1,6 +1,9 @@
 import { Box, Select, TextInput } from "@mantine/core";
 import { z } from "zod";
+import { useDebouncedState } from "@mantine/hooks";
+import { useEffect, useState } from "react";
 import { GenericForm } from "@/components/Common/Layout/FormLayout";
+import { useFindAllDashboardCategoriesQuery } from "@/store/dashboard-categories";
 
 export const GeoDataSourceSchema = z.object({
     name: z
@@ -31,7 +34,34 @@ type Props<T> = {
   form: GenericForm<T>;
 };
 
-export const DataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => (
+export const DataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => {
+  
+  const [searchDashboardCategory, setSearchDashboardCategory] = useState('');
+  
+  const [currentSearchDashboardCategory, setCurrentSearchDashboardCategory] = useDebouncedState(
+    searchDashboardCategory,
+    250
+  );
+
+  useEffect(() => {
+    setCurrentSearchDashboardCategory(searchDashboardCategory);
+  }, [searchDashboardCategory]);
+
+  const { data: dataDashboardCategory } = useFindAllDashboardCategoriesQuery(
+    {
+      page: 0,
+      perPage: 1000,
+      name: currentSearchDashboardCategory,
+    },
+    { pollingInterval: 30000 }
+  );
+
+  const dashboardCategoryList =
+    dataDashboardCategory?.data.map((item) => ({
+      value: item.id.toString(),
+      label: item.name,
+    })) || [];
+
   <Box>
     <TextInput
       withAsterisk
@@ -48,12 +78,16 @@ export const DataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => (
       disabled={disabled}
     />
     <Select
-      withAsterisk
-      label="Categoria"
-      placeholder="Categoria"
-      {...form.getInputProps('category')}
-      disabled={disabled}
-    />
+        withAsterisk
+        label="Categoria"
+        placeholder="Categoria"
+        {...form.getInputProps('category')}
+        data={dashboardCategoryList}
+        disabled={disabled}
+        searchable
+        searchValue={searchDashboardCategory}
+        onSearchChange={setSearchDashboardCategory}
+      />
     <TextInput
       withAsterisk
       label="Login"
@@ -69,4 +103,4 @@ export const DataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => (
       disabled={disabled}
     />
   </Box>
-);
+};
