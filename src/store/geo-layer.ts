@@ -9,7 +9,7 @@ export const { useFindGeoLayerQuery } = injectFindById<GeoLayer>(
     endpoint
 );
 
-export const ( useFindAllGeoLayersQuery ) = injectFindAll<GeoLayer, { name?: string }>(
+export const ( useFindAllGeoLayerQuery ) = injectFindAll<GeoLayer, { name?: string }>(
     'findAllGeoLayer',
     endpoint
 );
