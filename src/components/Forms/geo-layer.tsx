@@ -31,6 +31,7 @@ export const GeoLayerInputs = <T,>({ disabled = false, form}: Props<T>) => {
       label: item.name,
     })) || [];
 
+    return(
     <Box>
       <TextInput
         withAsterisk
@@ -58,4 +59,5 @@ export const GeoLayerInputs = <T,>({ disabled = false, form}: Props<T>) => {
         onSearchChange={setSearch}
       />
     </Box>
-}
+  );
+};
