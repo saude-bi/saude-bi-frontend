@@ -8,7 +8,7 @@ export interface GeoMaps extends Entity{
 
 export type CreateGeoMapsDto = {
     name: string;
-    category: DashboardCategory;
+    category: string;
 }
 
 export type UpdateGeoMapsDto = Partial<CreateGeoMapsDto>;

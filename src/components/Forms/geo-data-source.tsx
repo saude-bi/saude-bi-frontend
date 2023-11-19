@@ -34,7 +34,7 @@ type Props<T> = {
   form: GenericForm<T>;
 };
 
-export const DataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => {
+export const GeoDataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => {
   const [search, setSearch] = useState('');
   const [currentSearch, setCurrentSearch] = useDebouncedState(search, 250);
 

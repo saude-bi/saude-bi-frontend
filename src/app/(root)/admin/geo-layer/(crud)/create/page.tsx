@@ -12,7 +12,15 @@ export default function GeoLayerPage() {
         initialValues: {
             name: '',
             params: '',
-            source: '',
+            source: {
+                name: '',
+                sourceUrl: '',
+                category: '',
+                credentials: {
+                    username: '',
+                    password: '',
+                }
+            },
         },
         validate: zodResolver(GeoLayerSchema),
         validateInputOnChange: true,

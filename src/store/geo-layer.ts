@@ -1,6 +1,6 @@
 import { CreateGeoLayerDto, GeoLayer, UpdateGeoLayerDto } from "@/types/geo-layer";
 import { injectCreate, injectFindAll, injectFindById, injectRemove, injectUpdate } from "./common";
-import { string } from "zod";
+
 
 const endpoint = 'geo-layer';
 
@@ -9,7 +9,7 @@ export const { useFindGeoLayerQuery } = injectFindById<GeoLayer>(
     endpoint
 );
 
-export const ( useFindAllGeoLayerQuery ) = injectFindAll<GeoLayer, { name?: string }>(
+export const { useFindAllGeoLayerQuery } = injectFindAll<GeoLayer, { name?: string }>(
     'findAllGeoLayer',
     endpoint
 );
