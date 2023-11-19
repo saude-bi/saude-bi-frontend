@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import { Dashboard } from '@/types/dashboards';
 import { ContentCard } from '@/components/Common/ContentCard/ContentCard';
 import { useFindAllDashboardQuery } from '@/store/dashboards';
+import { useFindAllGeoMapsQuery } from '@/store/geo-maps';
+import { GeoMaps } from '@/types/geo-maps';
 
 type Props = {
   type: 'dashboard' | 'map';
@@ -38,15 +40,31 @@ export const ClientDashboards: React.FC = () => {
     isLoading,
     isSuccess,
   } = useFindAllDashboardQuery({ page: 0, perPage: 1000 }, { pollingInterval: 30000 });
+
+  const {
+    data: geomaps,
+    isLoading: isGeomapsLoading,
+    isSuccess: isGeomapsSuccess,
+  } = useFindAllGeoMapsQuery({ page: 0, perPage: 1000 }, { pollingInterval: 30000 });
+
   const [dashboardsMap, setdashboardsMap] = useState<Map<string, Dashboard[]>>(new Map());
+  const [geomapsMap, setgeomapsMap] = useState<Map<string, GeoMaps[]>>(new Map());
 
   const allDashboardsMap: Map<string, Dashboard[]> = new Map();
+  const allGeomapsMap: Map<string, GeoMaps[]> = new Map();
 
   dashboards?.data.forEach((dashboard) => {
     allDashboardsMap.has(dashboard.category.name)
       ? allDashboardsMap.get(dashboard.category.name)?.push(dashboard)
       : allDashboardsMap.set(dashboard.category.name, [dashboard]);
   });
+
+  geomaps?.data.forEach((geomap) => {
+    allGeomapsMap.has(geomap.category.name)
+      ? allGeomapsMap.get(geomap.category.name)?.push(geomap)
+      : allGeomapsMap.set(geomap.category.name, [geomap]);
+  });
+
 
   const updateDashboards = () => {
     if (searchParams.get('filter') && searchParams.get('filter') !== 'todos') {
@@ -55,6 +73,16 @@ export const ClientDashboards: React.FC = () => {
       );
     } else {
       setdashboardsMap(allDashboardsMap);
+    }
+  };
+
+  const updateGeomaps = () => {
+    if (searchParams.get('filter') && searchParams.get('filter') !== 'todos') {
+      setgeomapsMap(
+        new Map().set(searchParams.get('filter'), allGeomapsMap.get(searchParams.get('filter')!))
+      );
+    } else {
+      setgeomapsMap(allGeomapsMap);
     }
   };
 
@@ -67,6 +95,16 @@ export const ClientDashboards: React.FC = () => {
   useEffect(() => {
     updateDashboards();
   }, [dashboards, isSuccess]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      updateGeomaps();
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    updateGeomaps();
+  }, [geomaps, isSuccess]);
 
   return (
     <Stack>
@@ -89,6 +127,29 @@ export const ClientDashboards: React.FC = () => {
                     type="dashboard"
                     title={dashboard.name}
                     href={`dashboard/${dashboard.id}`}
+                  />
+                ))}
+              </SimpleGrid>
+            </>
+          ))}
+        {geomapsMap &&
+          Array.from(geomapsMap.keys()).map((key) => (
+            <>
+              <Title order={4}>{key}</Title>
+              <SimpleGrid
+                cols={3}
+                breakpoints={[
+                  { maxWidth: 'md', cols: 2, spacing: 'md' },
+                  { maxWidth: 'sm', cols: 1, spacing: 'sm' },
+                  { maxWidth: 'xs', cols: 1, spacing: 'sm' },
+                ]}
+              >
+                {geomapsMap.get(key)?.map((geomap) => (
+                  <DashboardCard
+                    key={geomap.id}
+                    type="map"
+                    title={geomap.name}
+                    href={`map/${geomap.id}`}
                   />
                 ))}
               </SimpleGrid>

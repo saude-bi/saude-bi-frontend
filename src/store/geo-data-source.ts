@@ -1,29 +1,29 @@
 import { CreateGeoDataSourceDto, GeoDataSource, UpdateGeoDataSourceDto } from '@/types/geo-data-source';
 import { injectCreate, injectFindAll, injectFindById, injectRemove, injectUpdate } from './common';
 
-const endpoint = 'geo-data-source';
+const endpoint = 'geographic-data-source';
 
 export const { useFindGeoDataSourceQuery } = injectFindById<GeoDataSource>(
-    'findGeoDataSource', endpoint
+  'findGeoDataSource', endpoint
 );
 
 export const { useFindAllGeoDataSourceQuery } = injectFindAll<GeoDataSource, { name?: string }>(
-    'findAllGeoDataSource',
-    endpoint
+  'findAllGeoDataSource',
+  endpoint
 );
 
 export const { useCreateGeoDataSourceMutation } = injectCreate<
-    GeoDataSource, CreateGeoDataSourceDto
+  GeoDataSource, CreateGeoDataSourceDto
 >(
-    'createGeoDataSource',
-    endpoint
+  'createGeoDataSource',
+  endpoint
 );
 
 export const { useUpdateGeoDataSourceMutation } = injectUpdate<
-    GeoDataSource, UpdateGeoDataSourceDto
+  GeoDataSource, UpdateGeoDataSourceDto
 >(
-    'updateGeoDataSource',
-    endpoint
+  'updateGeoDataSource',
+  endpoint
 );
 
 export const { useRemoveGeoDataSourceMutation } = injectRemove('removeGeoDataSource', endpoint);
