@@ -8,30 +8,30 @@ import { useFindAllGeoDataSourceQuery } from '@/store/geo-data-source';
 export const GeoLayerSchema = z.object({});
 
 type Props<T> = {
-    disabled: boolean;
-    form: GenericForm<T>;
+  disabled: boolean;
+  form: GenericForm<T>;
 };
 
 export const GeoLayerInputs = <T,>({ disabled = false, form }: Props<T>) => {
-    const [search, setSearch] = useState('');
-    const [currentSearch, setCurrentSearch] = useDebouncedState(search, 250);
+  const [search, setSearch] = useState('');
+  const [currentSearch, setCurrentSearch] = useDebouncedState(search, 250);
 
-    useEffect(() => {
-      setCurrentSearch(search);
-    }, [search]);
+  useEffect(() => {
+    setCurrentSearch(search);
+  }, [search]);
 
-    const { data } = useFindAllGeoDataSourceQuery(
-      { page: 0, perPage: 1000, name: currentSearch },
-      { pollingInterval: 30000 }
-    );
+  const { data } = useFindAllGeoDataSourceQuery(
+    { page: 0, perPage: 1000, name: currentSearch },
+    { pollingInterval: 30000 }
+  );
 
-    const geoDataSourceList =
+  const geoDataSourceList =
     data?.data.map((item) => ({
       value: item.id.toString(),
       label: item.name,
     })) || [];
 
-    return (
+  return (
     <Box>
       <TextInput
         withAsterisk
@@ -57,6 +57,12 @@ export const GeoLayerInputs = <T,>({ disabled = false, form }: Props<T>) => {
         searchable
         searchValue={search}
         onSearchChange={setSearch}
+      />
+      <TextInput
+        label="Parametro de Estabelecimento"
+        placeholder="Parametro de Estabelecimento"
+        {...form.getInputProps('establishmentPropertyName')}
+        disabled={disabled}
       />
     </Box>
   );

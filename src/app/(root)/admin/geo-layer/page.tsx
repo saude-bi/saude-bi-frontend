@@ -7,23 +7,24 @@ import { useFindAllGeoLayerQuery, useRemoveGeoLayerMutation } from '@/store/geo-
 import { GeoLayer } from '@/types/geo-layer';
 
 export default function GeoLayerPage() {
-    const columns = useMemo<MRT_ColumnDef<GeoLayer>[]>(
-        () => [
-            { accessorKey: 'name', header: 'Nome' },
-            { accessorKey: 'params', header: 'Parametros' },
-            { accessorKey: 'source', header: 'Fonte' },
-        ],
-        []
-    );
+  const columns = useMemo<MRT_ColumnDef<GeoLayer>[]>(
+    () => [
+      { accessorKey: 'name', header: 'Nome' },
+      { accessorKey: 'params', header: 'Parametros' },
+      { accessorKey: 'source', header: 'Fonte' },
+      { accessorKey: 'establishmentPropertyName', header: 'Parametro de Estabelecimento' },
+    ],
+    []
+  );
 
-    return (
-        <DataTable
-          useFindAllQuery={useFindAllGeoLayerQuery}
-          useRemoveMutation={useRemoveGeoLayerMutation}
-          columns={columns}
-          canCreate
-          canUpdate
-          canPreview
-        />
-    );
+  return (
+    <DataTable
+      useFindAllQuery={useFindAllGeoLayerQuery}
+      useRemoveMutation={useRemoveGeoLayerMutation}
+      columns={columns}
+      canCreate
+      canUpdate
+      canPreview
+    />
+  );
 }
