@@ -6,7 +6,7 @@ import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useParams } from 'next/navigation';
 import { FormLayout } from '@/components/Common/Layout/FormLayout';
 import { GeoLayerInputs } from '@/components/Forms/geo-layer';
-import { useCreateGeoLayerMutation, useFindGeoLayerQuery } from '@/store/geo-layer';
+import { useFindGeoLayerQuery, useRemoveGeoLayerMutation } from '@/store/geo-layer';
 import { UpdateGeoLayerDto } from '@/types/geo-layer';
 
 export default function GeoLayer() {
@@ -18,14 +18,14 @@ export default function GeoLayer() {
 
     useEffect(() => {
         if (isSuccess) {
-            form.setValues({ name: data.name, params: data.params, source: data.source });
+            form.setValues({ name: data.name, params: data.params, source: data.source.id });
         }
     });
 
     return (
         <FormLayout
           title="Camadas Geograficas"
-          useRemoveMutation={useCreateGeoLayerMutation}
+          useRemoveMutation={useRemoveGeoLayerMutation}
           FormInputs={GeoLayerInputs<UpdateGeoLayerDto>}
           form={form}
           type="preview"

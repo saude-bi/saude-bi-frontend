@@ -18,7 +18,7 @@ export default function GeoLayerPage() {
 
     useEffect(() => {
         if (isSuccess) {
-            form.setValues({ name: data.name, params: data.params, source: data.source });
+            form.setValues({ name: data.name, params: data.params, source: data.source.id });
         }
     });
 

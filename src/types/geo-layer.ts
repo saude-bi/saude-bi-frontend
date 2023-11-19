@@ -8,9 +8,10 @@ export interface GeoLayer extends Entity {
 }
 
 export type CreateGeoLayerDto = {
-    name: string;
-    params: string;
-    source: GeoDataSource;
+    source: number,
+    params: string,
+    name: string
+    establishmentPropertyName: string,
 };
 
 export type UpdateGeoLayerDto = Partial<CreateGeoLayerDto>;

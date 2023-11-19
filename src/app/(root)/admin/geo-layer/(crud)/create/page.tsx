@@ -10,17 +10,10 @@ import { CreateGeoLayerDto } from '@/types/geo-layer';
 export default function GeoLayerPage() {
     const form = useForm<CreateGeoLayerDto>({
         initialValues: {
-            name: '',
+            source: 0,
             params: '',
-            source: {
-                name: '',
-                sourceUrl: '',
-                category: '',
-                credentials: {
-                    username: '',
-                    password: '',
-                },
-            },
+            name: '',
+            establishmentPropertyName: '',
         },
         validate: zodResolver(GeoLayerSchema),
         validateInputOnChange: true,
