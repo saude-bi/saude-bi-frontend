@@ -1,7 +1,7 @@
 'use client';
 
 import { DataTable } from "@/components/Common/DataTable/DataTable";
-import { useRemoveGeoLayerMutation } from "@/store/geo-layer";
+import { useFindAllGeoLayerQuery, useRemoveGeoLayerMutation } from "@/store/geo-layer";
 import { GeoLayer } from "@/types/geo-layer";
 import { MRT_ColumnDef } from "mantine-react-table";
 import { useMemo } from "react";
