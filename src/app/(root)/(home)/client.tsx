@@ -97,14 +97,14 @@ export const ClientDashboards: React.FC = () => {
   }, [dashboards, isSuccess]);
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isGeomapsLoading) {
       updateGeomaps();
     }
   }, [searchParams]);
 
   useEffect(() => {
     updateGeomaps();
-  }, [geomaps, isSuccess]);
+  }, [geomaps, isGeomapsSuccess]);
 
   return (
     <Stack>
