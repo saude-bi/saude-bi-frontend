@@ -1,7 +1,9 @@
+'use client';
+
 import { FormLayout } from "@/components/Common/Layout/FormLayout";
 import { GeoMapsInputs, GeoMapsSchema } from "@/components/Forms/geo-maps";
 import { useFindGeoMapsQuery, useUpdateGeoMapsMutation } from "@/store/geo-maps";
-import { CreateGeoMapsDto, UpdateGeoMapsDto } from "@/types/geo-maps";
+import { UpdateGeoMapsDto } from "@/types/geo-maps";
 import { useForm, zodResolver } from "@mantine/form";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 import { useParams } from "next/navigation";
