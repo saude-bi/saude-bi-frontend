@@ -14,7 +14,7 @@ export interface GeoDataSource extends Entity{
 export type CreateGeoDataSourceDto = {
     name: string;
     sourceUrl: string;
-    category: DashboardCategory;
+    category: string;
     credentials: {
         username: string;
         password: string;
