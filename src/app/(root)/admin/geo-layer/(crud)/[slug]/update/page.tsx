@@ -10,26 +10,26 @@ import { useFindGeoLayerQuery, useUpdateGeoLayerMutation } from '@/store/geo-lay
 import { UpdateGeoLayerDto } from '@/types/geo-layer';
 
 export default function GeoLayerPage() {
-    const { slug } = useParams();
-    const id = parseInt(slug as string, 10);
-    const { data, isSuccess } = useFindGeoLayerQuery(slug ? id : skipToken);
+  const { slug } = useParams();
+  const id = parseInt(slug as string, 10);
+  const { data, isSuccess } = useFindGeoLayerQuery(slug ? id : skipToken);
 
-    const form = useForm<UpdateGeoLayerDto>({});
+  const form = useForm<UpdateGeoLayerDto>({});
 
-    useEffect(() => {
-        if (isSuccess) {
-            form.setValues({ name: data.name, params: data.params, source: data.source.id });
-        }
-    });
+  useEffect(() => {
+    if (isSuccess) {
+      form.setValues({ name: data.name, params: data.params, source: data.source.id });
+    }
+  }, [isSuccess]);
 
-    return (
-        <FormLayout
-          title="Camadas Geograficas"
-          useUpdateMutation={useUpdateGeoLayerMutation}
-          type="update"
-          FormInputs={GeoLayerInputs<UpdateGeoLayerDto>}
-          form={form}
-          id={id}
-        />
-    );
+  return (
+    <FormLayout
+      title="Camadas Geograficas"
+      useUpdateMutation={useUpdateGeoLayerMutation}
+      type="update"
+      FormInputs={GeoLayerInputs<UpdateGeoLayerDto>}
+      form={form}
+      id={id}
+    />
+  );
 }

@@ -10,26 +10,26 @@ import { useFindGeoLayerQuery, useRemoveGeoLayerMutation } from '@/store/geo-lay
 import { UpdateGeoLayerDto } from '@/types/geo-layer';
 
 export default function GeoLayer() {
-    const { slug } = useParams();
-    const id = parseInt(slug as string, 10);
-    const { data, isSuccess } = useFindGeoLayerQuery(slug ? id : skipToken);
+  const { slug } = useParams();
+  const id = parseInt(slug as string, 10);
+  const { data, isSuccess } = useFindGeoLayerQuery(slug ? id : skipToken);
 
-    const form = useForm<UpdateGeoLayerDto>({});
+  const form = useForm<UpdateGeoLayerDto>({});
 
-    useEffect(() => {
-        if (isSuccess) {
-            form.setValues({ name: data.name, params: data.params, source: data.source.id });
-        }
-    });
+  useEffect(() => {
+    if (isSuccess) {
+      form.setValues({ name: data.name, params: data.params, source: data.source.id });
+    }
+  }, [isSuccess]);
 
-    return (
-        <FormLayout
-          title="Camadas Geograficas"
-          useRemoveMutation={useRemoveGeoLayerMutation}
-          FormInputs={GeoLayerInputs<UpdateGeoLayerDto>}
-          form={form}
-          type="preview"
-          id={id}
-        />
-    );
+  return (
+    <FormLayout
+      title="Camadas Geograficas"
+      useRemoveMutation={useRemoveGeoLayerMutation}
+      FormInputs={GeoLayerInputs<UpdateGeoLayerDto>}
+      form={form}
+      type="preview"
+      id={id}
+    />
+  );
 }
