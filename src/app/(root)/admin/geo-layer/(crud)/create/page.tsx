@@ -1,11 +1,11 @@
 'use client';
 
-import React from "react";
-import { FormLayout } from "@/components/Common/Layout/FormLayout";
-import { GeoLayerInputs, GeoLayerSchema } from "@/components/Forms/geo-layer";
-import { useCreateGeoLayerMutation } from "@/store/geo-layer";
-import { CreateGeoLayerDto } from "@/types/geo-layer";
-import { useForm, zodResolver } from "@mantine/form";
+import React from 'react';
+import { useForm, zodResolver } from '@mantine/form';
+import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { GeoLayerInputs, GeoLayerSchema } from '@/components/Forms/geo-layer';
+import { useCreateGeoLayerMutation } from '@/store/geo-layer';
+import { CreateGeoLayerDto } from '@/types/geo-layer';
 
 export default function GeoLayerPage() {
     const form = useForm<CreateGeoLayerDto>({
@@ -19,7 +19,7 @@ export default function GeoLayerPage() {
                 credentials: {
                     username: '',
                     password: '',
-                }
+                },
             },
         },
         validate: zodResolver(GeoLayerSchema),
@@ -28,11 +28,11 @@ export default function GeoLayerPage() {
 
     return (
         <FormLayout
-            title="Camadas Geograficas"
-            useCreateMutation={useCreateGeoLayerMutation}
-            FormInputs={GeoLayerInputs<CreateGeoLayerDto>}
-            form={form}
-            type="create"
+          title="Camadas Geograficas"
+          useCreateMutation={useCreateGeoLayerMutation}
+          FormInputs={GeoLayerInputs<CreateGeoLayerDto>}
+          form={form}
+          type="create"
         />
     );
 }

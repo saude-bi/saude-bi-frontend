@@ -1,12 +1,11 @@
-import { CreateGeoDataSourceDto, GeoDataSource, UpdateGeoDataSourceDto } from "@/types/geo-data-source";
-import { injectCreate, injectFindAll, injectFindById, injectRemove, injectUpdate } from "./common";
-
+import { CreateGeoDataSourceDto, GeoDataSource, UpdateGeoDataSourceDto } from '@/types/geo-data-source';
+import { injectCreate, injectFindAll, injectFindById, injectRemove, injectUpdate } from './common';
 
 const endpoint = 'geo-data-source';
 
 export const { useFindGeoDataSourceQuery } = injectFindById<GeoDataSource>('findGeoDataSource', endpoint);
 
-export const { useFindAllGeoDataSourceQuery } = injectFindAll<GeoDataSource, {name?: string}>(
+export const { useFindAllGeoDataSourceQuery } = injectFindAll<GeoDataSource, { name?: string }>(
     'findAllGeoDataSource',
     endpoint
 );

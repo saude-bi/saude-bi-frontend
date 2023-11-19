@@ -1,7 +1,7 @@
-import { Entity } from "@/types/common";
-import { DashboardCategory } from "./dashboard-category";
+import { Entity } from '@/types/common';
+import { DashboardCategory } from './dashboard-category';
 
-export interface GeoDataSource extends Entity{
+export interface GeoDataSource extends Entity {
     name: string;
     sourceUrl: string;
     category: DashboardCategory;

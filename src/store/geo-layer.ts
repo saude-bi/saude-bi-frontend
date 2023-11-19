@@ -1,6 +1,5 @@
-import { CreateGeoLayerDto, GeoLayer, UpdateGeoLayerDto } from "@/types/geo-layer";
-import { injectCreate, injectFindAll, injectFindById, injectFindByIdChild, injectRemove, injectUpdate } from "./common";
-
+import { CreateGeoLayerDto, GeoLayer, UpdateGeoLayerDto } from '@/types/geo-layer';
+import { injectCreate, injectFindAll, injectFindById, injectFindByIdChild, injectRemove, injectUpdate } from './common';
 
 const endpoint = 'geographic-layers';
 

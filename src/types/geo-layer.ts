@@ -1,7 +1,7 @@
-import { Entity } from "./common";
-import { GeoDataSource } from "./geo-data-source";
+import { Entity } from './common';
+import { GeoDataSource } from './geo-data-source';
 
-export interface GeoLayer extends Entity{
+export interface GeoLayer extends Entity {
     name: string;
     params: string;
     source: GeoDataSource;

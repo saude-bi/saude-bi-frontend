@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import React, { useEffect } from "react";
-import { useForm } from "@mantine/form";
-import { skipToken } from "@reduxjs/toolkit/dist/query";
-import { useParams } from "next/navigation"
-import { FormLayout } from "@/components/Common/Layout/FormLayout";
-import { useFindGeoDataSourceQuery, useRemoveGeoDataSourceMutation } from "@/store/geo-data-source";
-import { GeoDataSourceInputs } from "@/components/Forms/geo-data-source";
-import { UpdateGeoDataSourceDto } from "@/types/geo-data-source";
+import React, { useEffect } from 'react';
+import { useForm } from '@mantine/form';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
+import { useParams } from 'next/navigation';
+import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { useFindGeoDataSourceQuery, useRemoveGeoDataSourceMutation } from '@/store/geo-data-source';
+import { GeoDataSourceInputs } from '@/components/Forms/geo-data-source';
+import { UpdateGeoDataSourceDto } from '@/types/geo-data-source';
 
 export default function GeoDataSourcePage() {
     const { slug } = useParams();
@@ -18,7 +18,7 @@ export default function GeoDataSourcePage() {
     const form = useForm<UpdateGeoDataSourceDto>({});
 
     useEffect(() => {
-        if(isSuccess) {
+        if (isSuccess) {
             form.setValues({
             name: data.name,
             sourceUrl: data.sourceUrl,
@@ -29,17 +29,16 @@ export default function GeoDataSourcePage() {
             },
           });
         }
-        
     }, [isSuccess]);
 
     return (
         <FormLayout
-            title="Fonte de Dados Geograficos"
-            useRemoveMutation={useRemoveGeoDataSourceMutation}
-            type="preview"
-            FormInputs={GeoDataSourceInputs<UpdateGeoDataSourceDto>}
-            form={form}
-            id={id}
+          title="Fonte de Dados Geograficos"
+          useRemoveMutation={useRemoveGeoDataSourceMutation}
+          type="preview"
+          FormInputs={GeoDataSourceInputs<UpdateGeoDataSourceDto>}
+          form={form}
+          id={id}
         />
     );
 }

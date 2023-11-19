@@ -1,27 +1,27 @@
-'use client'
+'use client';
 
-import { FormLayout } from "@/components/Common/Layout/FormLayout";
-import { GeoLayerInputs } from "@/components/Forms/geo-layer";
-import { useFindGeoLayerQuery, useUpdateGeoLayerMutation } from "@/store/geo-layer";
-import { UpdateGeoLayerDto } from "@/types/geo-layer";
-import { useForm } from "@mantine/form";
-import { skipToken } from "@reduxjs/toolkit/dist/query";
-import { useParams } from "next/navigation"
-import React, { useEffect } from "react";
+import { useForm } from '@mantine/form';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
+import { useParams } from 'next/navigation';
+import React, { useEffect } from 'react';
+import { FormLayout } from '@/components/Common/Layout/FormLayout';
+import { GeoLayerInputs } from '@/components/Forms/geo-layer';
+import { useFindGeoLayerQuery, useUpdateGeoLayerMutation } from '@/store/geo-layer';
+import { UpdateGeoLayerDto } from '@/types/geo-layer';
 
-export default function GeoLayerPage () {
+export default function GeoLayerPage() {
     const { slug } = useParams();
     const id = parseInt(slug as string, 10);
-    const {data, isSuccess} = useFindGeoLayerQuery(slug? id : skipToken);
+    const { data, isSuccess } = useFindGeoLayerQuery(slug ? id : skipToken);
 
     const form = useForm<UpdateGeoLayerDto>({});
 
     useEffect(() => {
-        if(isSuccess) {
+        if (isSuccess) {
             form.setValues({ name: data.name, params: data.params, source: data.source });
         }
     });
-    
+
     return (
         <FormLayout
           title="Camadas Geograficas"

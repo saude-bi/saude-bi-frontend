@@ -1,9 +1,9 @@
-import { Box, Select, TextInput } from "@mantine/core";
-import { z } from "zod";
-import { useDebouncedState } from "@mantine/hooks";
-import { useEffect, useState } from "react";
-import { GenericForm } from "@/components/Common/Layout/FormLayout";
-import { useFindAllDashboardCategoriesQuery } from "@/store/dashboard-categories";
+import { Box, Select, TextInput } from '@mantine/core';
+import { z } from 'zod';
+import { useDebouncedState } from '@mantine/hooks';
+import { useEffect, useState } from 'react';
+import { GenericForm } from '@/components/Common/Layout/FormLayout';
+import { useFindAllDashboardCategoriesQuery } from '@/store/dashboard-categories';
 
 export const GeoDataSourceSchema = z.object({
     name: z
@@ -70,16 +70,16 @@ export const GeoDataSourceInputs = <T,>({ disabled = false, form }: Props<T>) =>
       disabled={disabled}
     />
     <Select
-        withAsterisk
-        label="Categoria"
-        placeholder="Categoria"
-        {...form.getInputProps('category')}
-        data={dashboardCategoriesList}
-        disabled={disabled}
-        searchable
-        searchValue={search}
-        onSearchChange={setSearch}
-      />
+      withAsterisk
+      label="Categoria"
+      placeholder="Categoria"
+      {...form.getInputProps('category')}
+      data={dashboardCategoriesList}
+      disabled={disabled}
+      searchable
+      searchValue={search}
+      onSearchChange={setSearch}
+    />
     <TextInput
       withAsterisk
       label="Login"

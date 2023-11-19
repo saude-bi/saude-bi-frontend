@@ -1,9 +1,9 @@
-import { z } from "zod";
-import { GenericForm } from "../Common/Layout/FormLayout";
-import { Box, Select, TextInput } from "@mantine/core";
-import { useEffect, useState } from "react";
-import { useDebouncedState } from "@mantine/hooks";
-import { useFindAllGeoDataSourceQuery } from "@/store/geo-data-source";
+import { z } from 'zod';
+import { Box, Select, TextInput } from '@mantine/core';
+import { useEffect, useState } from 'react';
+import { useDebouncedState } from '@mantine/hooks';
+import { GenericForm } from '../Common/Layout/FormLayout';
+import { useFindAllGeoDataSourceQuery } from '@/store/geo-data-source';
 
 export const GeoLayerSchema = z.object({});
 
@@ -12,14 +12,14 @@ type Props<T> = {
     form: GenericForm<T>;
 };
 
-export const GeoLayerInputs = <T,>({ disabled = false, form}: Props<T>) => {
+export const GeoLayerInputs = <T,>({ disabled = false, form }: Props<T>) => {
     const [search, setSearch] = useState('');
     const [currentSearch, setCurrentSearch] = useDebouncedState(search, 250);
 
     useEffect(() => {
       setCurrentSearch(search);
     }, [search]);
-  
+
     const { data } = useFindAllGeoDataSourceQuery(
       { page: 0, perPage: 1000, name: currentSearch },
       { pollingInterval: 30000 }
@@ -31,7 +31,7 @@ export const GeoLayerInputs = <T,>({ disabled = false, form}: Props<T>) => {
       label: item.name,
     })) || [];
 
-    return(
+    return (
     <Box>
       <TextInput
         withAsterisk

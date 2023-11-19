@@ -1,9 +1,9 @@
-import { Box, Select, TextInput } from "@mantine/core";
-import { z } from "zod";
-import { useDebouncedState } from "@mantine/hooks";
-import { useEffect, useState } from "react";
-import { GenericForm } from "@/components/Common/Layout/FormLayout";
-import { useFindAllDashboardCategoriesQuery } from "@/store/dashboard-categories";
+import { Box, Select, TextInput } from '@mantine/core';
+import { z } from 'zod';
+import { useDebouncedState } from '@mantine/hooks';
+import { useEffect, useState } from 'react';
+import { GenericForm } from '@/components/Common/Layout/FormLayout';
+import { useFindAllDashboardCategoriesQuery } from '@/store/dashboard-categories';
 
 export const GeoMapsSchema = z.object({});
 
@@ -12,7 +12,7 @@ type Props<T> = {
     form: GenericForm<T>;
 };
 
-export const GeoMapsInputs = <T,>({disabled = false, form}: Props<T>) => {
+export const GeoMapsInputs = <T,>({ disabled = false, form }: Props<T>) => {
     const [search, setSearch] = useState('');
   const [currentSearch, setCurrentSearch] = useDebouncedState(search, 250);
 

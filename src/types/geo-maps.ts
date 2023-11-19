@@ -1,7 +1,7 @@
-import { Entity } from "./common";
-import { DashboardCategory } from "./dashboard-category";
+import { Entity } from './common';
+import { DashboardCategory } from './dashboard-category';
 
-export interface GeoMaps extends Entity{
+export interface GeoMaps extends Entity {
     name: string;
     category: DashboardCategory;
 }
@@ -9,6 +9,6 @@ export interface GeoMaps extends Entity{
 export type CreateGeoMapsDto = {
     name: string;
     category: string;
-}
+};
 
 export type UpdateGeoMapsDto = Partial<CreateGeoMapsDto>;

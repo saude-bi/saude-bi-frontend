@@ -1,10 +1,10 @@
-import { CreateGeoMapsDto, GeoMaps, UpdateGeoMapsDto } from "@/types/geo-maps";
-import { injectCreate, injectFindAll, injectFindById, injectRemove, injectUpdate } from "./common";
+import { CreateGeoMapsDto, GeoMaps, UpdateGeoMapsDto } from '@/types/geo-maps';
+import { injectCreate, injectFindAll, injectFindById, injectRemove, injectUpdate } from './common';
 
 const endpoint = 'geo-maps';
-export const { useFindGeoMapsQuery } = injectFindById<GeoMaps>('findGeoMaps',endpoint)
+export const { useFindGeoMapsQuery } = injectFindById<GeoMaps>('findGeoMaps', endpoint);
 
-export const { useFindAllGeoMapsQuery } = injectFindAll<GeoMaps, {name?: string}>(
+export const { useFindAllGeoMapsQuery } = injectFindAll<GeoMaps, { name?: string }>(
     'findAllGeoMaps',
     endpoint
 );
