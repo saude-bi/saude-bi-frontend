@@ -1,7 +1,7 @@
 import { CreateGeoDataSourceDto, GeoDataSource, UpdateGeoDataSourceDto } from '@/types/geo-data-source';
 import { injectCreate, injectFindAll, injectFindById, injectRemove, injectUpdate } from './common';
 
-const endpoint = 'geographic-data-source';
+const endpoint = 'geographic-data-sources';
 
 export const { useFindGeoDataSourceQuery } = injectFindById<GeoDataSource>(
   'findGeoDataSource', endpoint
