@@ -8,27 +8,26 @@ import { GeoDataSourceInputs, GeoDataSourceSchema } from '@/components/Forms/geo
 import { useCreateGeoDataSourceMutation } from '@/store/geo-data-source';
 
 export default function GeoDataSourcePage() {
-    const form = useForm<CreateGeoDataSourceDto>({
-        initialValues: {
-            name: '',
-            sourceUrl: '',
-            category: '',
-            credentials: {
-                username: '',
-                password: '',
-            },
-        },
-        validate: zodResolver(GeoDataSourceSchema),
-        validateInputOnChange: true,
-    });
+  const form = useForm<CreateGeoDataSourceDto>({
+    initialValues: {
+      name: '',
+      sourceUrl: '',
+      credentials: {
+        username: '',
+        password: '',
+      },
+    },
+    validate: zodResolver(GeoDataSourceSchema),
+    validateInputOnChange: true,
+  });
 
-    return (
-        <FormLayout
-          title="Fonte de Dados Geograficos"
-          useCreateMutation={useCreateGeoDataSourceMutation}
-          FormInputs={GeoDataSourceInputs<CreateGeoDataSourceDto>}
-          form={form}
-          type="create"
-        />
-    );
+  return (
+    <FormLayout
+      title="Fonte de Dados Geograficos"
+      useCreateMutation={useCreateGeoDataSourceMutation}
+      FormInputs={GeoDataSourceInputs<CreateGeoDataSourceDto>}
+      form={form}
+      type="create"
+    />
+  );
 }

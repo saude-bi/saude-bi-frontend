@@ -7,22 +7,23 @@ import { useCreateGeoMapsMutation } from '@/store/geo-maps';
 import { CreateGeoMapsDto } from '@/types/geo-maps';
 
 export default function GeoMaps() {
-    const form = useForm<CreateGeoMapsDto>({
-        initialValues: {
-            name: '',
-            category: '',
-        },
-        validate: zodResolver(GeoMapsSchema),
-        validateInputOnChange: true,
-    });
+  const form = useForm<CreateGeoMapsDto>({
+    initialValues: {
+      name: '',
+      category: '',
+      public: false,
+    },
+    validate: zodResolver(GeoMapsSchema),
+    validateInputOnChange: true,
+  });
 
-    return (
-        <FormLayout
-          title="Mapas Geograficos"
-          useCreateMutation={useCreateGeoMapsMutation}
-          FormInputs={GeoMapsInputs<CreateGeoMapsDto>}
-          form={form}
-          type="create"
-        />
-    );
+  return (
+    <FormLayout
+      title="Mapas Geograficos"
+      useCreateMutation={useCreateGeoMapsMutation}
+      FormInputs={GeoMapsInputs<CreateGeoMapsDto>}
+      form={form}
+      type="create"
+    />
+  );
 }

@@ -10,47 +10,45 @@ import { useFindGeoDataSourceQuery, useUpdateGeoDataSourceMutation } from '@/sto
 import { UpdateGeoDataSourceDto } from '@/types/geo-data-source';
 
 export default function GoeDataSourcePage() {
-    const { slug } = useParams();
-    const id = parseInt(slug as string, 10);
+  const { slug } = useParams();
+  const id = parseInt(slug as string, 10);
 
-    const { data, isSuccess } = useFindGeoDataSourceQuery(slug ? id : skipToken);
+  const { data, isSuccess } = useFindGeoDataSourceQuery(slug ? id : skipToken);
 
-    const form = useForm<UpdateGeoDataSourceDto>({
-        initialValues: {
-            name: '',
-            sourceUrl: '',
-            category: '',
-            credentials: {
-                username: '',
-                password: '',
-            },
+  const form = useForm<UpdateGeoDataSourceDto>({
+    initialValues: {
+      name: '',
+      sourceUrl: '',
+      credentials: {
+        username: '',
+        password: '',
+      },
+    },
+    validate: zodResolver(GeoDataSourceSchema),
+    validateInputOnChange: true,
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      form.setValues({
+        name: data.name,
+        sourceUrl: data.sourceUrl,
+        credentials: {
+          username: data.credentials.username,
+          password: data.credentials.password,
         },
-        validate: zodResolver(GeoDataSourceSchema),
-        validateInputOnChange: true,
-    });
+      });
+    }
+  }, [isSuccess]);
 
-    useEffect(() => {
-        if (isSuccess) {
-            form.setValues({
-            name: data.name,
-            sourceUrl: data.sourceUrl,
-            category: data.category.id.toString(),
-            credentials: {
-                username: data.credentials.username,
-                password: data.credentials.password,
-            },
-          });
-        }
-    }, [isSuccess]);
-
-    return (
-        <FormLayout
-          title="Fonte de Dados Geograficos"
-          useUpdateMutation={useUpdateGeoDataSourceMutation}
-          type="update"
-          FormInputs={GeoDataSourceInputs<UpdateGeoDataSourceDto>}
-          form={form}
-          id={id}
-        />
-    );
+  return (
+    <FormLayout
+      title="Fonte de Dados Geograficos"
+      useUpdateMutation={useUpdateGeoDataSourceMutation}
+      type="update"
+      FormInputs={GeoDataSourceInputs<UpdateGeoDataSourceDto>}
+      form={form}
+      id={id}
+    />
+  );
 }

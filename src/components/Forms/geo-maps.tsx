@@ -1,4 +1,4 @@
-import { Box, Select, TextInput } from '@mantine/core';
+import { Box, Select, Switch, TextInput } from '@mantine/core';
 import { z } from 'zod';
 import { useDebouncedState } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
@@ -8,12 +8,12 @@ import { useFindAllDashboardCategoriesQuery } from '@/store/dashboard-categories
 export const GeoMapsSchema = z.object({});
 
 type Props<T> = {
-    disabled: boolean;
-    form: GenericForm<T>;
+  disabled: boolean;
+  form: GenericForm<T>;
 };
 
 export const GeoMapsInputs = <T,>({ disabled = false, form }: Props<T>) => {
-    const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('');
   const [currentSearch, setCurrentSearch] = useDebouncedState(search, 250);
 
   useEffect(() => {
@@ -51,6 +51,7 @@ export const GeoMapsInputs = <T,>({ disabled = false, form }: Props<T>) => {
         searchValue={search}
         onSearchChange={setSearch}
       />
+      <Switch label="Público?" {...form.getInputProps('public')} />
     </Box>
   );
 };

@@ -7,22 +7,21 @@ import { useFindAllGeoDataSourceQuery, useRemoveGeoDataSourceMutation } from '@/
 import { GeoDataSource } from '@/types/geo-data-source';
 
 export default function GeoDataSourcePage() {
-    const columns = useMemo<MRT_ColumnDef<GeoDataSource>[]>(
-        () => [
-            { accessorKey: 'name', header: 'Nome' },
-            { accessorKey: 'category.name', header: 'Categoria' },
-        ],
-        []
-    );
+  const columns = useMemo<MRT_ColumnDef<GeoDataSource>[]>(
+    () => [
+      { accessorKey: 'name', header: 'Nome' },
+    ],
+    []
+  );
 
-    return (
-        <DataTable
-          useFindAllQuery={useFindAllGeoDataSourceQuery}
-          useRemoveMutation={useRemoveGeoDataSourceMutation}
-          columns={columns}
-          canCreate
-          canUpdate
-          canPreview
-        />
-    );
+  return (
+    <DataTable
+      useFindAllQuery={useFindAllGeoDataSourceQuery}
+      useRemoveMutation={useRemoveGeoDataSourceMutation}
+      columns={columns}
+      canCreate
+      canUpdate
+      canPreview
+    />
+  );
 }

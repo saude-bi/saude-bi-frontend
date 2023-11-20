@@ -10,35 +10,34 @@ import { GeoDataSourceInputs } from '@/components/Forms/geo-data-source';
 import { UpdateGeoDataSourceDto } from '@/types/geo-data-source';
 
 export default function GeoDataSourcePage() {
-    const { slug } = useParams();
-    const id = parseInt(slug as string, 10);
+  const { slug } = useParams();
+  const id = parseInt(slug as string, 10);
 
-    const { data, isSuccess } = useFindGeoDataSourceQuery(slug ? id : skipToken);
+  const { data, isSuccess } = useFindGeoDataSourceQuery(slug ? id : skipToken);
 
-    const form = useForm<UpdateGeoDataSourceDto>({});
+  const form = useForm<UpdateGeoDataSourceDto>({});
 
-    useEffect(() => {
-        if (isSuccess) {
-            form.setValues({
-            name: data.name,
-            sourceUrl: data.sourceUrl,
-            category: data.category.id.toString(),
-            credentials: {
-                username: data.credentials.username,
-                password: data.credentials.password,
-            },
-          });
-        }
-    }, [isSuccess]);
+  useEffect(() => {
+    if (isSuccess) {
+      form.setValues({
+        name: data.name,
+        sourceUrl: data.sourceUrl,
+        credentials: {
+          username: data.credentials.username,
+          password: data.credentials.password,
+        },
+      });
+    }
+  }, [isSuccess]);
 
-    return (
-        <FormLayout
-          title="Fonte de Dados Geograficos"
-          useRemoveMutation={useRemoveGeoDataSourceMutation}
-          type="preview"
-          FormInputs={GeoDataSourceInputs<UpdateGeoDataSourceDto>}
-          form={form}
-          id={id}
-        />
-    );
+  return (
+    <FormLayout
+      title="Fonte de Dados Geograficos"
+      useRemoveMutation={useRemoveGeoDataSourceMutation}
+      type="preview"
+      FormInputs={GeoDataSourceInputs<UpdateGeoDataSourceDto>}
+      form={form}
+      id={id}
+    />
+  );
 }
