@@ -12,10 +12,6 @@ export default function GeoDataSourcePage() {
     initialValues: {
       name: '',
       sourceUrl: '',
-      credentials: {
-        username: '',
-        password: '',
-      },
     },
     validate: zodResolver(GeoDataSourceSchema),
     validateInputOnChange: true,

@@ -22,10 +22,6 @@ export default function GeoDataSourcePage() {
       form.setValues({
         name: data.name,
         sourceUrl: data.sourceUrl,
-        credentials: {
-          username: data.credentials.username,
-          password: data.credentials.password,
-        },
       });
     }
   }, [isSuccess]);

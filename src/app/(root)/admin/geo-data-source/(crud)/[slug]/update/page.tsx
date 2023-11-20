@@ -19,10 +19,6 @@ export default function GoeDataSourcePage() {
     initialValues: {
       name: '',
       sourceUrl: '',
-      credentials: {
-        username: '',
-        password: '',
-      },
     },
     validate: zodResolver(GeoDataSourceSchema),
     validateInputOnChange: true,
@@ -33,10 +29,6 @@ export default function GoeDataSourcePage() {
       form.setValues({
         name: data.name,
         sourceUrl: data.sourceUrl,
-        credentials: {
-          username: data.credentials.username,
-          password: data.credentials.password,
-        },
       });
     }
   }, [isSuccess]);

@@ -51,20 +51,6 @@ export const GeoDataSourceInputs = <T,>({ disabled = false, form }: Props<T>) =>
         {...form.getInputProps('sourceUrl')}
         disabled={disabled}
       />
-      <TextInput
-        withAsterisk
-        label="Login"
-        placeholder="Login"
-        {...form.getInputProps('credentials.username')}
-        disabled={disabled}
-      />
-      <TextInput
-        withAsterisk
-        label="Senha"
-        placeholder="Senha"
-        {...form.getInputProps('credentials.password')}
-        disabled={disabled}
-      />
     </Box>
   );
 };
