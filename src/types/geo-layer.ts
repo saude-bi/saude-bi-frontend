@@ -1,5 +1,10 @@
 import { Entity } from './common';
 import { GeoDataSource } from './geo-data-source';
+import { GeoJsonObject } from 'geojson';
+
+export interface FindGeoLayerDataDto extends Entity {
+  data: any;
+}
 
 export interface GeoLayer extends Entity {
   name: string;

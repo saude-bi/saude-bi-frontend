@@ -1,4 +1,4 @@
-import { CreateGeoLayerDto, GeoLayer, UpdateGeoLayerDto } from '@/types/geo-layer';
+import { CreateGeoLayerDto, FindGeoLayerDataDto, GeoLayer, UpdateGeoLayerDto } from '@/types/geo-layer';
 import { injectCreate, injectFindAll, injectFindById, injectFindByIdChild, injectRemove, injectUpdate } from './common';
 
 const endpoint = 'geographic-layers';
@@ -10,9 +10,12 @@ export const { useFindGeoLayerQuery } = injectFindById<GeoLayer>(
     endpoint
 );
 
-export const { useFindGeographicLayerQuery } = injectFindByIdChild<
-  any
->('findGeographicLayer', endpointUrl);
+export const { useFindGeographicLayerDataQuery } = injectFindByIdChild<
+    FindGeoLayerDataDto,
+    { workRelation: number }
+>(
+    'findGeographicLayerData', endpointUrl
+);
 
 export const { useFindAllGeoLayerQuery } = injectFindAll<GeoLayer, { name?: string }>(
     'findAllGeoLayer',
