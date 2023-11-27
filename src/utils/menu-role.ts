@@ -7,7 +7,6 @@ import {
   IconDatabase,
   IconHome,
   IconSchool,
-  IconServerCog,
   IconSourceCode,
   IconUser,
   IconBuildingCommunity,
