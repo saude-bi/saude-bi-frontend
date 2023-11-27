@@ -65,7 +65,6 @@ export const ClientDashboards: React.FC = () => {
       : allGeomapsMap.set(geomap.category.name, [geomap]);
   });
 
-
   const updateDashboards = () => {
     if (searchParams.get('filter') && searchParams.get('filter') !== 'todos') {
       setdashboardsMap(

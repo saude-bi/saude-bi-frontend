@@ -1,9 +1,6 @@
-import { Box, Select, TextInput } from '@mantine/core';
+import { Box, TextInput } from '@mantine/core';
 import { z } from 'zod';
-import { useDebouncedState } from '@mantine/hooks';
-import { useEffect, useState } from 'react';
 import { GenericForm } from '@/components/Common/Layout/FormLayout';
-import { useFindAllDashboardCategoriesQuery } from '@/store/dashboard-categories';
 
 export const GeoDataSourceSchema = z.object({
   name: z
@@ -34,23 +31,21 @@ type Props<T> = {
   form: GenericForm<T>;
 };
 
-export const GeoDataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => {
-  return (
-    <Box>
-      <TextInput
-        withAsterisk
-        label="Nome"
-        placeholder="Nome"
-        {...form.getInputProps('name')}
-        disabled={disabled}
-      />
-      <TextInput
-        withAsterisk
-        label="URL"
-        placeholder="URL"
-        {...form.getInputProps('sourceUrl')}
-        disabled={disabled}
-      />
-    </Box>
-  );
-};
+export const GeoDataSourceInputs = <T,>({ disabled = false, form }: Props<T>) => (
+  <Box>
+    <TextInput
+      withAsterisk
+      label="Nome"
+      placeholder="Nome"
+      {...form.getInputProps('name')}
+      disabled={disabled}
+    />
+    <TextInput
+      withAsterisk
+      label="URL"
+      placeholder="URL"
+      {...form.getInputProps('sourceUrl')}
+      disabled={disabled}
+    />
+  </Box>
+);

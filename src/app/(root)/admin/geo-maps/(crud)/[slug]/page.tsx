@@ -10,30 +10,30 @@ import { useFindGeoMapsQuery, useRemoveGeoMapsMutation } from '@/store/geo-maps'
 import { UpdateGeoMapsDto } from '@/types/geo-maps';
 
 export default function GeoMapsPage() {
-    const { slug } = useParams();
-    const id = parseInt(slug as string, 10);
+  const { slug } = useParams();
+  const id = parseInt(slug as string, 10);
 
-    const { data, isSuccess } = useFindGeoMapsQuery(slug ? id : skipToken);
+  const { data, isSuccess } = useFindGeoMapsQuery(slug ? id : skipToken);
 
-    const form = useForm<UpdateGeoMapsDto>({});
+  const form = useForm<UpdateGeoMapsDto>({});
 
-    useEffect(() => {
-        if (isSuccess) {
-            form.setValues({
-                name: data.name,
-                category: data.category.toString(),
-            });
-        }
-    }, [isSuccess]);
+  useEffect(() => {
+    if (isSuccess) {
+      form.setValues({
+        name: data.name,
+        category: data.category.toString(),
+      });
+    }
+  }, [isSuccess]);
 
-    return (
-        <FormLayout
-          title="Mapas Geograficos"
-          useRemoveMutation={useRemoveGeoMapsMutation}
-          type="preview"
-          FormInputs={GeoMapsInputs<UpdateGeoMapsDto>}
-          form={form}
-          id={id}
-        />
-    );
+  return (
+    <FormLayout
+      title="Mapas Geograficos"
+      useRemoveMutation={useRemoveGeoMapsMutation}
+      type="preview"
+      FormInputs={GeoMapsInputs<UpdateGeoMapsDto>}
+      form={form}
+      id={id}
+    />
+  );
 }

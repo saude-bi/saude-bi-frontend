@@ -2,10 +2,7 @@
 
 import { useMemo } from 'react';
 import { MRT_ColumnDef } from 'mantine-react-table';
-import {
-  useFindAllGeoMapsQuery,
-  useRemoveGeoMapsMutation,
-} from '@/store/geo-maps';
+import { useFindAllGeoMapsQuery, useRemoveGeoMapsMutation } from '@/store/geo-maps';
 import { DataTable } from '@/components/Common/DataTable/DataTable';
 import { GeoMaps } from '@/types/geo-maps';
 
