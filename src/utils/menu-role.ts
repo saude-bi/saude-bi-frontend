@@ -10,6 +10,9 @@ import {
   IconServerCog,
   IconSourceCode,
   IconUser,
+  IconBuildingCommunity,
+  IconMap,
+  IconMap2,
 } from '@tabler/icons-react';
 import { Menu } from '@/components/Drawer/DrawerMenu';
 
@@ -44,7 +47,7 @@ export const menuAdmin: Menu[] = [
   {
     name: 'Gestão de Locais',
     uri: '/',
-    icon: IconServerCog,
+    icon: IconBuildingCommunity,
     submenu: [
       {
         name: 'Estabelecimentos',
@@ -77,6 +80,28 @@ export const menuAdmin: Menu[] = [
         name: 'Fonte de Dados',
         uri: '/admin/data-source',
         icon: IconSourceCode,
+      },
+    ],
+  },
+  {
+    name: 'Mapas',
+    uri: 'javascript.void(0)',
+    icon: IconMap,
+    submenu: [
+      {
+        name: 'Camadas',
+        uri: '/admin/geo-layer',
+        icon: IconMap2,
+      },
+      {
+        name: 'Fonte de Dados',
+        uri: '/admin/geo-data-source',
+        icon: IconSourceCode,
+      },
+      {
+        name: 'Cadastro Mapas',
+        uri: '/admin/geo-maps',
+        icon: IconMap,
       },
     ],
   },

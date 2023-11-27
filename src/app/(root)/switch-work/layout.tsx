@@ -7,7 +7,7 @@ import { PaginatedResponse } from '@/types/common';
 import { Directorship } from '@/types/directorship';
 
 export const metadata = {
-  title: 'Alterar Vínculo',
+  title: 'Selecionar Vínculo',
 };
 
 async function getData() {
@@ -39,7 +39,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
   const directorship = await getData();
   return (
     <>
-      <NavBar title="Alterar Vínculo" />
+      <NavBar title="Selecionar Vínculo" />
       <SwitchWorkLayout directorships={directorship.data}>{children}</SwitchWorkLayout>
     </>
   );
