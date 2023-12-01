@@ -1,0 +1,28 @@
+- name: Playbook Saude-BI Front
+  hosts: all
+  tasks:
+  - name: Getting Docker Repo
+    apt_repository:
+      name: "Docker"
+      baseurl: "https://download.docker.com/linux/ubuntu/dists/jammy/stable"
+      gpscheck: "no"
+  - name: Installing Docker
+    command: "apt install docker-ce --nobest -y"
+  - name: Starting Docker
+    service:
+      name: "docker"
+      state: started
+      enabled: yes
+  - name: "isntall python package"
+    package:
+      name: "python36"
+      state: present
+  - name: "installing docker as it uses python"
+    command: "pip3 install docker" 
+  - name: "running front-end"
+    docker_container:
+      name: "Front-end"
+      image: "LinkAqui"
+      ports:
+          - "80:3000"
+      state: started
