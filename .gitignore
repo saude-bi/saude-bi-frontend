@@ -46,3 +46,5 @@ settings.json
 .env
 
 venv/*
+/*/.terraform/*
+terraform.tfstate
