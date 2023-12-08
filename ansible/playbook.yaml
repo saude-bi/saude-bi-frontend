@@ -1,0 +1,51 @@
+- name: Playbook Saude-BI Front
+  hosts: all
+  become: true
+  vars:
+    docker_image: "395714450777.dkr.ecr.us-east-1.amazonaws.com/saude-bi/frontend:latest"
+  tasks:
+    - name: Install aptitude
+      ansible.builtin.apt:
+        name: aptitude
+        state: present
+        update_cache: true
+
+    - name: Install required system packages
+      ansible.builtin.apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: present
+        update_cache: true
+    - name: Add Docker GPG apt Key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      ansible.builtin.apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      ansible.builtin.apt:
+        name: docker-ce
+        state: present
+        update_cache: true
+
+    - name: Install Docker Module for Python
+      ansible.builtin.pip:
+        name: docker
+
+    - name: "Running front-end"
+      community.docker.docker_container:
+        name: "Front-end"
+        image: "{{ docker_image }}"
+        ports:
+          - "80:3000"
+        state: started
